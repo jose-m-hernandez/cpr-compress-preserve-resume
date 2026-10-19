@@ -1,0 +1,22 @@
+# label<TAB>regex. Generic classes only; no private strings belong here.
+home-path-macos	/Users/[A-Za-z0-9._-]+
+home-path-linux	/home/[A-Za-z0-9._-]+
+home-path-json-macos	\\/Users\\/[A-Za-z0-9._-]+
+home-path-json-linux	\\/home\\/[A-Za-z0-9._-]+
+home-path-urlenc-macos	(?i)%2FUsers%2F[A-Za-z0-9._-]+
+home-path-urlenc-linux	(?i)%2Fhome%2F[A-Za-z0-9._-]+
+home-dotdir-tilde	~/\.[A-Za-z0-9_-]+
+home-dotdir-env	\$HOME/\.[A-Za-z0-9_-]+
+home-dotdir-braced	\$\{HOME\}/\.[A-Za-z0-9_-]+
+macos-temp-var-folders	/var/folders/
+macos-temp-private-var	/private/var/
+macos-temp-private-tmp	/private/tmp/
+transcript-useremail	userEmail
+transcript-orguuid	organizationUuid
+transcript-credential-org	credential_org
+transcript-prompt-snapshot	prompt_snapshot
+transcript-api-request	api-request
+email-not-example	[A-Za-z0-9._%+-]{1,64}@(?!example\.(?:com|org|net)(?![A-Za-z0-9-]|\.[A-Za-z0-9]))[A-Za-z0-9.-]{1,253}\.[A-Za-z]{2,}
+api-key-anthropic	(?<![A-Za-z0-9_])sk-ant-[A-Za-z0-9_-]{20,}
+api-key-generic	(?<![A-Za-z0-9_])sk-[A-Za-z0-9_-]{20,}
+ls-long-owner	[-dl][-rwx]{9}@? +[0-9]+ +(?!user )\S+ +\S+ +[0-9]+ +[A-Z][a-z]{2} 
