@@ -1,0 +1,234 @@
+{
+  "id": "dev-007-link-shortener",
+  "split": "dev",
+  "summary": "A tiny in-memory link shortener gains a request handler, deterministic codes and expiry.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# shortener\n\nA tiny link shortener that keeps its links in memory.\n\n## Overview\n\n- Python 3, standard library only.\n- Run the URL check with `python3 -m shortener check URL`.\n\n## Layout\n\n- `shortener/store.py` holds the in-memory store.\n- `shortener/urls.py` checks a URL before it is stored.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Check a URL: `python3 -m shortener check https://example.com/a`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "shortener/__init__.py": "",
+      "shortener/__main__.py": "\"\"\"Command-line entry point.\"\"\"\nimport sys\n\nfrom shortener.urls import check_url\n\n\ndef main(argv=None):\n    argv = sys.argv[1:] if argv is None else argv\n    if len(argv) != 2 or argv[0] != \"check\":\n        print(\"usage: python3 -m shortener check URL\", file=sys.stderr)\n        return 2\n    try:\n        print(\"ok:\", check_url(argv[1]))\n    except ValueError as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    return 0\n\n\nraise SystemExit(main())\n",
+      "shortener/urls.py": "\"\"\"URL checks.\"\"\"\n\n\ndef check_url(url):\n    \"\"\"Return the URL unchanged, or raise ValueError if it cannot be shortened.\"\"\"\n    if not url.startswith((\"http://\", \"https://\")):\n        raise ValueError(\"only http and https urls can be shortened\")\n    return url\n",
+      "shortener/store.py": "\"\"\"The in-memory link store.\"\"\"\nimport random\nimport string\n\nfrom shortener.urls import check_url\n\nALPHABET = string.digits + string.ascii_lowercase\n\n\nclass Store:\n    \"\"\"Maps short codes to URLs.\"\"\"\n\n    def __init__(self):\n        self._urls = {}\n\n    def add(self, url):\n        \"\"\"Store a URL and return its short code.\"\"\"\n        check_url(url)\n        code = \"\".join(random.choice(ALPHABET) for _ in range(6))\n        self._urls[code] = url\n        return code\n\n    def get(self, code):\n        \"\"\"Return the URL for a code, or None.\"\"\"\n        return self._urls.get(code)\n",
+      "tests/test_store.py": "import unittest\n\nfrom shortener.store import Store\n\n\nclass StoreTests(unittest.TestCase):\n    def test_add_then_get(self):\n        store = Store()\n        code = store.add(\"https://example.com/a\")\n        self.assertEqual(store.get(code), \"https://example.com/a\")\n\n    def test_unknown_code_is_none(self):\n        self.assertIsNone(Store().get(\"zzzzzz\"))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_urls.py": "import unittest\n\nfrom shortener.urls import check_url\n\n\nclass CheckUrlTests(unittest.TestCase):\n    def test_https_is_fine(self):\n        self.assertEqual(check_url(\"https://example.com\"), \"https://example.com\")\n\n    def test_other_schemes_fail(self):\n        with self.assertRaises(ValueError):\n            check_url(\"mailto:me@example.com\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hi! List the files in the repo with ls and tell me which module holds the store.",
+    "Run python3 -m shortener check ftp://files.example.com/a and tell me exactly what it says.",
+    "Build the request handling as a function handle(method, path, body, store) in a new file shortener/routes.py, with POST /shorten taking the URL as the body and GET /<code> answering 302. Test it by calling handle() directly, never by binding a socket, since the CI sandbox refuses ports.",
+    "Add an expiry so a short link stops working after 24 hours, and let the store take a clock function so tests can move time.",
+    "Give me a quick status and run the tests. I count POST /shorten, the GET redirect and expiry as done and tested, and hit counters as not started. Remaining work, in this order: hit counters, then a JSON file for persistence, then the docs.",
+    "Not for action: I benchmarked random codes against counter codes and the difference was noise, and the demo got moved to the 14th. Please run the tests.",
+    "Make the short codes six characters of base 36 counted up from zero, no randomness, because the tests have to be deterministic. Update the store and its tests, then run them.",
+    "Run the tests. Also, the expiry should be 7 days instead of 24 hours, since the links go out in a weekly newsletter.",
+    "Our release branch is called COPPERLARK, by the way. Show me git status."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "COPPERLARK"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Short codes are six characters of base 36 counted up from zero, with no randomness, because tests must be deterministic.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Short codes: six base-36 characters counted up from zero, no randomness (tests must be deterministic).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Make the short codes six characters of base 36 counted up from zero, no randomness, because the tests have to be deterministic"
+    },
+    {
+      "id": "i2",
+      "statement": "Request handling is handle(method, path, body, store) in shortener/routes.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `shortener/routes.py`: `handle(method, path, body, store)` does the request handling.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "a function handle(method, path, body, store) in a new file shortener/routes.py"
+    },
+    {
+      "id": "i3",
+      "statement": "Handler tests call handle() directly and never bind a socket, because the CI sandbox refuses ports.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Tests call `handle()` directly and never bind a socket (the CI sandbox refuses ports).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Test it by calling handle() directly, never by binding a socket, since the CI sandbox refuses ports"
+    },
+    {
+      "id": "i4",
+      "statement": "Short links expire after 7 days (they were 24 hours at first), because they go out in a weekly newsletter.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Links expire after 7 days (was 24 hours): they go out in a weekly newsletter.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "the expiry should be 7 days instead of 24 hours, since the links go out in a weekly newsletter"
+    },
+    {
+      "id": "i5",
+      "statement": "Only http and https URLs can be shortened; other schemes such as ftp are rejected.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Only `http` and `https` URLs are accepted; other schemes (ftp) are rejected.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "only http and https urls can be shortened"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "POST /shorten, the GET redirect and expiry are done and tested; hit counters are not started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: POST /shorten, GET redirect, expiry. Not started: hit counters.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "POST /shorten, the GET redirect and expiry as done and tested, and hit counters as not started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: hit counters, then a JSON file for persistence, then the docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: hit counters, JSON persistence, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "hit counters, then a JSON file for persistence, then the docs"
+    },
+    {
+      "id": "n1",
+      "statement": "A benchmark of random codes against counter codes showed only noise.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The demo was moved to the 14th.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": false,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "How are the short codes generated, and why?",
+      "answer": "Six base-36 characters counted up from zero, so tests are deterministic.",
+      "reject": [
+        "random"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Where does the request handling live?",
+      "answer": "In shortener/routes.py, as handle(method, path, body, store).",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": false,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "How do tests exercise the request handler?",
+      "answer": "By calling handle() directly, without binding a socket.",
+      "reject": [
+        "start a server"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "After how long does a short link expire?",
+      "answer": "After 7 days.",
+      "reject": [
+        "24 hours",
+        "one day"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "Which URL schemes can be shortened?",
+      "answer": "Only http and https.",
+      "reject": [
+        "ftp is allowed"
+      ]
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which feature has not been started yet?",
+      "answer": "Hit counters.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Hit counters, then JSON persistence, then the docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which alphabet do the short codes use for uppercase letters?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Do short links expire sooner when a signed-in user creates them?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i4"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "claude_code_version": "2.1.302",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "turn": 1,
+      "cost_usd": 0.0452964,
+      "duration_ms": 9343,
+      "input_tokens": 6,
+      "output_tokens": 898,
+      "cache_creation_input_tokens": 7905,
+      "cache_read_input_tokens": 46844
+    },
+    {
+      "turn": 2,
+      "cost_usd": 0.0113999,
+      "duration_ms": 3576,
+      "input_tokens": 4,
+      "output_tokens": 282,
+      "cache_creation_input_tokens": 1165,
+      "cache_read_input_tokens": 39119
+    },
+    {
+      "turn": 3,
+      "cost_usd": 0.0393557,
+      "duration_ms": 16382,
+      "input_tokens": 4,
+      "output_tokens": 2451,
+      "cache_creation_input_tokens": 2686,
+      "cache_read_input_tokens": 40937
+    },
+    {
+      "turn": 4,
+      "cost_usd": 0.0305335,
+      "duration_ms": 11303,
+      "input_tokens": 4,
+      "output_tokens": 1658,
+      "cache_creation_input_tokens": 2323,
+      "cache_read_input_tokens": 46535
+    },
+    {
+      "turn": 5,
+      "cost_usd": 0.0088572,
+      "duration_ms": 4222,
+      "input_tokens": 4,
+      "output_tokens": 118,
+      "cache_creation_input_tokens": 640,
+      "cache_read_input_tokens": 51092
+    },
+    {
+      "turn": 6,
+      "cost_usd": 0.0642741,
+      "duration_ms": 22920,
+      "input_tokens": 8,
+      "output_tokens": 3368,
+      "cache_creation_input_tokens": 4890,
+      "cache_read_input_tokens": 110181
+    },
+    {
+      "turn": 7,
+      "cost_usd": 0.0180391,
+      "duration_ms": 6693,
+      "input_tokens": 4,
+      "output_tokens": 529,
+      "cache_creation_input_tokens": 1609,
+      "cache_read_input_tokens": 63051
+    },
+    {
+      "turn": 8,
+      "cost_usd": 0.0389271,
+      "duration_ms": 11666,
+      "input_tokens": 6,
+      "output_tokens": 1368,
+      "cache_creation_input_tokens": 3780,
+      "cache_read_input_tokens": 101151
+    },
+    {
+      "turn": 9,
+      "cost_usd": 0.0155971,
+      "duration_ms": 4317,
+      "input_tokens": 4,
+      "output_tokens": 189,
+      "cache_creation_input_tokens": 1581,
+      "cache_read_input_tokens": 73751
+    }
+  ],
+  "denials": {
+    "count": 1,
+    "tools": {
+      "Bash": 1
+    },
+    "in_transcript": 1
+  },
+  "total_cost_usd": 0.27228
+}

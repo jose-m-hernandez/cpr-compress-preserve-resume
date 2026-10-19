@@ -1,0 +1,234 @@
+{
+  "id": "dev-018-shift-planner",
+  "split": "dev",
+  "summary": "A rota builder gains round-robin assignment, a CSV export, a shift cap and a staffing change.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# rota\n\nA command-line tool that builds a weekly staff rota from each person's available days.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m rota AVAILABILITY_FILE`.\n\n## Layout\n\n- `rota/availability.py` reads the availability file.\n- `rota/planner.py` assigns people to days.\n- `rota/__main__.py` prints the rota.\n- `data/` holds example availability files.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m rota data/avail.txt`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "rota/__init__.py": "",
+      "rota/__main__.py": "\"\"\"Print the rota for an availability file.\"\"\"\nimport sys\n\nfrom rota.availability import DAYS, parse_availability\nfrom rota.planner import assign\n\n\ndef main(argv):\n    if len(argv) != 1:\n        print(\"usage: python3 -m rota AVAILABILITY_FILE\", file=sys.stderr)\n        return 2\n    try:\n        with open(argv[0], encoding=\"utf-8\") as handle:\n            people = parse_availability(handle.read())\n    except (OSError, ValueError) as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    rota = assign(people)\n    for day in DAYS:\n        print(f\"{day}: {', '.join(rota[day])}\")\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "rota/availability.py": "\"\"\"Reading availability: one line per person, `NAME: day, day, ...`.\"\"\"\n\nDAYS = (\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\")\n\n\ndef parse_availability(text):\n    \"\"\"Return {name: set of days}.\"\"\"\n    people = {}\n    for number, line in enumerate(text.splitlines(), start=1):\n        if not line.strip():\n            continue\n        name, _, rest = line.partition(\":\")\n        days = {day.strip() for day in rest.split(\",\") if day.strip()}\n        for day in sorted(days):\n            if day not in DAYS:\n                raise ValueError(f\"line {number}: unknown day {day!r}; days are written mon, tue, wed, thu, fri, sat, sun\")\n        people[name.strip()] = days\n    return people\n",
+      "rota/planner.py": "\"\"\"Assigning people to days.\"\"\"\nfrom rota.availability import DAYS\n\n\ndef assign(people, per_day=2):\n    \"\"\"Return {day: [names]} with up to per_day people on each day.\"\"\"\n    rota = {}\n    for day in DAYS:\n        available = sorted(name for name, days in people.items() if day in days)\n        rota[day] = available[:per_day]\n    return rota\n",
+      "data/avail.txt": "ana: mon, tue, wed\nbo: tue, wed, thu\ncy: mon, thu, fri, sat\ndee: sat, sun\n",
+      "data/bad.txt": "ana: monday, tue\nbo: wed\n",
+      "tests/test_availability.py": "import unittest\n\nfrom rota.availability import parse_availability\n\n\nclass AvailabilityTests(unittest.TestCase):\n    def test_reads_days(self):\n        self.assertEqual(parse_availability(\"ana: mon, tue\\n\"), {\"ana\": {\"mon\", \"tue\"}})\n\n    def test_unknown_day_names_the_line(self):\n        with self.assertRaises(ValueError) as caught:\n            parse_availability(\"ana: mon\\nbo: funday\\n\")\n        self.assertIn(\"line 2\", str(caught.exception))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_planner.py": "import unittest\n\nfrom rota.planner import assign\n\n\nclass PlannerTests(unittest.TestCase):\n    def test_limits_people_per_day(self):\n        people = {\"a\": {\"mon\"}, \"b\": {\"mon\"}, \"c\": {\"mon\"}}\n        self.assertEqual(len(assign(people)[\"mon\"]), 2)\n\n    def test_empty_day_is_an_empty_list(self):\n        self.assertEqual(assign({\"a\": {\"mon\"}})[\"tue\"], [])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Run the tests and tell me the result.",
+    "Run python3 -m rota data/bad.txt and tell me exactly what it prints.",
+    "Make the planner assign people round-robin in name order, never at random. People want to be able to check the rota by hand. Staff 2 people per day for now, and add tests.",
+    "Add an export module rota/export.py that writes the rota as CSV, one row per day, for the front desk. Add a test and run the suite.",
+    "Cap every person at 3 shifts a week. That is the limit in the staff contract. Add tests.",
+    "Where are we? The planner, the export and the shift cap are done and tested, and leave-request handling hasn't been started. Remaining, in order: leave requests, then a swap command, then docs. Run the tests.",
+    "Not for action: I tried a nicer table layout for the printout and went back to the plain one, and the front desk is closed next Monday. Show me git status.",
+    "Staff 3 people per day instead of 2, and update the tests. The weekend turned out busier than we thought. The release branch is called COBBLEFERRY."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "COBBLEFERRY"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "The planner assigns people round-robin in name order, never at random, so people can check the rota by hand.",
+      "needed": true,
+      "suits": [
+        "Key Decisions",
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Assignment is round-robin in name order, never random, so the rota can be checked by hand.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "People want to be able to check the rota by hand"
+    },
+    {
+      "id": "i2",
+      "statement": "Each day is staffed by 3 people (it was 2 at first), because the weekend is busier than expected.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Staff 3 people per day (was 2): the weekend is busier than expected.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The weekend turned out busier than we thought"
+    },
+    {
+      "id": "i3",
+      "statement": "The CSV export for the front desk lives in the new module rota/export.py, one row per day.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `rota/export.py` writes the rota as CSV, one row per day, for the front desk.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add an export module rota/export.py that writes the rota as CSV, one row per day, for the front desk"
+    },
+    {
+      "id": "i4",
+      "statement": "Nobody works more than 3 shifts a week, because that is the limit in the staff contract.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Max 3 shifts per person per week (staff contract).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "That is the limit in the staff contract"
+    },
+    {
+      "id": "i5",
+      "statement": "Days in an availability file must be written mon, tue, wed, thu, fri, sat, sun; a full word such as monday is rejected.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Days are written `mon`..`sun`; `monday` is rejected.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "days are written mon, tue, wed, thu, fri, sat, sun"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "The planner, the export and the shift cap are done and tested; leave-request handling has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: planner, export, shift cap. Not started: leave requests.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "The planner, the export and the shift cap are done and tested, and leave-request handling hasn't been started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: leave requests, then a swap command, then docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: leave requests, swap command, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "leave requests, then a swap command, then docs"
+    },
+    {
+      "id": "n1",
+      "statement": "A nicer table layout for the printout was tried and dropped in favour of the plain one.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The front desk is closed next Monday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "How does the planner pick who works a day, and why?",
+      "answer": "Round-robin in name order, never random, so the rota can be checked by hand.",
+      "reject": [
+        "at random"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "knowledge-update",
+      "question": "How many people are staffed per day?",
+      "answer": "3.",
+      "reject": [
+        "2",
+        "two"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Which module writes the CSV for the front desk?",
+      "answer": "rota/export.py",
+      "reject": []
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "single-fact",
+      "question": "What is the maximum number of shifts per person per week, and why?",
+      "answer": "3, the limit in the staff contract.",
+      "reject": []
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "How must days be written in an availability file?",
+      "answer": "As mon, tue, wed, thu, fri, sat, sun.",
+      "reject": [
+        "full names like monday"
+      ]
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which piece of work has not been started?",
+      "answer": "Leave-request handling.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Leave requests, then a swap command, then docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Does the shift cap differ for part-time staff?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i4"
+    },
+    {
+      "id": "p9",
+      "code_answers": true,
+      "item": null,
+      "type": "abstention",
+      "question": "Which column separator does the CSV export use for the front desk?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i3"
+    }
+  ]
+}

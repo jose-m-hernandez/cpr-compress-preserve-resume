@@ -1,0 +1,2 @@
+counter errors_total
+counter requests

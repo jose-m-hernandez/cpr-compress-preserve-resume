@@ -1,0 +1,77 @@
+{
+  "claude_code_version": "2.1.302",
+  "model": "claude-sonnet-5-5",
+  "turns": [
+    {
+      "turn": 1,
+      "cost_usd": 0.029876200000000002,
+      "duration_ms": 3153,
+      "input_tokens": 4,
+      "output_tokens": 89,
+      "cache_creation_input_tokens": 6524,
+      "cache_read_input_tokens": 28822
+    },
+    {
+      "turn": 2,
+      "cost_usd": 0.0061417,
+      "duration_ms": 3450,
+      "input_tokens": 4,
+      "output_tokens": 157,
+      "cache_creation_input_tokens": 251,
+      "cache_read_input_tokens": 35597
+    },
+    {
+      "turn": 3,
+      "cost_usd": 0.0482119,
+      "duration_ms": 18258,
+      "input_tokens": 14,
+      "output_tokens": 1986,
+      "cache_creation_input_tokens": 3648,
+      "cache_read_input_tokens": 137319
+    },
+    {
+      "turn": 4,
+      "cost_usd": 0.071672,
+      "duration_ms": 28055,
+      "input_tokens": 8,
+      "output_tokens": 4243,
+      "cache_creation_input_tokens": 5040,
+      "cache_read_input_tokens": 90660
+    },
+    {
+      "turn": 5,
+      "cost_usd": 0.0104977,
+      "duration_ms": 4005,
+      "input_tokens": 4,
+      "output_tokens": 108,
+      "cache_creation_input_tokens": 997,
+      "cache_read_input_tokens": 54217
+    },
+    {
+      "turn": 6,
+      "cost_usd": 0.0358346,
+      "duration_ms": 14947,
+      "input_tokens": 8,
+      "output_tokens": 1615,
+      "cache_creation_input_tokens": 2088,
+      "cache_read_input_tokens": 113166
+    },
+    {
+      "turn": 7,
+      "cost_usd": 0.0115194,
+      "duration_ms": 4307,
+      "input_tokens": 4,
+      "output_tokens": 198,
+      "cache_creation_input_tokens": 879,
+      "cache_read_input_tokens": 60154
+    }
+  ],
+  "denials": {
+    "count": 1,
+    "tools": {
+      "Bash": 1
+    },
+    "in_transcript": 1
+  },
+  "total_cost_usd": 0.213754
+}

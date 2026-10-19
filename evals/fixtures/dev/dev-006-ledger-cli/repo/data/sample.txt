@@ -1,0 +1,5 @@
+# March spending
+2026-03-02 | weekly shop | 42.50 | food
+2026-03-03 | bus pass | 30.00 | travel
+2026-03-09 | weekly shop | 27.50 | food
+2026-03-10 | rent share | 500.00 | rent

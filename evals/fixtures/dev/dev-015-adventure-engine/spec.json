@@ -1,0 +1,351 @@
+{
+  "id": "dev-015-adventure-engine",
+  "split": "dev",
+  "summary": "A text-adventure engine gains an inventory limit, saves, a determinism rule and a blocked dialogue feature.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# adventure\n\nA small text-adventure engine: a world of rooms in a JSON file and a state machine that runs player commands.\n\n## Overview\n\n- Python 3, standard library only.\n- Validate a world with `python3 -m adventure check FILE`.\n\n## Layout\n\n- `adventure/world.py` loads and validates a world file.\n- `adventure/state.py` holds the player's state.\n- `adventure/engine.py` runs one command and returns the message.\n- `worlds/` holds example world files.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m adventure check worlds/cave.json`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "adventure/__init__.py": "",
+      "adventure/__main__.py": "\"\"\"Validate a world file.\"\"\"\nimport sys\n\nfrom adventure.world import load_world\n\n\ndef main(argv):\n    if len(argv) != 2 or argv[0] != \"check\":\n        print(\"usage: python3 -m adventure check FILE\", file=sys.stderr)\n        return 2\n    try:\n        world = load_world(argv[1])\n    except (OSError, ValueError) as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    print(f\"ok: {len(world['rooms'])} rooms\")\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "adventure/world.py": "\"\"\"Loading and checking a world file.\"\"\"\nimport json\n\n\ndef validate_world(world):\n    \"\"\"Raise ValueError if the world is not usable.\"\"\"\n    rooms = world.get(\"rooms\", {})\n    if world.get(\"start\") not in rooms:\n        raise ValueError(\"the start room does not exist\")\n    for name, room in rooms.items():\n        for direction, target in room.get(\"exits\", {}).items():\n            if target not in rooms:\n                raise ValueError(f\"room {name!r} has an exit to unknown room {target!r}; every exit must name an existing room\")\n\n\ndef load_world(path):\n    \"\"\"Read a world file and check it.\"\"\"\n    with open(path, encoding=\"utf-8\") as handle:\n        world = json.load(handle)\n    validate_world(world)\n    return world\n",
+      "adventure/state.py": "\"\"\"The player's state.\"\"\"\n\n\nclass GameState:\n    \"\"\"Where the player is and what they carry.\"\"\"\n\n    def __init__(self, room):\n        self.room = room\n        self.inventory = []\n",
+      "adventure/engine.py": "\"\"\"Running one command.\"\"\"\n\n\ndef step(world, state, text):\n    \"\"\"Apply one command line to the state and return the message to show.\"\"\"\n    words = text.lower().split()\n    if not words:\n        return \"Say something.\"\n    room = world[\"rooms\"][state.room]\n    if words[0] == \"look\":\n        return room[\"description\"]\n    if words[0] == \"go\" and len(words) == 2:\n        target = room.get(\"exits\", {}).get(words[1])\n        if target is None:\n            return \"You can't go that way.\"\n        state.room = target\n        return world[\"rooms\"][target][\"description\"]\n    if words[0] == \"take\" and len(words) == 2:\n        if words[1] not in room.get(\"items\", []):\n            return f\"There is no {words[1]} here.\"\n        room[\"items\"].remove(words[1])\n        state.inventory.append(words[1])\n        return f\"You take the {words[1]}.\"\n    return \"I don't understand.\"\n",
+      "worlds/cave.json": "{\n  \"start\": \"gate\",\n  \"rooms\": {\n    \"gate\": {\"description\": \"A stone gate.\", \"exits\": {\"north\": \"hall\"}, \"items\": [\"lamp\"]},\n    \"hall\": {\"description\": \"A long hall.\", \"exits\": {\"south\": \"gate\"}, \"items\": [\"key\"]}\n  }\n}\n",
+      "worlds/broken.json": "{\n  \"start\": \"gate\",\n  \"rooms\": {\n    \"gate\": {\"description\": \"A stone gate.\", \"exits\": {\"down\": \"cellar\"}},\n    \"cellar\": {\"description\": \"A damp cellar.\", \"exits\": {\"east\": \"vault\"}}\n  }\n}\n",
+      "tests/test_world.py": "import os\nimport unittest\n\nfrom adventure.world import load_world, validate_world\n\nWORLDS = os.path.join(os.path.dirname(__file__), \"..\", \"worlds\")\n\n\nclass WorldTests(unittest.TestCase):\n    def test_cave_loads(self):\n        self.assertIn(\"gate\", load_world(os.path.join(WORLDS, \"cave.json\"))[\"rooms\"])\n\n    def test_missing_start_is_rejected(self):\n        with self.assertRaises(ValueError):\n            validate_world({\"start\": \"x\", \"rooms\": {}})\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_engine.py": "import unittest\n\nfrom adventure.engine import step\nfrom adventure.state import GameState\n\nWORLD = {\"start\": \"a\", \"rooms\": {\n    \"a\": {\"description\": \"Room A.\", \"exits\": {\"north\": \"b\"}, \"items\": [\"lamp\"]},\n    \"b\": {\"description\": \"Room B.\", \"exits\": {\"south\": \"a\"}},\n}}\n\n\nclass EngineTests(unittest.TestCase):\n    def test_go_moves_the_player(self):\n        state = GameState(\"a\")\n        step(WORLD, state, \"go north\")\n        self.assertEqual(state.room, \"b\")\n\n    def test_take_adds_to_inventory(self):\n        state = GameState(\"a\")\n        step({\"rooms\": {\"a\": {\"description\": \"x\", \"items\": [\"lamp\"]}}}, state, \"take lamp\")\n        self.assertEqual(state.inventory, [\"lamp\"])\n\n    def test_unknown_command(self):\n        self.assertEqual(step(WORLD, GameState(\"a\"), \"dance\"), \"I don't understand.\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hello! Please run the unit tests and tell me whether they pass.",
+    "Run python3 -m adventure check worlds/broken.json and tell me exactly what it says.",
+    "Add an inventory limit of 4 items. Taking a fifth should fail with a short message. Add tests.",
+    "Run the tests.",
+    "Add a random wandering monster that moves one room each turn, using the random module. Keep it behind a function so tests can replace it.",
+    "Run the tests and show me git status.",
+    "Add saving: write the game state as JSON into saves/NAME.json from a new module adventure/saves.py, plus save NAME and load NAME commands. Add tests.",
+    "Run the tests.",
+    "Move the new tests onto a play(world, commands) helper in tests/helpers.py that runs a list of command strings. Tests should drive the engine that way, not by poking at state objects, since poking broke every time the state changed shape.",
+    "Run the tests again.",
+    "Add the verb inspect as another way to say look at. It's temporary: inspect is deprecated and goes away in version 2, so make look at the documented form. Add a test.",
+    "Run the tests.",
+    "No action needed: I sketched a room-map visualiser with a graph library last night and abandoned it, too many dependencies for the value. Show me the git log.",
+    "Add the drop command, with a test.",
+    "Run the tests.",
+    "When the player dies, put them back at their last save instead of ending the game. Players hate losing progress. Add a test through the helper.",
+    "Run the tests.",
+    "Add a quit command that asks really quit? only when there are moves since the last save. With nothing unsaved it quits straight away. Add tests.",
+    "Run the tests.",
+    "One test failed once on CI with a temp-directory race and passed on the rerun, so nothing to chase. I'm also away on the 20th. No action needed. Show me the line count of every Python file.",
+    "I want the NPC dialogue next, but it's blocked: the writer hasn't delivered the script text yet, so use placeholder strings in the meantime. Show me where dialogue would hook in.",
+    "Run the tests.",
+    "Take the wandering monster out. Nothing in the engine should be random, because a save has to replay identically. Update the code and the tests, then run them.",
+    "Run the tests.",
+    "Raise the inventory limit to 6. Four was too tight once the key and the lamp were both needed. Update the tests.",
+    "Run the whole suite and tell me how many tests there are.",
+    "Where do we stand? Inventory, saving, death-and-restart, drop and quit are done and tested, and the dialogue hasn't been started.",
+    "Show me the layout of adventure/ and tests/ with ls.",
+    "What's left, in this order: dialogue with the placeholder text, then a map command, then packaging. Tell me if that order has a dependency problem.",
+    "By the way, the release branch is called GLASSHARBOR in my notes. Run the tests one last time."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "GLASSHARBOR"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "A world file is rejected when any exit points to a room that does not exist.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- A world file is rejected when an exit names a room that does not exist.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "every exit must name an existing room"
+      ]
+    },
+    {
+      "id": "i2",
+      "statement": "The inventory limit is 6 items (it was 4 at first), because 4 was too tight once the key and the lamp were both needed.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Inventory limit is 6 items (was 4): 4 was too tight with both key and lamp.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Four was too tight once the key and the lamp were both needed"
+    },
+    {
+      "id": "i3",
+      "statement": "Saves are JSON files in saves/NAME.json written by the new module adventure/saves.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `adventure/saves.py` writes saves as JSON to `saves/NAME.json`.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "write the game state as JSON into saves/NAME.json from a new module adventure/saves.py"
+    },
+    {
+      "id": "i4",
+      "statement": "Tests drive the engine through a play(world, commands) helper in tests/helpers.py instead of poking at state objects, because that broke whenever the state changed shape.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Tests use `play(world, commands)` in `tests/helpers.py`, not state objects (they break when state changes shape).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Tests should drive the engine that way, not by poking at state objects, since poking broke every time the state changed shape"
+    },
+    {
+      "id": "i5",
+      "statement": "The verb inspect is deprecated and goes away in version 2; look at is the documented form.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `inspect` is deprecated (removed in version 2); `look at` is the documented form.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "inspect is deprecated and goes away in version 2, so make look at the documented form"
+    },
+    {
+      "id": "i6",
+      "statement": "When the player dies they are put back at their last save instead of the game ending, because players hate losing progress.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Death returns the player to the last save instead of ending the game.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "put them back at their last save instead of ending the game"
+    },
+    {
+      "id": "i7",
+      "statement": "The quit command asks for confirmation only when there are moves since the last save.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- `quit` confirms only when there are unsaved moves.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "With nothing unsaved it quits straight away"
+    },
+    {
+      "id": "i8",
+      "statement": "NPC dialogue is blocked until the writer delivers the script text; placeholder strings are used meanwhile.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Blocked: NPC dialogue waits for the writer's script text; use placeholder strings.",
+      "oracle_section": "Warnings",
+      "source": "user",
+      "anchor": "the writer hasn't delivered the script text yet, so use placeholder strings in the meantime"
+    },
+    {
+      "id": "i9",
+      "statement": "Nothing in the engine is random (the wandering monster was removed), because a save has to replay identically.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- No randomness anywhere in the engine: a save must replay identically.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Nothing in the engine should be random, because a save has to replay identically"
+    },
+    {
+      "id": "i10",
+      "statement": "Inventory, saving, death-and-restart, drop and quit are done and tested; the dialogue has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: inventory, saving, death-and-restart, drop, quit. Not started: dialogue.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "Inventory, saving, death-and-restart, drop and quit are done and tested, and the dialogue hasn't been started"
+    },
+    {
+      "id": "i11",
+      "statement": "Remaining work, in order: dialogue with the placeholder text, then a map command, then packaging.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: dialogue (placeholder text), map command, packaging.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "dialogue with the placeholder text, then a map command, then packaging"
+    },
+    {
+      "id": "n1",
+      "statement": "A room-map visualiser using a graph library was sketched and abandoned because of the dependencies.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "One test failed once on CI with a temp-directory race and passed on the rerun.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n3",
+      "statement": "The user is away on the 20th.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "When does the world loader reject a world file because of an exit?",
+      "answer": "When an exit points to a room that does not exist.",
+      "reject": []
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "knowledge-update",
+      "question": "How many items can the player carry?",
+      "answer": "6.",
+      "reject": [
+        "4",
+        "four"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Where are saves written, and by which module?",
+      "answer": "saves/NAME.json, by adventure/saves.py.",
+      "reject": []
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "single-fact",
+      "question": "How should tests drive the engine?",
+      "answer": "Through the play(world, commands) helper in tests/helpers.py.",
+      "reject": [
+        "poking at state objects"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": false,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "Which verb is deprecated, and what is the documented form?",
+      "answer": "inspect is deprecated; look at is documented.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "What happens when the player dies?",
+      "answer": "They return to their last save; the game does not end.",
+      "reject": [
+        "the game ends"
+      ]
+    },
+    {
+      "id": "p7",
+      "code_answers": true,
+      "item": "i7",
+      "type": "single-fact",
+      "question": "When does quit ask for confirmation?",
+      "answer": "Only when there are moves since the last save.",
+      "reject": [
+        "always"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": "i8",
+      "type": "single-fact",
+      "question": "Why has the NPC dialogue not been written?",
+      "answer": "It is blocked until the writer delivers the script text.",
+      "reject": []
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": "i9",
+      "type": "knowledge-update",
+      "question": "Does the engine use any randomness, such as a wandering monster?",
+      "answer": "No; nothing is random so saves replay identically.",
+      "reject": [
+        "a wandering monster moves each turn"
+      ]
+    },
+    {
+      "id": "p10",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "i10",
+      "type": "single-fact",
+      "question": "In the status I gave you, which piece of work did I say had not been started?",
+      "answer": "The dialogue.",
+      "reject": []
+    },
+    {
+      "id": "p11",
+      "code_answers": false,
+      "item": "i11",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Dialogue, then a map command, then packaging.",
+      "reject": [
+        "packaging first"
+      ]
+    },
+    {
+      "id": "p12",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Are old saves deleted automatically after a number of days?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i3"
+    },
+    {
+      "id": "p13",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Can the player carry more items when they wear a backpack?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i2"
+    }
+  ]
+}

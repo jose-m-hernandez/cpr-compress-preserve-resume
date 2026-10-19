@@ -1,0 +1,234 @@
+{
+  "id": "dev-016-mail-templates",
+  "split": "dev",
+  "summary": "A message-template library gains a subject limit, a strict renderer and a changed unsubscribe footer.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# mailtpl\n\nA small library that fills in and checks plain-text message templates.\n\n## Overview\n\n- Python 3, standard library only.\n- Check a template with `python3 -m mailtpl check FILE`.\n\n## Layout\n\n- `mailtpl/render.py` fills a template with values.\n- `mailtpl/check.py` checks a template for problems.\n- `mailtpl/__main__.py` is the command-line entry point.\n- `templates/` holds the message templates.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m mailtpl check templates/reminder.txt`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "mailtpl/__init__.py": "",
+      "mailtpl/__main__.py": "\"\"\"Check a template file.\"\"\"\nimport sys\n\nfrom mailtpl.check import check_template\n\n\ndef main(argv):\n    if len(argv) != 2 or argv[0] != \"check\":\n        print(\"usage: python3 -m mailtpl check FILE\", file=sys.stderr)\n        return 2\n    with open(argv[1], encoding=\"utf-8\") as handle:\n        try:\n            check_template(handle.read())\n        except ValueError as err:\n            print(f\"error: {err}\", file=sys.stderr)\n            return 1\n    print(\"ok\")\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "mailtpl/render.py": "\"\"\"Filling in a template.\"\"\"\nimport re\n\nPLACEHOLDER = re.compile(r\"\\{(\\w+)\\}\")\n\n\ndef placeholders(text):\n    \"\"\"Return the placeholder names used in a template.\"\"\"\n    return PLACEHOLDER.findall(text)\n\n\ndef render(text, values):\n    \"\"\"Replace each {name} with its value.\"\"\"\n    return PLACEHOLDER.sub(lambda m: str(values.get(m.group(1), \"\")), text)\n",
+      "mailtpl/check.py": "\"\"\"Checking a template.\"\"\"\nfrom mailtpl.render import placeholders\n\nALLOWED = (\"name\", \"plan\", \"link\")\n\n\ndef check_template(text):\n    \"\"\"Raise ValueError for the first problem found.\"\"\"\n    if not text.startswith(\"Subject:\"):\n        raise ValueError(\"the first line must start with 'Subject:'\")\n    for name in placeholders(text):\n        if name not in ALLOWED:\n            raise ValueError(f\"unknown placeholder {name!r}; allowed placeholders are name, plan and link\")\n",
+      "templates/welcome.txt": "Subject: Welcome, {name}\nHello {name},\nYour {plan_name} plan is ready: {link}\n",
+      "templates/reminder.txt": "Subject: Your plan renews soon\nHello {name},\nYour {plan} plan renews soon: {link}\n",
+      "tests/test_render.py": "import unittest\n\nfrom mailtpl.render import placeholders, render\n\n\nclass RenderTests(unittest.TestCase):\n    def test_fills_values(self):\n        self.assertEqual(render(\"Hi {name}\", {\"name\": \"Ana\"}), \"Hi Ana\")\n\n    def test_lists_placeholders(self):\n        self.assertEqual(placeholders(\"{a} and {b}\"), [\"a\", \"b\"])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_check.py": "import unittest\n\nfrom mailtpl.check import check_template\n\n\nclass CheckTests(unittest.TestCase):\n    def test_good_template_passes(self):\n        check_template(\"Subject: Hi\\nHello {name}\\n\")\n\n    def test_missing_subject_fails(self):\n        with self.assertRaises(ValueError):\n            check_template(\"Hello {name}\\n\")\n\n    def test_unknown_placeholder_fails(self):\n        with self.assertRaises(ValueError):\n            check_template(\"Subject: Hi\\n{nope}\\n\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hi, show me the files with ls and tell me which one renders the messages.",
+    "Run python3 -m mailtpl check templates/welcome.txt and tell me exactly what it says.",
+    "Add a subject-length check: a Subject line over 60 characters is an error. Phones cut longer ones off in the inbox list. Add tests.",
+    "Make the renderer raise MissingValue when a placeholder has no value, never leave it blank. A blank greeting went out last year. Add tests.",
+    "Add a footer that the renderer appends to every message: 'Reply STOP to unsubscribe'. Put the footer handling in a new module mailtpl/footer.py.",
+    "Quick status, and run the tests: the subject check, MissingValue and the footer are done and tested, and the HTML variant has not been started. Remaining work, in order: the HTML variant, then a preview command, then docs.",
+    "Not for action: I tried a templating library and dropped it as overkill, and the newsletter launch slipped a week. Please run the tests.",
+    "Change the footer wording to 'Use the link to unsubscribe'. The mail rules require a link, not a reply keyword. Update the footer and the tests.",
+    "The release branch is called SANDPIPERLIT. Show me git status."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "SANDPIPERLIT"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "A Subject line over 60 characters is an error, because phones cut longer ones off in the inbox list.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Subjects over 60 characters are an error (phones cut them off).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Phones cut longer ones off in the inbox list"
+    },
+    {
+      "id": "i2",
+      "statement": "The footer handling lives in the new module mailtpl/footer.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `mailtpl/footer.py` appends the footer.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Put the footer handling in a new module mailtpl/footer.py"
+    },
+    {
+      "id": "i3",
+      "statement": "The renderer raises MissingValue for a placeholder without a value and never leaves it blank, because a blank greeting went out once.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Missing values raise `MissingValue`; never render a blank (a blank greeting once went out).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "A blank greeting went out last year"
+    },
+    {
+      "id": "i4",
+      "statement": "The footer reads 'Use the link to unsubscribe' (it was 'Reply STOP to unsubscribe'), because the mail rules require a link, not a reply keyword.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Footer is `Use the link to unsubscribe` (was a reply keyword): the mail rules require a link.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The mail rules require a link, not a reply keyword"
+    },
+    {
+      "id": "i5",
+      "statement": "Only the placeholders name, plan and link are allowed in a template; welcome.txt fails because it uses plan_name.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Allowed placeholders: `name`, `plan`, `link`; `templates/welcome.txt` fails on `plan_name`.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "allowed placeholders are name, plan and link"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "The subject check, MissingValue and the footer are done and tested; the HTML variant has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: subject check, `MissingValue`, footer. Not started: HTML variant.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "the subject check, MissingValue and the footer are done and tested, and the HTML variant has not been started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: the HTML variant, then a preview command, then docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: HTML variant, preview command, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "the HTML variant, then a preview command, then docs"
+    },
+    {
+      "id": "n1",
+      "statement": "A templating library was tried and dropped as overkill.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The newsletter launch slipped a week.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "What is the longest allowed Subject line, and why?",
+      "answer": "60 characters, because phones cut longer ones off.",
+      "reject": [
+        "80"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Which module handles the footer?",
+      "answer": "mailtpl/footer.py",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "What does the renderer do when a placeholder has no value?",
+      "answer": "It raises MissingValue and never renders a blank.",
+      "reject": [
+        "renders it blank"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "What does the footer say?",
+      "answer": "Use the link to unsubscribe.",
+      "reject": [
+        "Reply STOP to unsubscribe"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "Which placeholders may a template use?",
+      "answer": "Only name, plan and link.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "In the status I gave you, which piece of work did I say had not been started?",
+      "answer": "The HTML variant.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "The HTML variant, then a preview command, then docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Is a Subject line shorter than 10 characters also an error?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which language is the footer translated into for non-English recipients?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i4"
+    }
+  ]
+}

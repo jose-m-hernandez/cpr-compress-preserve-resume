@@ -1,0 +1,234 @@
+{
+  "id": "dev-020-ci-summary",
+  "split": "dev",
+  "summary": "A CI result summariser gains a slow list, a flaky rule, a markdown table and case-insensitive job names.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# cisum\n\nA script that summarises a folder of CI job result files.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m cisum RESULTS_DIR`.\n\n## Layout\n\n- `cisum/parse.py` reads the result files.\n- `cisum/summary.py` counts outcomes and adds up time.\n- `cisum/__main__.py` prints the summary.\n- `samples/` holds example result folders.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m cisum samples/run1`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "cisum/__init__.py": "",
+      "cisum/__main__.py": "\"\"\"Print the summary for a results folder.\"\"\"\nimport sys\n\nfrom cisum.parse import load_results\nfrom cisum.summary import summarise\n\n\ndef main(argv):\n    if len(argv) != 1:\n        print(\"usage: python3 -m cisum RESULTS_DIR\", file=sys.stderr)\n        return 2\n    try:\n        results = load_results(argv[0])\n    except (OSError, ValueError) as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    summary = summarise(results)\n    print(f\"passed: {summary['passed']}  failed: {summary['failed']}  flaky: {summary['flaky']}\")\n    print(f\"total seconds: {summary['seconds']}\")\n    return 1 if summary[\"failed\"] else 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "cisum/parse.py": "\"\"\"Reading result files: one JSON object per job.\"\"\"\nimport json\nimport os\n\nSTATUSES = (\"passed\", \"failed\", \"flaky\")\n\n\ndef load_results(directory):\n    \"\"\"Return a list of result dicts, sorted by job name.\"\"\"\n    results = []\n    for name in sorted(os.listdir(directory)):\n        if not name.endswith(\".json\"):\n            continue\n        with open(os.path.join(directory, name), encoding=\"utf-8\") as handle:\n            result = json.load(handle)\n        if result.get(\"status\") not in STATUSES:\n            raise ValueError(f\"job {result.get('job')}: status must be passed, failed or flaky (got {result.get('status')!r})\")\n        results.append(result)\n    return results\n",
+      "cisum/summary.py": "\"\"\"Counting outcomes.\"\"\"\n\n\ndef summarise(results):\n    \"\"\"Return counts per status and the total seconds.\"\"\"\n    summary = {\"passed\": 0, \"failed\": 0, \"flaky\": 0, \"seconds\": 0}\n    for result in results:\n        summary[result[\"status\"]] += 1\n        summary[\"seconds\"] += result.get(\"seconds\", 0)\n    return summary\n",
+      "samples/run1/unit.json": "{\"job\": \"unit\", \"status\": \"passed\", \"seconds\": 41}\n",
+      "samples/run1/lint.json": "{\"job\": \"lint\", \"status\": \"passed\", \"seconds\": 9}\n",
+      "samples/odd/lint.json": "{\"job\": \"lint\", \"status\": \"skipped\", \"seconds\": 0}\n",
+      "tests/test_parse.py": "import os\nimport unittest\n\nfrom cisum.parse import load_results\n\nSAMPLES = os.path.join(os.path.dirname(__file__), \"..\", \"samples\")\n\n\nclass LoadResultsTests(unittest.TestCase):\n    def test_reads_both_jobs(self):\n        results = load_results(os.path.join(SAMPLES, \"run1\"))\n        self.assertEqual([r[\"job\"] for r in results], [\"lint\", \"unit\"])\n\n    def test_odd_status_is_rejected(self):\n        with self.assertRaises(ValueError):\n            load_results(os.path.join(SAMPLES, \"odd\"))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_summary.py": "import unittest\n\nfrom cisum.summary import summarise\n\n\nclass SummariseTests(unittest.TestCase):\n    def test_counts_and_adds_up(self):\n        results = [{\"status\": \"passed\", \"seconds\": 5}, {\"status\": \"failed\", \"seconds\": 7}]\n        summary = summarise(results)\n        self.assertEqual((summary[\"passed\"], summary[\"failed\"], summary[\"seconds\"]), (1, 1, 12))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Run the tests and tell me the result.",
+    "Run python3 -m cisum samples/odd and tell me exactly what it prints.",
+    "Flag a job as slow when it takes more than 60 seconds, and list the slow jobs at the end of the summary. Add tests.",
+    "Treat a flaky job as reported but not failing: the summary should still show it, yet it must not make the run fail. Those tests are being fixed and I don't want the build red meanwhile. Add a test.",
+    "Add cisum/markdown.py that renders the summary as a markdown table for the pull-request comment. Add a test.",
+    "Match job names case-insensitively. The CI provider renamed Unit to unit between releases, so the same job showed up twice. Add a test.",
+    "Where are we? Parsing, the slow list, flaky handling, markdown and the name matching are done and tested, and trend tracking across runs hasn't been started. Remaining, in order: trend tracking, then a --since flag, then docs. Run the tests.",
+    "Not for action: I compared this against the vendor's own dashboard and theirs is prettier, and the retrospective moved to Thursday. Run the tests.",
+    "Raise the slow-job threshold to 120 seconds. The integration suite legitimately takes about 90. Update the tests and run them. The release branch is called OTTERSPIRE."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "OTTERSPIRE"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "A flaky job is reported in the summary but does not make the run fail, because those tests are being fixed and the build should not be red meanwhile.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Flaky jobs are shown but never fail the run (their tests are being fixed).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Those tests are being fixed and I don't want the build red meanwhile"
+    },
+    {
+      "id": "i2",
+      "statement": "A job is slow when it takes more than 120 seconds (the threshold was 60 at first), because the integration suite legitimately takes about 90.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Slow-job threshold is 120 seconds (was 60): the integration suite takes about 90.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The integration suite legitimately takes about 90"
+    },
+    {
+      "id": "i3",
+      "statement": "cisum/markdown.py renders the summary as a markdown table for the pull-request comment.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `cisum/markdown.py` renders the summary as a markdown table for PR comments.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add cisum/markdown.py that renders the summary as a markdown table for the pull-request comment"
+    },
+    {
+      "id": "i4",
+      "statement": "Job names are matched case-insensitively, because the CI provider renamed Unit to unit and the same job showed up twice.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Job names are matched case-insensitively (the provider renamed `Unit` to `unit`).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "The CI provider renamed Unit to unit between releases, so the same job showed up twice"
+    },
+    {
+      "id": "i5",
+      "statement": "A result with a status other than passed, failed or flaky, such as skipped, is rejected.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Only `passed`, `failed` and `flaky` are valid statuses; `skipped` is rejected.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "status must be passed, failed or flaky"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "Parsing, the slow list, flaky handling, markdown and name matching are done and tested; trend tracking across runs has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: parsing, slow list, flaky handling, markdown, name matching. Not started: trend tracking.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "Parsing, the slow list, flaky handling, markdown and the name matching are done and tested, and trend tracking across runs hasn't been started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: trend tracking, then a --since flag, then docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: trend tracking, `--since` flag, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "trend tracking, then a --since flag, then docs"
+    },
+    {
+      "id": "n1",
+      "statement": "The vendor's own dashboard was compared and looked prettier.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The retrospective moved to Thursday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "Does a flaky job make the run fail?",
+      "answer": "No; it is reported but does not fail the run.",
+      "reject": [
+        "Yes"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "knowledge-update",
+      "question": "After how many seconds is a job flagged as slow?",
+      "answer": "120 seconds.",
+      "reject": [
+        "60"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Which module renders the markdown table?",
+      "answer": "cisum/markdown.py",
+      "reject": []
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "single-fact",
+      "question": "Are job names Unit and unit treated as the same job?",
+      "answer": "Yes; names are matched case-insensitively.",
+      "reject": [
+        "No"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "Which statuses are valid in a result file?",
+      "answer": "passed, failed and flaky.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which piece of work has not been started?",
+      "answer": "Trend tracking across runs.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Trend tracking, then a --since flag, then docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "How many flaky runs in a row turn a job into a failure?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Is the slow-job threshold different for the lint job?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i2"
+    }
+  ]
+}

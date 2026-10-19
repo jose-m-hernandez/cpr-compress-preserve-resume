@@ -1,0 +1,333 @@
+{
+  "id": "dev-004-md-linter",
+  "split": "dev",
+  "summary": "A long session on a Markdown linter CLI: new rules, a config file, a rename, JSON output.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# mdcheck\n\nA small command-line linter for Markdown files.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m mdcheck FILE [FILE ...]`.\n- Findings print as `path:line: rule: message`.\n\n## Layout\n\n- `mdcheck/rules.py` holds the lint rules.\n- `mdcheck/runner.py` applies the rules to files.\n- `mdcheck/cli.py` parses arguments and prints findings.\n- `mdcheck/errors.py` holds exception types and exit codes.\n- `samples/` holds example Markdown files.\n- `docs/rules.md` documents each rule.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Lint a sample: `python3 -m mdcheck samples/good.md`.\n\n## Conventions\n\n- Four-space indentation and type hints on public functions.\n- One function per rule, with a test for each.\n- No third-party dependencies.\n- Exit code 0 means clean and 1 means findings.\n",
+      ".gitignore": "__pycache__/\n",
+      "mdcheck/__init__.py": "",
+      "mdcheck/__main__.py": "from mdcheck.cli import main\n\nraise SystemExit(main())\n",
+      "mdcheck/errors.py": "\"\"\"Exception types and exit codes.\"\"\"\n\nEXIT_CLEAN = 0\nEXIT_FINDINGS = 1\nEXIT_CONFIG = 4\n\n\nclass UnknownRule(Exception):\n    pass\n",
+      "mdcheck/rules.py": "\"\"\"Lint rules. A rule takes the list of lines and returns (line_number, message) pairs.\"\"\"\n\n\ndef final_newline(lines):\n    if lines and not lines[-1].endswith(\"\\n\"):\n        return [(len(lines), \"file does not end with a newline\")]\n    return []\n\n\ndef no_tabs(lines):\n    return [(number, \"tab character\") for number, line in enumerate(lines, start=1) if \"\\t\" in line]\n\n\nRULES = [\n    (\"final-newline\", final_newline),\n    (\"no-tabs\", no_tabs),\n]\n",
+      "mdcheck/runner.py": "\"\"\"Applying rules to files.\"\"\"\nfrom mdcheck.errors import UnknownRule\nfrom mdcheck.rules import RULES\n\n\ndef select_rules(names=None):\n    known = dict(RULES)\n    if not names:\n        return list(RULES)\n    chosen = []\n    for name in names:\n        if name not in known:\n            raise UnknownRule(f\"unknown rule {name!r}; known rules: {', '.join(sorted(known))}\")\n        chosen.append((name, known[name]))\n    return chosen\n\n\ndef run_checks(paths, names=None):\n    findings = []\n    rules = select_rules(names)\n    for path in paths:\n        with open(path, encoding=\"utf-8\", newline=\"\") as handle:\n            lines = handle.readlines()\n        for rule_name, rule in rules:\n            for number, message in rule(lines):\n                findings.append((path, number, rule_name, message))\n    return findings\n",
+      "mdcheck/cli.py": "\"\"\"Command-line interface.\"\"\"\nimport argparse\nimport sys\n\nfrom mdcheck.errors import EXIT_CLEAN, EXIT_CONFIG, EXIT_FINDINGS, UnknownRule\nfrom mdcheck.runner import run_checks\n\n\ndef main(argv=None):\n    parser = argparse.ArgumentParser(prog=\"mdcheck\", description=\"Lint Markdown files.\")\n    parser.add_argument(\"paths\", nargs=\"+\")\n    parser.add_argument(\"--rules\", help=\"comma-separated rule names to run\")\n    args = parser.parse_args(argv)\n    names = args.rules.split(\",\") if args.rules else None\n    try:\n        findings = run_checks(args.paths, names)\n    except UnknownRule as error:\n        print(f\"error: {error}\", file=sys.stderr)\n        return EXIT_CONFIG\n    for path, number, rule, message in findings:\n        print(f\"{path}:{number}: {rule}: {message}\")\n    return EXIT_FINDINGS if findings else EXIT_CLEAN\n",
+      "samples/good.md": "# Title\n\nA clean paragraph.\n\n## Section\n\n- one\n- two\n",
+      "samples/bad.md": "# Title\n\n\tindented with a tab\n\nno final newline",
+      "docs/rules.md": "# Rules\n\n## no-tabs\n\nFlags tab characters. Bad example:\n\n```\n\tindented with a tab\n```\n\n## final-newline\n\nFlags files without a final newline.\n",
+      "tests/test_rules.py": "import unittest\n\nfrom mdcheck.rules import final_newline, no_tabs\n\n\nclass RuleTests(unittest.TestCase):\n    def test_no_tabs_flags_a_tab(self):\n        self.assertEqual(no_tabs([\"a\\n\", \"\\tb\\n\"]), [(2, \"tab character\")])\n\n    def test_final_newline(self):\n        self.assertEqual(final_newline([\"a\\n\", \"b\"]), [(2, \"file does not end with a newline\")])\n        self.assertEqual(final_newline([\"a\\n\"]), [])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_cli.py": "import os\nimport unittest\n\nfrom mdcheck.cli import main\n\nSAMPLES = os.path.join(os.path.dirname(__file__), \"..\", \"samples\")\n\n\nclass CliTests(unittest.TestCase):\n    def test_clean_file_exits_zero(self):\n        self.assertEqual(main([os.path.join(SAMPLES, \"good.md\")]), 0)\n\n    def test_findings_exit_one(self):\n        self.assertEqual(main([os.path.join(SAMPLES, \"bad.md\")]), 1)\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *",
+    "echo *"
+  ],
+  "turns": [
+    "Hello! Please run the unit tests and tell me whether they pass.",
+    "Read mdcheck/rules.py and summarize which rules exist right now, in two lines.",
+    "Add a line-length rule that flags lines longer than 100 characters, registered as 'line-length', with a test.",
+    "Run the tests and show me the result.",
+    "Actually make the maximum line length 88 instead of 100, it should match the other tools we use. Update the rule, its test and docs/rules.md, then run the tests.",
+    "Add a trailing-space rule that flags lines ending in spaces or tabs, registered as 'trailing-space', with a test.",
+    "Run the tests again.",
+    "Can you list the rules documented in docs/rules.md? I'm out on Friday for a dentist appointment, so the review will wait until Monday anyway.",
+    "Add a --config option that reads a JSON file shaped like {\"rules\": [\"no-tabs\", \"line-length\"]} to pick which rules run. The file will be called .mdcheck.json, JSON rather than INI, since the standard library parses it without any extra code.",
+    "Write tests for the config loading, using a temporary directory, and run them.",
+    "Add a short section to docs/rules.md describing the config file, then show me the diff of that file.",
+    "Now try running python3 -m mdcheck samples/good.md --rules line-lenght (with a typo on purpose) and tell me exactly what happens, including the exit code.",
+    "Add a heading-increment rule that flags a heading skipping a level, for example an h1 followed by an h3. Make it a warning rather than an error. Register it and add a test.",
+    "Run the tests.",
+    "Rename runner.run_checks to runner.check_files everywhere, tests included, and run the tests afterwards.",
+    "Show me where the old name still appears, if anywhere.",
+    "Run the full test suite once more.",
+    "Unrelated: last week I tried making the checker run files in parallel with threads, the GIL made it no faster and I reverted it. Anyway, can you show me the current file layout?",
+    "Add a --format option with text (default) and json. In json mode print one JSON object per finding, one per line, with the keys path, line, rule and severity.",
+    "Add a test for the json output and run the tests.",
+    "Move the formatting code into a new module mdcheck/formats.py instead of cli.py, and have cli.py import from it.",
+    "Update the tests to match the move and run them.",
+    "Check that the RULES list at the bottom of rules.py is in alphabetical order by rule name, because that is where new rules get registered.",
+    "Add a no-bare-urls rule that flags http:// or https:// URLs that are not inside a Markdown link, registered the same way, with a test.",
+    "Run the tests.",
+    "Add a test that runs mdcheck on samples/good.md and expects exit code 0. Don't point any self-check at docs/rules.md though, it quotes bad examples on purpose so it would always report findings.",
+    "Run the whole suite again and tell me the number of tests.",
+    "Can you summarize where things stand in a short paragraph? Done and documented so far, as I see it: line-length, trailing-space, heading-increment and no-bare-urls, plus --config and --format json.",
+    "After this I'd like, in order, autofix for trailing-space, then a --watch mode, then packaging. Repeat the plan back to me.",
+    "Oh, and the release branch is called AMBERKITE in our notes. Show me git status.",
+    "Run the tests one last time.",
+    "Summarize where the project stands."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "AMBERKITE"
+  },
+  "items": [
+    {
+      "id": "o1",
+      "statement": "The maximum line length is 88 characters (it was first set to 100).",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Maximum line length: 88 (changed from 100 to match our other tools).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "make the maximum line length 88 instead of 100, it should match the other tools we use"
+    },
+    {
+      "id": "o2",
+      "statement": "The config file is named .mdcheck.json (JSON, not INI) and selects rules with a \"rules\" list.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Config file: `.mdcheck.json` (JSON, not INI), e.g. `{\"rules\": [\"no-tabs\"]}`.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The file will be called .mdcheck.json, JSON rather than INI"
+    },
+    {
+      "id": "o3",
+      "statement": "An unknown rule name, such as a typo, is a hard error: a message listing the known rules and exit code 4.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- An unknown rule name is a hard error: it lists the known rules and exits with code 4.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "unknown rule 'line-lenght'"
+      ]
+    },
+    {
+      "id": "o4",
+      "statement": "runner.run_checks was renamed to runner.check_files.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `mdcheck/runner.py`: the entry point is `check_files` (formerly `run_checks`).",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Rename runner.run_checks to runner.check_files everywhere"
+    },
+    {
+      "id": "o5",
+      "statement": "JSON output prints one object per line with the keys path, line, rule and severity, and lives in mdcheck/formats.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `--format json` prints one object per line (`path`, `line`, `rule`, `severity`); code in `mdcheck/formats.py`.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "In json mode print one JSON object per finding, one per line, with the keys path, line, rule and severity"
+    },
+    {
+      "id": "o6",
+      "statement": "New rules are registered in the RULES list at the bottom of rules.py, in alphabetical order by rule name.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Register new rules in `RULES` at the bottom of `rules.py`, alphabetical by name.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "the RULES list at the bottom of rules.py is in alphabetical order by rule name, because that is where new rules get registered"
+    },
+    {
+      "id": "o7",
+      "statement": "Never run mdcheck against docs/rules.md in a self-check test: it quotes bad examples on purpose and always reports findings.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Do not self-check `docs/rules.md`: its bad examples always produce findings.",
+      "oracle_section": "Warnings",
+      "source": "user",
+      "anchor": "Don't point any self-check at docs/rules.md though, it quotes bad examples on purpose so it would always report findings"
+    },
+    {
+      "id": "o8",
+      "statement": "The heading-increment rule reports a warning, not an error.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `heading-increment` reports a warning, not an error.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Make it a warning rather than an error"
+    },
+    {
+      "id": "o9",
+      "statement": "The rules line-length, trailing-space, heading-increment and no-bare-urls are done and documented; the config option and JSON output are finished.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: line-length, trailing-space, heading-increment, no-bare-urls, `--config`, `--format json`.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "Done and documented so far, as I see it: line-length, trailing-space, heading-increment and no-bare-urls, plus --config and --format json"
+    },
+    {
+      "id": "o10",
+      "statement": "Remaining work, in order: autofix for trailing-space, then a --watch mode, then packaging.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: trailing-space autofix, `--watch` mode, packaging.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "in order, autofix for trailing-space, then a --watch mode, then packaging"
+    },
+    {
+      "id": "n1",
+      "statement": "The user is out on Friday for a dentist appointment, so the review waits until Monday.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "Running files in parallel with threads was tried last week and reverted because the GIL made it no faster.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "o1",
+      "type": "knowledge-update",
+      "question": "What is the maximum line length?",
+      "answer": "88 characters",
+      "reject": [
+        "100 characters"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "o2",
+      "type": "single-fact",
+      "question": "What is the config file called and in which format is it?",
+      "answer": ".mdcheck.json, in JSON.",
+      "reject": [
+        "INI",
+        "mdcheck.ini"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": false,
+      "item": "o3",
+      "type": "single-fact",
+      "question": "What happens when a rule name is misspelled on the command line?",
+      "answer": "It is a hard error that lists the known rules and exits with code 4.",
+      "reject": [
+        "it is ignored",
+        "exit code 1"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "o4",
+      "type": "knowledge-update",
+      "question": "What is the runner's entry point function called now?",
+      "answer": "check_files",
+      "reject": [
+        "run_checks"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "o5",
+      "type": "single-fact",
+      "question": "Which keys does each JSON output object have, and which module formats it?",
+      "answer": "path, line, rule and severity; mdcheck/formats.py.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "o6",
+      "type": "single-fact",
+      "question": "Where and in what order are new rules registered?",
+      "answer": "In the RULES list at the bottom of rules.py, alphabetical by rule name.",
+      "reject": [
+        "at the top",
+        "in the order they were added"
+      ]
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "o7",
+      "type": "single-fact",
+      "question": "Why must the self-check test avoid docs/rules.md?",
+      "answer": "It quotes bad examples on purpose, so it always reports findings.",
+      "reject": []
+    },
+    {
+      "id": "p8",
+      "code_answers": true,
+      "item": "o8",
+      "type": "single-fact",
+      "question": "What severity does the heading-increment rule report?",
+      "answer": "Warning.",
+      "reject": [
+        "error"
+      ]
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": "o9",
+      "type": "single-fact",
+      "question": "Which rules are done and documented?",
+      "answer": "line-length, trailing-space, heading-increment and no-bare-urls.",
+      "reject": []
+    },
+    {
+      "id": "p10",
+      "code_answers": false,
+      "item": "o10",
+      "type": "temporal",
+      "question": "In what order is the remaining work to be done?",
+      "answer": "Trailing-space autofix, then --watch mode, then packaging.",
+      "reject": [
+        "packaging first"
+      ]
+    },
+    {
+      "id": "p11",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "What severity does the line-length rule report?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "o8"
+    },
+    {
+      "id": "p12",
+      "code_answers": true,
+      "item": null,
+      "type": "abstention",
+      "question": "Which exit code is returned when the config file is malformed JSON?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "o2"
+    }
+  ]
+}

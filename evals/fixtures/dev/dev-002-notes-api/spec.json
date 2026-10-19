@@ -1,0 +1,239 @@
+{
+  "id": "dev-002-notes-api",
+  "split": "dev",
+  "summary": "A small notes web service moves its port, adds /v2 endpoints and extracts validation.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# notes-api\n\nA small HTTP service that stores short notes in a JSON file.\n\n## Overview\n\n- Python 3, standard library only.\n- Start the server with `python3 -m notes_api.app`.\n- Responses are JSON.\n\n## Layout\n\n- `notes_api/app.py` is the HTTP layer.\n- `notes_api/store.py` keeps notes in memory and saves them to a file.\n- `config.json` holds runtime settings.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- List notes: `curl http://127.0.0.1:<port>/v1/notes` once the server is running.\n\n## Conventions\n\n- Four-space indentation.\n- Keep handlers thin and put logic in the store.\n- Every public function has a test.\n- No third-party dependencies.\n",
+      "README.md": "# notes-api\n\nA tiny notes service.\n\nStart it with `python3 -m notes_api.app`. It listens on port 8081.\n",
+      "config.json": "{\n  \"port\": 8081,\n  \"data_file\": \"notes.json\"\n}\n",
+      ".gitignore": "__pycache__/\nnotes.json\n",
+      "notes_api/__init__.py": "",
+      "notes_api/store.py": "\"\"\"A tiny file-backed note store.\"\"\"\nimport json\nimport os\n\nMAX_TITLE = 80\n\n\nclass NoteStore:\n    def __init__(self, path):\n        self.path = path\n        self.notes = {}\n        if os.path.exists(path):\n            with open(path, encoding=\"utf-8\") as handle:\n                self.notes = {int(key): value for key, value in json.load(handle).items()}\n\n    def add(self, title, body):\n        if len(title) > MAX_TITLE:\n            raise ValueError(\"title too long (max 80)\")\n        note_id = max(self.notes, default=0) + 1\n        self.notes[note_id] = {\"title\": title, \"body\": body}\n        self._save()\n        return note_id\n\n    def get(self, note_id):\n        return self.notes[note_id]\n\n    def _save(self):\n        with open(self.path, \"w\", encoding=\"utf-8\") as handle:\n            json.dump(self.notes, handle)\n",
+      "notes_api/app.py": "\"\"\"HTTP layer for the notes service.\"\"\"\nimport json\nimport os\nimport re\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\n\nfrom notes_api.store import NoteStore\n\nHERE = os.path.dirname(os.path.abspath(__file__))\nSTORE = None\n\n\ndef load_config():\n    with open(os.path.join(HERE, \"..\", \"config.json\"), encoding=\"utf-8\") as handle:\n        return json.load(handle)\n\n\ndef list_notes():\n    return 200, {\"notes\": STORE.notes}\n\n\nROUTES = [\n    (\"GET\", r\"/v1/notes\", list_notes),\n]\n\n\ndef dispatch(method, path):\n    for route_method, pattern, func in ROUTES:\n        match = re.fullmatch(pattern, path)\n        if route_method == method and match:\n            return func, match.groups()\n    return None, ()\n\n\nclass Handler(BaseHTTPRequestHandler):\n    def do_GET(self):\n        func, groups = dispatch(\"GET\", self.path)\n        status, payload = func(*groups) if func else (404, {\"error\": \"not found\"})\n        body = json.dumps(payload).encode(\"utf-8\")\n        self.send_response(status)\n        self.send_header(\"Content-Type\", \"application/json\")\n        self.send_header(\"Content-Length\", str(len(body)))\n        self.end_headers()\n        self.wfile.write(body)\n\n\ndef serve():\n    global STORE\n    config = load_config()\n    STORE = NoteStore(config[\"data_file\"])\n    HTTPServer((\"127.0.0.1\", config[\"port\"]), Handler).serve_forever()\n\n\nif __name__ == \"__main__\":\n    serve()\n",
+      "tests/test_store.py": "import os\nimport tempfile\nimport unittest\n\nfrom notes_api.store import NoteStore\n\n\nclass StoreTests(unittest.TestCase):\n    def setUp(self):\n        self.dir = tempfile.TemporaryDirectory()\n        self.addCleanup(self.dir.cleanup)\n        self.path = os.path.join(self.dir.name, \"notes.json\")\n\n    def test_add_and_get(self):\n        store = NoteStore(self.path)\n        note_id = store.add(\"hello\", \"body\")\n        self.assertEqual(store.get(note_id)[\"title\"], \"hello\")\n\n    def test_notes_survive_a_reload(self):\n        NoteStore(self.path).add(\"kept\", \"body\")\n        self.assertEqual(NoteStore(self.path).get(1)[\"title\"], \"kept\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hello! Please run the unit tests, then tell me which port the dev server is configured to listen on right now.",
+    "Switch the dev server to port 8082. 8081 is gone from our dev boxes since the metrics sidecar grabbed it. Update config.json and the README, then run the tests.",
+    "Add a GET endpoint for a single note, at /v2/notes/<id>, with a test. The /v1 routes stay as they are, bug fixes only, and everything new goes under /v2.",
+    "Create a note with a 100-character title through NoteStore in a quick throwaway script and tell me exactly what it prints. Then add a test for that case and run it.",
+    "Yesterday's CI run was red because the runner lost network for ten minutes and a rerun fixed it, so there is nothing to look at there. My lunch plans changed too, so I may not answer around noon. Meanwhile, could you list the files under notes_api/?",
+    "Create notes_api/validation.py and move the title and body checks out of store.py into it, then update the imports and run the tests.",
+    "Add DELETE /v2/notes/<id> with a test. Routes go in the ROUTES table in app.py and the handler only looks them up, I don't want it branching on the path itself.",
+    "Where are we? GET and DELETE for single notes work under /v2 now, pagination and rate limiting haven't been started, and I want rate limiting first, then pagination, then the docs. Give me that back in one short paragraph.",
+    "The release branch is called COPPERWREN in the tracker, by the way. Run the tests one final time."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "COPPERWREN"
+  },
+  "items": [
+    {
+      "id": "j1",
+      "statement": "The dev server port is 8082; 8081 was retired because the metrics sidecar uses it.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Dev server port: 8082 (8081 retired: the metrics sidecar uses it).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "8081 is gone from our dev boxes since the metrics sidecar grabbed it"
+    },
+    {
+      "id": "j2",
+      "statement": "The /v1 routes are frozen (bug fixes only); every new endpoint goes under /v2/.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `/v1` routes are frozen (bug fixes only); new endpoints go under `/v2/`.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The /v1 routes stay as they are, bug fixes only, and everything new goes under /v2"
+    },
+    {
+      "id": "j3",
+      "statement": "Note titles are limited to 80 characters; the store raises ValueError('title too long (max 80)') beyond that.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Titles over 80 characters are rejected with `ValueError('title too long (max 80)')`.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "title too long (max 80)"
+      ]
+    },
+    {
+      "id": "j4",
+      "statement": "Title and body validation lives in notes_api/validation.py, moved out of store.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- Input checks live in `notes_api/validation.py` (moved out of `store.py`).",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "move the title and body checks out of store.py into it"
+    },
+    {
+      "id": "j5",
+      "statement": "Register every route in the ROUTES table in app.py; the handler only looks routes up and never branches on the path.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Register routes in the `ROUTES` table in `app.py`; the handler never branches on the path.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Routes go in the ROUTES table in app.py and the handler only looks them up, I don't want it branching on the path itself"
+    },
+    {
+      "id": "j6",
+      "statement": "GET and DELETE for single notes exist under /v2; pagination and rate limiting have not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: single-note GET and DELETE under `/v2`. Not started: pagination, rate limiting.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "GET and DELETE for single notes work under /v2 now, pagination and rate limiting haven't been started"
+    },
+    {
+      "id": "j7",
+      "statement": "Remaining work, in order: rate limiting, then pagination, then the docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: rate limiting, pagination, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "I want rate limiting first, then pagination, then the docs"
+    },
+    {
+      "id": "n1",
+      "statement": "Yesterday's CI run was red only because the runner lost network for ten minutes.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The user's lunch plans changed, so pings around noon can be ignored.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "j1",
+      "type": "knowledge-update",
+      "question": "Which port does the dev server use?",
+      "answer": "8082",
+      "reject": [
+        "8081"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": false,
+      "item": "j2",
+      "type": "single-fact",
+      "question": "Under which path prefix do all new endpoints go?",
+      "answer": "/v2/",
+      "reject": [
+        "/v1/"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "j3",
+      "type": "single-fact",
+      "question": "How long may a note title be?",
+      "answer": "At most 80 characters.",
+      "reject": [
+        "100 characters",
+        "unlimited"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": false,
+      "item": "j4",
+      "type": "single-fact",
+      "question": "Which module holds the title and body validation?",
+      "answer": "notes_api/validation.py",
+      "reject": [
+        "store.py"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": false,
+      "item": "j5",
+      "type": "single-fact",
+      "question": "Where must new routes be registered?",
+      "answer": "In the ROUTES table in app.py.",
+      "reject": [
+        "inside the handler"
+      ]
+    },
+    {
+      "id": "p6",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "j6",
+      "type": "single-fact",
+      "question": "In the status I gave you, which features did I say have not been started?",
+      "answer": "Pagination and rate limiting.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "j7",
+      "type": "temporal",
+      "question": "In what order is the remaining work to be done?",
+      "answer": "Rate limiting, then pagination, then the docs.",
+      "reject": [
+        "docs first",
+        "pagination first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "What happens to the dev server port on the staging machine?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "j1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "How long may a note body be?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "j3"
+    }
+  ]
+}

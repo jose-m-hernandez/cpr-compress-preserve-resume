@@ -1,0 +1,7 @@
+{
+  "start": "gate",
+  "rooms": {
+    "gate": {"description": "A stone gate.", "exits": {"down": "cellar"}},
+    "cellar": {"description": "A damp cellar.", "exits": {"east": "vault"}}
+  }
+}

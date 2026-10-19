@@ -1,0 +1,254 @@
+{
+  "id": "dev-017-metrics-exporter",
+  "split": "dev",
+  "summary": "A tiny metrics endpoint gains a text renderer, a no-labels rule, a moved path and a deprecation.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# metrics\n\nA tiny metrics endpoint: counters held in memory and served as plain text.\n\n## Overview\n\n- Python 3, standard library only.\n- Check a list of metric names with `python3 -m metrics check FILE`.\n\n## Layout\n\n- `metrics/registry.py` holds counters in a registry.\n- `metrics/check.py` checks metric names.\n- `metrics/__main__.py` is the command-line entry point.\n- `data/` holds example name lists.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m metrics check data/names.txt`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "metrics/__init__.py": "",
+      "metrics/__main__.py": "\"\"\"Check metric names from a file.\"\"\"\nimport sys\n\nfrom metrics.check import check_names\n\n\ndef main(argv):\n    if len(argv) != 2 or argv[0] != \"check\":\n        print(\"usage: python3 -m metrics check FILE\", file=sys.stderr)\n        return 2\n    with open(argv[1], encoding=\"utf-8\") as handle:\n        try:\n            check_names(handle.read().splitlines())\n        except ValueError as err:\n            print(f\"error: {err}\", file=sys.stderr)\n            return 1\n    print(\"ok\")\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "metrics/registry.py": "\"\"\"Counters held in memory.\"\"\"\n\n\nclass Counter:\n    \"\"\"A value that only goes up.\"\"\"\n\n    def __init__(self, name):\n        self.name = name\n        self.value = 0\n\n    def inc(self):\n        \"\"\"Add one.\"\"\"\n        self.value += 1\n\n\nclass Registry:\n    \"\"\"Holds counters by name.\"\"\"\n\n    def __init__(self):\n        self._counters = {}\n\n    def counter(self, name):\n        \"\"\"Return the counter called name, creating it if needed.\"\"\"\n        if name not in self._counters:\n            self._counters[name] = Counter(name)\n        return self._counters[name]\n\n    def counters(self):\n        \"\"\"Return all counters sorted by name.\"\"\"\n        return [self._counters[name] for name in sorted(self._counters)]\n",
+      "metrics/check.py": "\"\"\"Checking metric names: each line is `KIND NAME`.\"\"\"\n\n\ndef check_names(lines):\n    \"\"\"Raise ValueError for the first bad line.\"\"\"\n    for number, line in enumerate(lines, start=1):\n        parts = line.split()\n        if len(parts) != 2:\n            raise ValueError(f\"line {number}: expected KIND NAME\")\n        kind, name = parts\n        if kind == \"counter\" and not name.endswith(\"_total\"):\n            raise ValueError(f\"line {number}: counter names must end in _total\")\n",
+      "data/names.txt": "counter errors_total\ncounter requests\n",
+      "tests/test_registry.py": "import unittest\n\nfrom metrics.registry import Registry\n\n\nclass RegistryTests(unittest.TestCase):\n    def test_counter_counts(self):\n        registry = Registry()\n        registry.counter(\"a_total\").inc()\n        registry.counter(\"a_total\").inc()\n        self.assertEqual(registry.counter(\"a_total\").value, 2)\n\n    def test_counters_are_sorted(self):\n        registry = Registry()\n        registry.counter(\"b_total\")\n        registry.counter(\"a_total\")\n        self.assertEqual([c.name for c in registry.counters()], [\"a_total\", \"b_total\"])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_check.py": "import unittest\n\nfrom metrics.check import check_names\n\n\nclass CheckNamesTests(unittest.TestCase):\n    def test_good_names_pass(self):\n        check_names([\"counter hits_total\"])\n\n    def test_counter_without_suffix_fails(self):\n        with self.assertRaises(ValueError):\n            check_names([\"counter hits\"])\n\n    def test_wrong_shape_fails(self):\n        with self.assertRaises(ValueError):\n            check_names([\"counter\"])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Run the tests and tell me the result.",
+    "Run python3 -m metrics check data/names.txt and tell me exactly what it says.",
+    "Add metrics/render.py that turns a registry into the plain text format, one line per counter as name and value, sorted by name. Serve it at /metrics from a handle(path) function in metrics/app.py.",
+    "Do not support labels. Each dimension gets its own metric name joined with underscores, since escaping label values by hand is where the formatter would break. Add a test that a name containing a brace is rejected.",
+    "Run the tests and show me git status.",
+    "Switch the existing callers over to Counter.add(n) and run the tests. Counter.inc() is deprecated and I'll delete it after the next release.",
+    "Move the scrape endpoint from /metrics to /-/metrics. The proxy in front of us reserves /metrics for itself. Update the handler and the tests.",
+    "Status: render, the endpoint and the Counter.add switch are done and tested, and histograms haven't been started. Remaining, in order: histograms, then a process-uptime gauge, then docs. Run the tests.",
+    "No action needed: I looked at a metrics client library and it needs a compiler on the build box, so no. The dashboard review is Friday as well. Run the tests.",
+    "Convert the render tests to compare the whole output text exactly, line for line. Stray whitespace breaks the scraper, so partial matches are not good enough. The release branch is called BRAMBLEHAWK."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "BRAMBLEHAWK"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "The scrape endpoint is /-/metrics (it was /metrics at first), because the proxy in front reserves /metrics.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Scrape endpoint is `/-/metrics` (was `/metrics`): the proxy reserves `/metrics`.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The proxy in front of us reserves /metrics for itself"
+    },
+    {
+      "id": "i2",
+      "statement": "Labels are not supported; each dimension gets its own metric name joined with underscores, because hand-escaping label values would break the formatter.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- No labels: each dimension is its own underscore-joined metric name (hand-escaping label values breaks).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "since escaping label values by hand is where the formatter would break"
+    },
+    {
+      "id": "i3",
+      "statement": "The plain text rendering lives in the new module metrics/render.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `metrics/render.py` renders the registry as plain text.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add metrics/render.py that turns a registry into the plain text format"
+    },
+    {
+      "id": "i4",
+      "statement": "Render tests compare the whole output text exactly, line for line, because stray whitespace breaks the scraper.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Render tests compare the whole output exactly (stray whitespace breaks the scraper).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Stray whitespace breaks the scraper, so partial matches are not good enough"
+    },
+    {
+      "id": "i5",
+      "statement": "Counter names must end in _total; a name such as requests is rejected.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Counter names must end in `_total`; `requests` is rejected.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "counter names must end in _total"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "Counter.inc() is deprecated in favour of Counter.add(n) and will be deleted after the next release.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `Counter.inc()` is deprecated; use `Counter.add(n)`. It goes after the next release.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Counter.inc() is deprecated and I'll delete it after the next release"
+    },
+    {
+      "id": "i7",
+      "statement": "Render, the endpoint and the Counter.add switch are done and tested; histograms have not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: render, endpoint, `Counter.add` switch. Not started: histograms.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "render, the endpoint and the Counter.add switch are done and tested, and histograms haven't been started"
+    },
+    {
+      "id": "i8",
+      "statement": "Remaining work, in order: histograms, then a process-uptime gauge, then docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: histograms, process-uptime gauge, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "histograms, then a process-uptime gauge, then docs"
+    },
+    {
+      "id": "n1",
+      "statement": "A metrics client library was rejected because it needs a compiler on the build box.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The dashboard review is on Friday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "i1",
+      "type": "knowledge-update",
+      "question": "Which path serves the metrics?",
+      "answer": "/-/metrics",
+      "reject": [
+        "/metrics"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": false,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Are labels supported, and why not?",
+      "answer": "No; hand-escaping label values would break the formatter.",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Which module renders the plain text output?",
+      "answer": "metrics/render.py",
+      "reject": []
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "single-fact",
+      "question": "How do the render tests compare the output?",
+      "answer": "They compare the whole text exactly, line for line.",
+      "reject": [
+        "partial matches"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "What must a counter name end in?",
+      "answer": "_total",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which Counter method is deprecated?",
+      "answer": "Counter.inc(); use Counter.add(n).",
+      "reject": [
+        "Counter.add is deprecated"
+      ]
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "single-fact",
+      "question": "Which piece of work has not been started?",
+      "answer": "Histograms.",
+      "reject": []
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": "i8",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Histograms, then a process-uptime gauge, then docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which HTTP method does the scrape endpoint accept besides GET?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p10",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "In which release will Counter.inc be deleted?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i6"
+    }
+  ]
+}

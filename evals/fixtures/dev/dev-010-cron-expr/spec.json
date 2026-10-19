@@ -1,0 +1,231 @@
+{
+  "id": "dev-010-cron-expr",
+  "split": "dev",
+  "summary": "A cron-like expression parser gains next_run, a dedicated error type and a decision on weekday names.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# cronish\n\nA small library that parses cron-like schedule expressions.\n\n## Overview\n\n- Python 3, standard library only.\n- Inspect an expression with `python3 -m cronish 'MINUTE HOUR WEEKDAY'`.\n\n## Layout\n\n- `cronish/parser.py` parses an expression into a schedule.\n- `cronish/__main__.py` prints the parsed fields.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m cronish '*/15 9-17 1-5'`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "cronish/__init__.py": "",
+      "cronish/__main__.py": "\"\"\"Print the fields of an expression.\"\"\"\nimport sys\n\nfrom cronish.parser import parse\n\n\ndef main(argv):\n    if len(argv) != 1:\n        print(\"usage: python3 -m cronish 'MINUTE HOUR WEEKDAY'\", file=sys.stderr)\n        return 2\n    try:\n        schedule = parse(argv[0])\n    except ValueError as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    print(\"minutes:\", sorted(schedule.minutes))\n    print(\"hours:\", sorted(schedule.hours))\n    print(\"weekdays:\", sorted(schedule.weekdays))\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "cronish/parser.py": "\"\"\"Parsing schedule expressions.\"\"\"\nfrom collections import namedtuple\n\nSchedule = namedtuple(\"Schedule\", \"minutes hours weekdays\")\n\n\ndef parse_field(text, low, high, name):\n    \"\"\"Expand one field (`*`, `N`, `A-B`, `*/N` or a comma list) into a set of ints.\"\"\"\n    values = set()\n    for part in text.split(\",\"):\n        step = 1\n        if \"/\" in part:\n            part, step_text = part.split(\"/\", 1)\n            step = int(step_text)\n        if part == \"*\":\n            start, end = low, high\n        elif \"-\" in part:\n            start, end = (int(x) for x in part.split(\"-\", 1))\n        else:\n            start = end = int(part)\n        if name == \"weekday\" and end == 7:\n            raise ValueError(\"weekday 7 is not accepted; Sunday is 0\")\n        if start < low or end > high or start > end:\n            raise ValueError(f\"{name} {part!r} is out of range {low}-{high}\")\n        values.update(range(start, end + 1, step))\n    return values\n\n\ndef parse(expr):\n    \"\"\"Parse `MINUTE HOUR WEEKDAY` into a Schedule.\"\"\"\n    fields = expr.split()\n    if len(fields) != 3:\n        raise ValueError(f\"expected 3 fields, found {len(fields)}\")\n    return Schedule(parse_field(fields[0], 0, 59, \"minute\"),\n                    parse_field(fields[1], 0, 23, \"hour\"),\n                    parse_field(fields[2], 0, 6, \"weekday\"))\n",
+      "tests/test_parser.py": "import unittest\n\nfrom cronish.parser import parse, parse_field\n\n\nclass ParserTests(unittest.TestCase):\n    def test_star_covers_the_range(self):\n        self.assertEqual(parse_field(\"*\", 0, 5, \"minute\"), {0, 1, 2, 3, 4, 5})\n\n    def test_step_over_a_range(self):\n        self.assertEqual(parse_field(\"10-20/5\", 0, 59, \"minute\"), {10, 15, 20})\n\n    def test_three_fields_are_required(self):\n        with self.assertRaises(ValueError):\n            parse(\"* *\")\n\n    def test_out_of_range_minute(self):\n        with self.assertRaises(ValueError):\n            parse(\"61 * *\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Run git status and ls, then tell me what is in the repo before we change anything.",
+    "Run python3 -m cronish '30 9 7' and tell me exactly what it prints.",
+    "Add a next_run(schedule, after) function in a new module cronish/nextrun.py that returns the next matching minute. Keep to three fields, minute hour weekday, with no seconds or month, since the scheduler wakes once a minute. Add tests.",
+    "Make the parser accept weekday names like MON-FRI as well as numbers, and add a test.",
+    "Not for action: I looked at adopting an existing scheduler package and its licence was a problem, so I dropped the idea. My train is delayed, so replies will lag. Please run the tests.",
+    "Every parse failure should raise ExprError, a ValueError subclass defined in cronish/errors.py, with the field name in the message. Update the tests to expect it.",
+    "Quick status, and run the tests: parsing, next_run and ExprError are done and tested, and a --next flag for the command line hasn't been started. Remaining work, in this order: the --next flag, then ranges with steps like 10-30/5 in every field, then packaging.",
+    "Remove the weekday names from the parser and the tests again. They turned out to be a locale headache, so it is numbers only. Run the tests afterwards.",
+    "The release branch is called HALCYONMOTH. Show me git status."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "HALCYONMOTH"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Expressions have exactly three fields, minute hour weekday, with no seconds or month, because the scheduler wakes once a minute.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Expressions are `minute hour weekday` only (no seconds, no month): the scheduler wakes once a minute.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Keep to three fields, minute hour weekday, with no seconds or month, since the scheduler wakes once a minute"
+    },
+    {
+      "id": "i2",
+      "statement": "next_run lives in the new module cronish/nextrun.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `cronish/nextrun.py` holds `next_run(schedule, after)`.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add a next_run(schedule, after) function in a new module cronish/nextrun.py"
+    },
+    {
+      "id": "i3",
+      "statement": "Every parse failure raises ExprError (a ValueError subclass in cronish/errors.py) with the field name in the message.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Parse failures raise `ExprError` (a `ValueError` subclass, `cronish/errors.py`) naming the field.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Every parse failure should raise ExprError, a ValueError subclass defined in cronish/errors.py, with the field name in the message"
+    },
+    {
+      "id": "i4",
+      "statement": "Weekdays are numbers only; weekday names such as MON-FRI were added and then removed because of locale trouble.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Weekdays are numbers only; names (MON-FRI) were removed because of locale trouble.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "They turned out to be a locale headache, so it is numbers only"
+    },
+    {
+      "id": "i5",
+      "statement": "Weekday 7 is rejected: Sunday is 0.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Weekday 7 is rejected; Sunday is 0.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "weekday 7 is not accepted; Sunday is 0"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "Parsing, next_run and ExprError are done and tested; the --next flag has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: parsing, `next_run`, `ExprError`. Not started: the `--next` flag.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "parsing, next_run and ExprError are done and tested, and a --next flag for the command line hasn't been started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: the --next flag, then ranges with steps in every field, then packaging.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: `--next` flag, ranges with steps in every field, packaging.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "the --next flag, then ranges with steps like 10-30/5 in every field, then packaging"
+    },
+    {
+      "id": "n1",
+      "statement": "An existing scheduler package was considered and dropped because its licence was a problem.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The user's train was delayed, so replies would lag.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": false,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "Which fields does an expression have, and why no seconds?",
+      "answer": "Minute, hour and weekday; the scheduler wakes once a minute.",
+      "reject": []
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Where is next_run defined?",
+      "answer": "In cronish/nextrun.py.",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "What does the parser raise on a bad expression?",
+      "answer": "ExprError, a ValueError subclass that names the field.",
+      "reject": [
+        "a plain ValueError"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": false,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "Does the parser accept weekday names such as MON?",
+      "answer": "No; weekdays are numbers only.",
+      "reject": [
+        "Yes",
+        "MON-FRI is accepted"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "Which number stands for Sunday in the weekday field?",
+      "answer": "0, and 7 is rejected.",
+      "reject": [
+        "7"
+      ]
+    },
+    {
+      "id": "p6",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "In the status I gave you, which piece of work did I say had not been started?",
+      "answer": "The --next flag.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "The --next flag, then ranges with steps, then packaging.",
+      "reject": [
+        "packaging first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Does an expression support a month field in a later version?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which exit code does the command line return for an ExprError?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i3"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "id": "dev-014-log-digest",
+  "split": "dev",
+  "summary": "An access-log digest script gains path normalisation, hourly buckets and a markdown table.",
+  "excluded": {
+    "date": "2026-10-18",
+    "reason": "Not run or scored. Generation failed six times: twice on compound shell commands outside allowed_bash, then four times in the resume control, where the fresh session with no history wrote tool-call markup as text and Claude Code returned the result as an error. Kept as a record of the attempt."
+  },
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# digest\n\nA script that summarises a web access log: the busiest paths and the status code mix.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m digest LOGFILE`.\n\n## Layout\n\n- `digest/parse.py` turns log lines into requests.\n- `digest/stats.py` counts paths and statuses.\n- `digest/__main__.py` prints the report.\n- `data/` holds small example logs.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m digest data/small.log`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "digest/__init__.py": "",
+      "digest/__main__.py": "\"\"\"Print the report for a log file.\"\"\"\nimport sys\n\nfrom digest.parse import parse_file\nfrom digest.stats import status_counts, top_paths\n\n\ndef main(argv):\n    if len(argv) != 1:\n        print(\"usage: python3 -m digest LOGFILE\", file=sys.stderr)\n        return 2\n    requests, skipped = parse_file(argv[0])\n    if skipped:\n        print(f\"skipped {len(skipped)} malformed lines (first: line {skipped[0]})\", file=sys.stderr)\n    for path, count in top_paths(requests, 10):\n        print(f\"{count:6d}  {path}\")\n    for status, count in sorted(status_counts(requests).items()):\n        print(f\"{status}: {count}\")\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "digest/parse.py": "\"\"\"Reading log lines: `IP TIMESTAMP METHOD PATH STATUS`.\"\"\"\nfrom collections import namedtuple\n\nRequest = namedtuple(\"Request\", \"ip when method path status\")\n\n\ndef parse_line(line):\n    \"\"\"Return a Request, or raise ValueError for a malformed line.\"\"\"\n    parts = line.split()\n    if len(parts) != 5 or not parts[4].isdigit():\n        raise ValueError(\"malformed line\")\n    return Request(parts[0], parts[1], parts[2], parts[3], int(parts[4]))\n\n\ndef parse_file(path):\n    \"\"\"Return (requests, numbers of the malformed lines).\"\"\"\n    requests, skipped = [], []\n    with open(path, encoding=\"utf-8\") as handle:\n        for number, line in enumerate(handle, start=1):\n            if not line.strip():\n                continue\n            try:\n                requests.append(parse_line(line))\n            except ValueError:\n                skipped.append(number)\n    return requests, skipped\n",
+      "digest/stats.py": "\"\"\"Counting requests.\"\"\"\nfrom collections import Counter\n\n\ndef top_paths(requests, limit):\n    \"\"\"Return the `limit` most requested (path, count) pairs.\"\"\"\n    return Counter(r.path for r in requests).most_common(limit)\n\n\ndef status_counts(requests):\n    \"\"\"Return {status: count}.\"\"\"\n    return dict(Counter(r.status for r in requests))\n",
+      "data/small.log": "10.0.0.1 2026-05-01T10:15:00 GET /home 200\n10.0.0.2 2026-05-01T10:20:00 GET /home 200\n10.0.0.1 2026-05-01T11:05:00 GET /about 404\n",
+      "data/messy.log": "10.0.0.1 2026-05-01T10:15:00 GET /home 200\nthis line is garbage\n10.0.0.2 2026-05-01T10:20:00 GET /home\n10.0.0.3 2026-05-01T11:05:00 GET /about 200\n",
+      "tests/test_parse.py": "import unittest\n\nfrom digest.parse import parse_line\n\n\nclass ParseLineTests(unittest.TestCase):\n    def test_reads_five_fields(self):\n        request = parse_line(\"10.0.0.1 2026-05-01T10:15:00 GET /home 200\")\n        self.assertEqual((request.path, request.status), (\"/home\", 200))\n\n    def test_short_line_is_malformed(self):\n        with self.assertRaises(ValueError):\n            parse_line(\"10.0.0.1 GET\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_stats.py": "import unittest\n\nfrom digest.parse import parse_line\nfrom digest.stats import status_counts, top_paths\n\nLINES = [\"1.1.1.1 t GET /a 200\", \"1.1.1.2 t GET /a 200\", \"1.1.1.3 t GET /b 500\"]\n\n\nclass StatsTests(unittest.TestCase):\n    def setUp(self):\n        self.requests = [parse_line(line) for line in LINES]\n\n    def test_top_path_comes_first(self):\n        self.assertEqual(top_paths(self.requests, 1), [(\"/a\", 2)])\n\n    def test_status_counts(self):\n        self.assertEqual(status_counts(self.requests), {200: 2, 500: 1})\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *",
+    "echo *",
+    "grep *"
+  ],
+  "turns": [
+    "Let's start with ls on the repo and a one-line description of each file.",
+    "Run python3 -m digest data/messy.log and tell me exactly what it prints.",
+    "Count paths without their query strings, so /a?x=1 and /a?x=2 are one path. Otherwise tracking parameters split the counts. Add a test.",
+    "Add digest/buckets.py that groups requests by hour, and a --by-hour flag that prints the busiest hours. Add tests.",
+    "Make the report a markdown table instead of plain columns. It gets pasted into the team wiki.",
+    "Where are we? Parsing, the query-string rule, hourly buckets and the markdown table are done and tested, and the status-class breakdown hasn't been started. Then, in order: the status-class breakdown, then a --since filter, then packaging. Run the tests too.",
+    "Not for action: I tried charting the output with a plotting library and dropped it because it pulled in too many dependencies. The log rotation job moves to midnight next week. Run the tests.",
+    "Test logs should come from a small generator function in tests/loggen.py, not from checked-in files, since the real logs are big and the samples keep going stale. Convert the new tests to use it. The release branch is called WILLOWBEAK."
+  ],
+  "history_check": {
+    "question": "What codename did I say the release uses?",
+    "token": "WILLOWBEAK"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Paths are counted without their query strings, because tracking parameters split the counts.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Paths are counted without query strings (tracking parameters split the counts).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Otherwise tracking parameters split the counts"
+    },
+    {
+      "id": "i2",
+      "statement": "digest/buckets.py groups requests by hour for the --by-hour flag.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `digest/buckets.py` groups requests by hour (`--by-hour`).",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add digest/buckets.py that groups requests by hour"
+    },
+    {
+      "id": "i3",
+      "statement": "The report is a markdown table (it was plain columns at first), because it is pasted into the team wiki.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- The report is a markdown table (was plain columns): it is pasted into the team wiki.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "It gets pasted into the team wiki"
+    },
+    {
+      "id": "i4",
+      "statement": "Test logs come from a generator function in tests/loggen.py instead of checked-in files, because real logs are big and samples go stale.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Test logs come from `tests/loggen.py`, not checked-in files (samples go stale).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Test logs should come from a small generator function in tests/loggen.py, not from checked-in files, since the real logs are big and the samples keep going stale"
+    },
+    {
+      "id": "i5",
+      "statement": "Malformed log lines are skipped rather than fatal, and the count is reported on standard error.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Malformed log lines are skipped, not fatal; the count goes to standard error.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "skipped 2 malformed lines"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "Parsing, the query-string rule, hourly buckets and the markdown table are done and tested; the status-class breakdown has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: parsing, query-string rule, hourly buckets, markdown table. Not started: status-class breakdown.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "Parsing, the query-string rule, hourly buckets and the markdown table are done and tested, and the status-class breakdown hasn't been started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: the status-class breakdown, then a --since filter, then packaging.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: status-class breakdown, `--since` filter, packaging.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "the status-class breakdown, then a --since filter, then packaging"
+    },
+    {
+      "id": "n1",
+      "statement": "A plotting library was tried for charts and dropped because it pulled in too many dependencies.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The log rotation job moves to midnight next week.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "item": "i1",
+      "type": "single-fact",
+      "question": "Are /a?x=1 and /a?x=2 counted as one path, and why?",
+      "answer": "Yes, because tracking parameters would split the counts.",
+      "reject": []
+    },
+    {
+      "id": "p2",
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Which module groups requests by hour?",
+      "answer": "digest/buckets.py",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "item": "i3",
+      "type": "knowledge-update",
+      "question": "What format does the report use?",
+      "answer": "A markdown table.",
+      "reject": [
+        "plain columns"
+      ]
+    },
+    {
+      "id": "p4",
+      "item": "i4",
+      "type": "single-fact",
+      "question": "Where do test logs come from?",
+      "answer": "A generator function in tests/loggen.py, not checked-in files.",
+      "reject": [
+        "checked-in sample files"
+      ]
+    },
+    {
+      "id": "p5",
+      "item": "i5",
+      "type": "single-fact",
+      "question": "What happens to a malformed log line?",
+      "answer": "It is skipped, and the count is reported on standard error.",
+      "reject": [
+        "the run fails"
+      ]
+    },
+    {
+      "id": "p6",
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which piece of work has not been started?",
+      "answer": "The status-class breakdown.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Status-class breakdown, then --since, then packaging.",
+      "reject": [
+        "packaging first"
+      ]
+    },
+    {
+      "id": "p8",
+      "item": null,
+      "type": "abstention",
+      "question": "Are fragment identifiers after a hash sign also removed from the paths?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "item": null,
+      "type": "abstention",
+      "question": "Which column order does the markdown table use for the status counts?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i3"
+    }
+  ]
+}

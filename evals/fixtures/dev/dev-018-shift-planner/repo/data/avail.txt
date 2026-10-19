@@ -1,0 +1,4 @@
+ana: mon, tue, wed
+bo: tue, wed, thu
+cy: mon, thu, fri, sat
+dee: sat, sun

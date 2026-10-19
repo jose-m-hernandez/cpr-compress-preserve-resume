@@ -1,0 +1,378 @@
+{
+  "id": "dev-006-ledger-cli",
+  "split": "dev",
+  "summary": "A plain-text expense ledger summariser moves to integer cents and gains grouping, a top-N option and an input fallback.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# ledger\n\nA small command-line tool that summarises a plain-text expense ledger.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m ledger FILE`.\n- It prints one line per category with the total spent.\n\n## Layout\n\n- `ledger/parse.py` turns ledger lines into entries.\n- `ledger/summary.py` totals the entries and formats the report.\n- `ledger/cli.py` parses arguments and prints the result.\n- `data/` holds small example ledger files.\n- `tests/` holds the unit tests.\n\n## Ledger format\n\n- One entry per line: `DATE | DESCRIPTION | AMOUNT | CATEGORY`.\n- Blank lines and lines starting with `#` are ignored.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m ledger data/sample.txt`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- Errors are reported as `error: line N: ...` on standard error.\n",
+      "ledger/__init__.py": "",
+      "ledger/__main__.py": "from ledger.cli import main\n\nraise SystemExit(main())\n",
+      "ledger/parse.py": "\"\"\"Reading ledger lines.\"\"\"\nfrom collections import namedtuple\n\nEntry = namedtuple(\"Entry\", \"date description amount category\")\n\n\ndef parse_amount(text, number):\n    \"\"\"Convert one amount cell to a float.\"\"\"\n    try:\n        value = float(text)\n    except ValueError:\n        raise ValueError(f\"line {number}: bad amount {text!r}\")\n    if value < 0:\n        raise ValueError(f\"line {number}: amounts must be positive; refunds go under category 'refund', never as a negative amount\")\n    return value\n\n\ndef parse_line(line, number):\n    \"\"\"Turn one ledger line into an Entry.\"\"\"\n    parts = [part.strip() for part in line.split(\"|\")]\n    if len(parts) != 4:\n        raise ValueError(f\"line {number}: expected 4 fields, found {len(parts)}\")\n    date, description, amount, category = parts\n    return Entry(date, description, parse_amount(amount, number), category)\n\n\ndef parse_file(path):\n    \"\"\"Read every entry in a ledger file.\"\"\"\n    entries = []\n    with open(path, encoding=\"utf-8\") as handle:\n        for number, line in enumerate(handle, start=1):\n            text = line.strip()\n            if text and not text.startswith(\"#\"):\n                entries.append(parse_line(text, number))\n    return entries\n",
+      "ledger/summary.py": "\"\"\"Totals and the printed report.\"\"\"\n\n\ndef totals_by_category(entries):\n    \"\"\"Add up the amounts of each category.\"\"\"\n    totals = {}\n    for entry in entries:\n        totals[entry.category] = totals.get(entry.category, 0.0) + entry.amount\n    return totals\n\n\ndef format_report(totals):\n    \"\"\"Return one aligned line per category, sorted by name.\"\"\"\n    width = max((len(name) for name in totals), default=0)\n    return \"\\n\".join(f\"{name.ljust(width)}  {total:9.2f}\" for name, total in sorted(totals.items()))\n",
+      "ledger/cli.py": "\"\"\"Command-line interface.\"\"\"\nimport argparse\nimport sys\n\nfrom ledger.parse import parse_file\nfrom ledger.summary import format_report, totals_by_category\n\n\ndef build_parser():\n    parser = argparse.ArgumentParser(prog=\"ledger\", description=\"Summarise an expense ledger.\")\n    parser.add_argument(\"file\")\n    return parser\n\n\ndef main(argv=None):\n    args = build_parser().parse_args(argv)\n    try:\n        entries = parse_file(args.file)\n    except ValueError as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    print(format_report(totals_by_category(entries)))\n    return 0\n",
+      "data/sample.txt": "# March spending\n2026-03-02 | weekly shop | 42.50 | food\n2026-03-03 | bus pass | 30.00 | travel\n2026-03-09 | weekly shop | 27.50 | food\n2026-03-10 | rent share | 500.00 | rent\n",
+      "data/refunds.txt": "2026-03-04 | weekly shop | 40.00 | food\n2026-03-05 | returned jacket | -25.00 | clothes\n",
+      "tests/test_parse.py": "import unittest\n\nfrom ledger.parse import parse_line\n\n\nclass ParseLineTests(unittest.TestCase):\n    def test_reads_four_fields(self):\n        entry = parse_line(\"2026-03-02 | weekly shop | 42.50 | food\", 1)\n        self.assertEqual(entry.category, \"food\")\n        self.assertEqual(entry.amount, 42.5)\n\n    def test_wrong_field_count_names_the_line(self):\n        with self.assertRaises(ValueError) as caught:\n            parse_line(\"2026-03-02 | weekly shop\", 7)\n        self.assertIn(\"line 7\", str(caught.exception))\n\n    def test_negative_amount_is_rejected(self):\n        with self.assertRaises(ValueError):\n            parse_line(\"2026-03-02 | return | -5 | misc\", 2)\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_summary.py": "import os\nimport unittest\n\nfrom ledger.parse import parse_file\nfrom ledger.summary import format_report, totals_by_category\n\nDATA = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\n\n\nclass SummaryTests(unittest.TestCase):\n    def test_totals_the_sample_file(self):\n        totals = totals_by_category(parse_file(os.path.join(DATA, \"sample.txt\")))\n        self.assertEqual(totals[\"food\"], 70.0)\n\n    def test_report_has_one_line_per_category(self):\n        report = format_report({\"food\": 1.0, \"rent\": 2.0})\n        self.assertEqual(len(report.split(\"\\n\")), 2)\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hello! Please run the unit tests and tell me whether they pass.",
+    "Run the tool on data/sample.txt and show me the report it prints.",
+    "Switch the amounts over to integer cents internally and keep the printed report in dollars and cents. Totals drifted by a cent against a spreadsheet I compared with, which is why I don't want floats anywhere in the sums. Put the conversion helpers in a new module ledger/money.py.",
+    "Run the tests and show me the result.",
+    "Run python3 -m ledger data/refunds.txt and tell me exactly what it prints.",
+    "Leave that as it is. Add a --by option to the summary so the report can group by week, and make week the default grouping, since the household budget is reviewed every Monday. Add a test.",
+    "Run the tests.",
+    "No action needed on this one: I tried colouring the negative balances with ANSI codes last night and reverted it, because it garbled the output when piped to a file. Meanwhile, show me git status.",
+    "Add a --top N option that limits the report to the N biggest categories, default 5. Option tests should call main(argv) directly rather than spawn a subprocess, since the slow subprocess runs held up CI in my other projects.",
+    "Run the tests, and then run the tool with --top 2 on data/sample.txt.",
+    "Make the file argument optional. When it is missing, the tool should use the LEDGER_FILE environment variable, and if that is unset, data/ledger.txt. Add tests for both.",
+    "Run the tests.",
+    "One test failed on my laptop earlier in a timing check and passed on the rerun, so I'm treating it as a one-off. No action needed. What does git log --oneline show?",
+    "Add a test that mixed-case categories end up in one bucket. They are stored lowercase, so 'Food' and 'food' land together.",
+    "Run the tests.",
+    "Show me ledger/parse.py. I want budget limits per category next, but I can't settle the category list until the accountant sends it, probably after the audit, so categories stay free text for now.",
+    "Show me the line count of every Python file in ledger/.",
+    "I'm away Thursday and Friday, so no reviews from me then; no action needed. Please run the tests again.",
+    "Add a --since YYYY-MM-DD filter that skips entries dated before it, with a test.",
+    "Run the tests.",
+    "Show me the diff stat of everything so far with git diff --stat.",
+    "Update the --top default to 3 and fix the tests. It was 5, but the report was too long for my terminal.",
+    "Run the tests.",
+    "Switch the default grouping to month instead of week, and update the tests. The Monday review got cancelled, we do it at month end now.",
+    "Run the whole suite once more and tell me how many tests there are.",
+    "Summarize where we are. By my count parsing, cents, grouping, --top and --since are done and tested, and the budget limits haven't been started.",
+    "Move the report formatting out of summary.py into ledger/report.py, keep summary.py for the totals, and fix the imports and tests.",
+    "Run the tests.",
+    "Tell me whether you see a dependency problem in the plan: CSV export first, then the budget limits, then a README, in that order.",
+    "By the way, in my notes the release branch is called SALTMARSH. What does git status show?",
+    "Run the tests one last time.",
+    "Give me a short summary of the project's current state."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "SALTMARSH"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Amounts are stored as integer cents internally, not floats, because float sums drifted by a cent against a spreadsheet.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Amounts are integer cents internally, never floats: float sums drifted by a cent against a spreadsheet.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Totals drifted by a cent against a spreadsheet I compared with, which is why I don't want floats anywhere in the sums"
+    },
+    {
+      "id": "i2",
+      "statement": "ledger/money.py holds the cents conversion helpers.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `ledger/money.py`: cents conversion helpers.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Put the conversion helpers in a new module ledger/money.py"
+    },
+    {
+      "id": "i3",
+      "statement": "Negative amounts are rejected on purpose; a refund is entered as a positive amount under the category 'refund'.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Negative amounts are rejected; enter a refund as a positive amount under category `refund`.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "refunds go under category 'refund', never as a negative amount"
+      ]
+    },
+    {
+      "id": "i4",
+      "statement": "The report groups by month by default (it was week at first).",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Default grouping is by month (`--by`), changed from week.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "we do it at month end now"
+    },
+    {
+      "id": "i5",
+      "statement": "--top defaults to 3 categories (it was 5 at first), because the report was too long for the terminal.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `--top` defaults to 3, not 5, because the report was too long.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Update the --top default to 3 and fix the tests"
+    },
+    {
+      "id": "i6",
+      "statement": "Tests for command-line options call main(argv) directly instead of spawning a subprocess, because subprocess runs were slow in CI.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Option tests call `main(argv)` directly, not a subprocess (slow in CI).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Option tests should call main(argv) directly rather than spawn a subprocess"
+    },
+    {
+      "id": "i7",
+      "statement": "With no file argument, the tool reads the path from the LEDGER_FILE environment variable, falling back to data/ledger.txt.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- No file argument: use the `LEDGER_FILE` environment variable, else `data/ledger.txt`.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "When it is missing, the tool should use the LEDGER_FILE environment variable, and if that is unset, data/ledger.txt"
+    },
+    {
+      "id": "i8",
+      "statement": "Categories are stored lowercase, so 'Food' and 'food' land in one bucket.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Categories are stored lowercase; `Food` and `food` are one bucket.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "They are stored lowercase, so 'Food' and 'food' land together"
+    },
+    {
+      "id": "i9",
+      "statement": "Budget limits per category are blocked until the accountant sends the category list; categories stay free text until then.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Blocked: budget limits wait for the accountant's category list; categories stay free text.",
+      "oracle_section": "Warnings",
+      "source": "user",
+      "anchor": "I can't settle the category list until the accountant sends it, probably after the audit, so categories stay free text for now"
+    },
+    {
+      "id": "i10",
+      "statement": "Parsing, cents, grouping, --top and --since are done and tested; the budget limits have not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: parsing, cents, grouping, `--top`, `--since`. Not started: budget limits.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "parsing, cents, grouping, --top and --since are done and tested, and the budget limits haven't been started"
+    },
+    {
+      "id": "i11",
+      "statement": "Report formatting lives in ledger/report.py; summary.py keeps only the totals.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `ledger/report.py` formats the report; `ledger/summary.py` only totals.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Move the report formatting out of summary.py into ledger/report.py"
+    },
+    {
+      "id": "i12",
+      "statement": "Remaining work, in order: CSV export, then the budget limits, then a README.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: CSV export, budget limits, README.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "CSV export first, then the budget limits, then a README, in that order"
+    },
+    {
+      "id": "n1",
+      "statement": "Colouring negative balances with ANSI codes was tried and reverted because it garbled output piped to a file.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "One test failed once on the user's laptop in a timing check and passed on the rerun.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n3",
+      "statement": "The user is away Thursday and Friday, so there are no reviews then.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": false,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "How are amounts held inside the sums, and why?",
+      "answer": "As integer cents, because float sums drifted by a cent against a spreadsheet.",
+      "reject": [
+        "floats"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Which module holds the cents conversion helpers?",
+      "answer": "ledger/money.py",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "How should a refund be entered in a ledger file?",
+      "answer": "As a positive amount under the category 'refund'.",
+      "reject": [
+        "as a negative amount"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "What does the report group by when no grouping option is given?",
+      "answer": "By month.",
+      "reject": [
+        "week",
+        "weekly"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "knowledge-update",
+      "question": "How many categories does --top show when no value is passed?",
+      "answer": "3",
+      "reject": [
+        "5",
+        "five"
+      ]
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "How should tests for command-line options run the tool?",
+      "answer": "By calling main(argv) directly, not through a subprocess.",
+      "reject": [
+        "spawn a subprocess"
+      ]
+    },
+    {
+      "id": "p7",
+      "code_answers": true,
+      "item": "i7",
+      "type": "single-fact",
+      "question": "Where does the tool take its input path from when no file argument is given?",
+      "answer": "The LEDGER_FILE environment variable, else data/ledger.txt.",
+      "reject": []
+    },
+    {
+      "id": "p8",
+      "code_answers": true,
+      "item": "i8",
+      "type": "single-fact",
+      "question": "Are 'Food' and 'food' separate buckets in the report?",
+      "answer": "No; categories are stored lowercase, so they merge.",
+      "reject": [
+        "Yes"
+      ]
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": "i9",
+      "type": "single-fact",
+      "question": "Why can the budget limits not be built yet?",
+      "answer": "They wait for the accountant's category list; categories stay free text until then.",
+      "reject": []
+    },
+    {
+      "id": "p10",
+      "code_answers": false,
+      "item": "i10",
+      "type": "single-fact",
+      "question": "Which features are finished and which one has not been started?",
+      "answer": "Parsing, cents, grouping, --top and --since are done; the budget limits have not been started.",
+      "reject": []
+    },
+    {
+      "id": "p11",
+      "code_answers": true,
+      "item": "i11",
+      "type": "single-fact",
+      "question": "Which module formats the printed report?",
+      "answer": "ledger/report.py",
+      "reject": [
+        "summary.py"
+      ]
+    },
+    {
+      "id": "p12",
+      "code_answers": false,
+      "item": "i12",
+      "type": "temporal",
+      "question": "In what order is the remaining work planned?",
+      "answer": "CSV export, then the budget limits, then a README.",
+      "reject": [
+        "README first"
+      ]
+    },
+    {
+      "id": "p13",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which rounding mode does the cents conversion use for half-cent values?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p14",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which environment variable sets the currency symbol in the report?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i7"
+    }
+  ]
+}

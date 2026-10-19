@@ -1,0 +1,227 @@
+{
+  "id": "dev-013-unit-convert",
+  "split": "dev",
+  "summary": "A unit-conversion library gains rounding, aliases and a corrected pound factor.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# units\n\nA small library that converts between units of length and mass.\n\n## Overview\n\n- Python 3, standard library only.\n- Convert from the command line with `python3 -m units VALUE FROM TO`.\n\n## Layout\n\n- `units/table.py` holds the conversion factors.\n- `units/convert.py` does the conversion.\n- `units/__main__.py` is the command-line entry point.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m units 5 km mi`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "units/__init__.py": "",
+      "units/__main__.py": "\"\"\"Command-line entry point.\"\"\"\nimport sys\n\nfrom units.convert import convert\n\n\ndef main(argv):\n    if len(argv) != 3:\n        print(\"usage: python3 -m units VALUE FROM TO\", file=sys.stderr)\n        return 2\n    try:\n        print(convert(float(argv[0]), argv[1], argv[2]))\n    except ValueError as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "units/table.py": "\"\"\"Conversion factors: unit -> (dimension, factor to the base unit).\"\"\"\n\nFACTORS = {\n    \"m\": (\"length\", 1.0),\n    \"km\": (\"length\", 1000.0),\n    \"mi\": (\"length\", 1609.344),\n    \"ft\": (\"length\", 0.3048),\n    \"kg\": (\"mass\", 1.0),\n    \"g\": (\"mass\", 0.001),\n    \"lb\": (\"mass\", 0.4536),\n}\n\nTEMPERATURE = (\"C\", \"F\", \"K\")\n",
+      "units/convert.py": "\"\"\"Converting a value between two units.\"\"\"\nfrom units.table import FACTORS, TEMPERATURE\n\n\ndef convert(value, src, dst):\n    \"\"\"Convert value from unit src to unit dst.\"\"\"\n    if src in TEMPERATURE or dst in TEMPERATURE:\n        raise ValueError(\"temperature needs an offset, not a factor, so it is not in the table\")\n    for unit in (src, dst):\n        if unit not in FACTORS:\n            raise ValueError(f\"unknown unit {unit!r}\")\n    src_dim, src_factor = FACTORS[src]\n    dst_dim, dst_factor = FACTORS[dst]\n    if src_dim != dst_dim:\n        raise ValueError(f\"cannot convert {src_dim} to {dst_dim}\")\n    return value * src_factor / dst_factor\n",
+      "tests/test_convert.py": "import unittest\n\nfrom units.convert import convert\n\n\nclass ConvertTests(unittest.TestCase):\n    def test_kilometres_to_metres(self):\n        self.assertEqual(convert(2, \"km\", \"m\"), 2000.0)\n\n    def test_dimension_mismatch_is_an_error(self):\n        with self.assertRaises(ValueError):\n            convert(1, \"km\", \"kg\")\n\n    def test_unknown_unit_is_an_error(self):\n        with self.assertRaises(ValueError):\n            convert(1, \"furlong\", \"m\")\n\n    def test_temperature_is_not_supported(self):\n        with self.assertRaises(ValueError):\n            convert(1, \"C\", \"F\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Please run the tests and tell me if they pass.",
+    "Run python3 -m units 20 C F and tell me exactly what it says.",
+    "Round every result to 6 significant digits. Float noise like 0.30000000000000004 showed up in the docs examples. Add tests.",
+    "Add units/aliases.py so spellings like metre, meter and m all work, matched case-insensitively. Plan for the rest, in this order: compound units, then a --list flag, then the docs. Add tests.",
+    "Not for action: I thought about switching to decimal.Decimal and gave up because the examples got too long to read. Also the review moved to Thursday. Run the tests.",
+    "Change the pound factor to 0.45359237 from 0.4536. The shorter one made round trips lose a gram on 1000 lb. Update the table and the tests.",
+    "Status: rounding, aliases and the pound fix are done and tested, and nothing is started on compound units like km/h. The release branch is called QUARTZHERON, by the way. Show me git status."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "QUARTZHERON"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Results are rounded to 6 significant digits, because float noise like 0.30000000000000004 showed up in the docs examples.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Results are rounded to 6 significant digits (float noise showed up in the docs examples).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Float noise like 0.30000000000000004 showed up in the docs examples"
+    },
+    {
+      "id": "i2",
+      "statement": "Unit spellings such as metre and meter map to m in the new module units/aliases.py.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `units/aliases.py` maps spellings (`metre`, `meter`) to the table's unit names.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add units/aliases.py so spellings like metre, meter and m all work"
+    },
+    {
+      "id": "i3",
+      "statement": "Unit names are matched case-insensitively.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Unit names are matched case-insensitively.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "matched case-insensitively"
+    },
+    {
+      "id": "i4",
+      "statement": "The pound factor is 0.45359237 kg (it was 0.4536 at first), because the shorter value made round trips lose a gram on 1000 lb.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Pound factor is `0.45359237` (was `0.4536`): the short value lost a gram on 1000 lb round trips.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "The shorter one made round trips lose a gram on 1000 lb"
+    },
+    {
+      "id": "i5",
+      "statement": "Temperature units (C, F, K) are not supported, because they need an offset rather than a factor.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Temperature units are not supported: they need an offset, not a factor.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "temperature needs an offset, not a factor"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "Rounding, aliases and the pound fix are done and tested; compound units like km/h have not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: rounding, aliases, pound fix. Not started: compound units (`km/h`).",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "rounding, aliases and the pound fix are done and tested, and nothing is started on compound units like km/h"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: compound units, then a --list flag, then the docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: compound units, `--list` flag, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "compound units, then a --list flag, then the docs"
+    },
+    {
+      "id": "n1",
+      "statement": "Switching to decimal.Decimal was considered and dropped because the examples got too long.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The review moved to Thursday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": false,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "To how many significant digits are results rounded, and why?",
+      "answer": "Six, because float noise showed up in the docs examples.",
+      "reject": []
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Which module maps spellings like metre to m?",
+      "answer": "units/aliases.py",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Is the unit name KM treated the same as km?",
+      "answer": "Yes; names are matched case-insensitively.",
+      "reject": [
+        "No"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "What factor does the table use for the pound?",
+      "answer": "0.45359237",
+      "reject": [
+        "0.4536"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "Why can the tool not convert temperatures?",
+      "answer": "Temperature needs an offset, not just a factor.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "In the status I gave you, which piece of work did I say had not been started?",
+      "answer": "Compound units like km/h.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Compound units, then a --list flag, then the docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "How many digits does the printed result show after the decimal point?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which factor does the table use for the stone?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i4"
+    }
+  ]
+}

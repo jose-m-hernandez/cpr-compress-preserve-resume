@@ -1,0 +1,230 @@
+{
+  "id": "dev-019-plugin-registry",
+  "split": "dev",
+  "summary": "A plugin registry gains a name rule, hook points, a lookup that raises, and a configuration convention.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# plugins\n\nA small library for registering plugins by name and looking them up later.\n\n## Overview\n\n- Python 3, standard library only.\n- Check a list of plugin names with `python3 -m plugins check FILE`.\n\n## Layout\n\n- `plugins/registry.py` holds the registry.\n- `plugins/__main__.py` is the command-line entry point.\n- `data/` holds example name lists.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m plugins check data/names.txt`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "plugins/__init__.py": "",
+      "plugins/__main__.py": "\"\"\"Register the names in a file and report problems.\"\"\"\nimport sys\n\nfrom plugins.registry import Registry\n\n\ndef main(argv):\n    if len(argv) != 2 or argv[0] != \"check\":\n        print(\"usage: python3 -m plugins check FILE\", file=sys.stderr)\n        return 2\n    registry = Registry()\n    with open(argv[1], encoding=\"utf-8\") as handle:\n        names = [line.strip() for line in handle if line.strip()]\n    try:\n        for name in names:\n            registry.register(name, object)\n    except ValueError as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    print(f\"ok: {len(names)} plugins\")\n    return 0\n\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "plugins/registry.py": "\"\"\"The plugin registry.\"\"\"\n\n\nclass Registry:\n    \"\"\"Maps names to plugin factories.\"\"\"\n\n    def __init__(self):\n        self._factories = {}\n\n    def register(self, name, factory):\n        \"\"\"Add a factory under a name; a repeated name is an error.\"\"\"\n        if name in self._factories:\n            raise ValueError(f\"plugin {name!r} is already registered; the first registration is kept\")\n        self._factories[name] = factory\n\n    def get(self, name):\n        \"\"\"Build and return the plugin called name.\"\"\"\n        return self._factories[name]()\n\n    def names(self):\n        \"\"\"Return the registered names, sorted.\"\"\"\n        return sorted(self._factories)\n",
+      "data/names.txt": "csv-export\njson-export\n",
+      "data/dupes.txt": "csv-export\njson-export\ncsv-export\n",
+      "tests/test_registry.py": "import unittest\n\nfrom plugins.registry import Registry\n\n\nclass RegistryTests(unittest.TestCase):\n    def test_get_builds_the_plugin(self):\n        registry = Registry()\n        registry.register(\"a\", lambda: 42)\n        self.assertEqual(registry.get(\"a\"), 42)\n\n    def test_repeated_name_is_an_error(self):\n        registry = Registry()\n        registry.register(\"a\", object)\n        with self.assertRaises(ValueError):\n            registry.register(\"a\", object)\n\n    def test_names_are_sorted(self):\n        registry = Registry()\n        registry.register(\"b\", object)\n        registry.register(\"a\", object)\n        self.assertEqual(registry.names(), [\"a\", \"b\"])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Run the tests and tell me the result.",
+    "Run python3 -m plugins check data/dupes.txt and tell me exactly what it says.",
+    "Make get() return None for a missing plugin, and add a test. Names must be lowercase kebab-case such as csv-export, since they appear in config files and URLs.",
+    "Add plugins/hooks.py with a HOOKS tuple naming the hook points, before_run and after_run. Plugins may only attach to those. Plan for the rest, in this order: directory discovery, then a reload command, then docs.",
+    "Not for action: I tried loading plugins from entry points and dropped it as overkill, and the build server is down until Tuesday. Run the tests.",
+    "Make get() raise PluginNotFound instead of returning None. A silent None hid a typo in a config file for a week. Plugin factories take no arguments, and settings arrive through a configure(settings) method afterwards. Update the tests.",
+    "Where are we? The registry, the name rule, hooks and PluginNotFound are done and tested, and discovery from a directory hasn't been started. The release branch is called SPINDLEWREN."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "SPINDLEWREN"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Plugin names must be lowercase kebab-case such as csv-export, because they appear in config files and URLs.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Plugin names are lowercase kebab-case (`csv-export`): they appear in config files and URLs.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Names must be lowercase kebab-case such as csv-export, since they appear in config files and URLs"
+    },
+    {
+      "id": "i2",
+      "statement": "get() raises PluginNotFound for a missing plugin (it returned None at first), because a silent None hid a config typo for a week.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `get()` raises `PluginNotFound` (it returned `None`): a silent `None` hid a config typo.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "A silent None hid a typo in a config file for a week"
+    },
+    {
+      "id": "i3",
+      "statement": "plugins/hooks.py defines the HOOKS tuple of hook points, before_run and after_run; plugins may only attach to those.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `plugins/hooks.py`: `HOOKS` = `before_run`, `after_run`; plugins attach only to those.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Add plugins/hooks.py with a HOOKS tuple naming the hook points, before_run and after_run"
+    },
+    {
+      "id": "i4",
+      "statement": "Plugin factories take no arguments; settings arrive afterwards through a configure(settings) method.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Factories take no arguments; settings arrive through `configure(settings)`.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Plugin factories take no arguments, and settings arrive through a configure(settings) method afterwards"
+    },
+    {
+      "id": "i5",
+      "statement": "Registering a name twice is an error and the first registration is kept.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Registering a name twice raises an error; the first registration is kept.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "the first registration is kept"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "The registry, the name rule, hooks and PluginNotFound are done and tested; discovery from a directory has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: registry, name rule, hooks, `PluginNotFound`. Not started: directory discovery.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "The registry, the name rule, hooks and PluginNotFound are done and tested, and discovery from a directory hasn't been started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: directory discovery, then a reload command, then docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: directory discovery, reload command, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "directory discovery, then a reload command, then docs"
+    },
+    {
+      "id": "n1",
+      "statement": "Loading plugins from entry points was tried and dropped as overkill.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The build server is down until Tuesday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": false,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "What form must a plugin name have, and why?",
+      "answer": "Lowercase kebab-case, because names appear in config files and URLs.",
+      "reject": []
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "knowledge-update",
+      "question": "What does get() do for a plugin that is not registered?",
+      "answer": "It raises PluginNotFound.",
+      "reject": [
+        "returns None"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Which hook points exist?",
+      "answer": "before_run and after_run, defined in plugins/hooks.py.",
+      "reject": []
+    },
+    {
+      "id": "p4",
+      "code_answers": false,
+      "item": "i4",
+      "type": "single-fact",
+      "question": "How does a plugin receive its settings?",
+      "answer": "Through a configure(settings) method after construction; factories take no arguments.",
+      "reject": [
+        "factory arguments"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "What happens when the same name is registered twice?",
+      "answer": "It is an error, and the first registration is kept.",
+      "reject": [
+        "the second replaces it"
+      ]
+    },
+    {
+      "id": "p6",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "In the status I gave you, which piece of work did I say had not been started?",
+      "answer": "Discovery from a directory.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Directory discovery, then a reload command, then docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Are names compared case-insensitively when a plugin is looked up?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Can a plugin attach to more than one hook point at the same time?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i3"
+    }
+  ]
+}

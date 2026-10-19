@@ -1,0 +1,232 @@
+{
+  "id": "dev-003-sales-etl",
+  "split": "dev",
+  "summary": "A sales CSV report script gets a rounding rule, a unit fix and a report writer.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# sales-etl\n\nA small script that loads a sales CSV and reports revenue per product.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m etl data/sales_2025.csv`.\n- Output is one tab-separated line per SKU.\n\n## Layout\n\n- `etl/load.py` reads the CSV into dictionaries.\n- `etl/transform.py` computes revenue per SKU.\n- `etl/__main__.py` is the command-line entry point.\n- `data/` holds input files.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Run the report: `python3 -m etl data/sales_2025.csv`.\n\n## Conventions\n\n- Four-space indentation.\n- Pure functions in `transform.py`; all file access stays in `load.py`.\n- Every public function has a test.\n- No third-party dependencies.\n",
+      ".gitignore": "__pycache__/\n",
+      "etl/__init__.py": "",
+      "etl/__main__.py": "\"\"\"Command-line entry point.\"\"\"\nimport sys\n\nfrom etl.load import load_sales\nfrom etl.transform import revenue_by_sku\n\n\ndef main(argv=None):\n    args = argv if argv is not None else sys.argv[1:]\n    totals = revenue_by_sku(load_sales(args[0]))\n    for sku in sorted(totals):\n        print(f\"{sku}\\t{totals[sku]:.2f}\")\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+      "etl/load.py": "\"\"\"Reading the sales CSV.\"\"\"\nimport csv\n\n\ndef load_sales(path):\n    with open(path, newline=\"\", encoding=\"utf-8\") as handle:\n        return [\n            {\n                \"date\": row[\"date\"],\n                \"sku\": row[\"sku\"],\n                \"quantity\": int(row[\"quantity\"]),\n                \"unit_price\": float(row[\"unit_price\"]),\n            }\n            for row in csv.DictReader(handle)\n        ]\n",
+      "etl/transform.py": "\"\"\"Revenue calculations.\"\"\"\nimport sys\n\n\ndef revenue_by_sku(sales):\n    totals = {}\n    skipped = 0\n    for sale in sales:\n        if sale[\"quantity\"] < 0:\n            skipped += 1\n            continue\n        totals[sale[\"sku\"]] = totals.get(sale[\"sku\"], 0.0) + sale[\"quantity\"] * sale[\"unit_price\"]\n    if skipped:\n        print(f\"warning: {skipped} rows with negative quantity treated as returns and excluded\", file=sys.stderr)\n    return totals\n",
+      "data/sales_2025.csv": "date,sku,quantity,unit_price\n2025-01-03,A100,2,1250\n2025-01-03,B200,1,990\n2025-01-04,A100,3,1250\n2025-01-05,C300,5,300\n2025-01-06,B200,-1,990\n2025-01-07,A100,-2,1250\n2025-01-08,C300,-1,300\n2025-02-01,B200,4,990\n",
+      "tests/test_transform.py": "import unittest\n\nfrom etl.transform import revenue_by_sku\n\n\nclass RevenueTests(unittest.TestCase):\n    def test_sums_per_sku(self):\n        sales = [\n            {\"sku\": \"A\", \"quantity\": 2, \"unit_price\": 3.0},\n            {\"sku\": \"A\", \"quantity\": 1, \"unit_price\": 3.0},\n            {\"sku\": \"B\", \"quantity\": 1, \"unit_price\": 5.0},\n        ]\n        self.assertEqual(revenue_by_sku(sales), {\"A\": 9.0, \"B\": 5.0})\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hi! Run the unit tests, then run the report on data/sales_2025.csv and show me everything it prints, including anything on stderr.",
+    "Check how revenue is computed. It should be quantity times unit price and rounded to cents only once, in the final report, never per row. Tell me what you changed.",
+    "Add a test for revenue_by_sku using made-up rows where unit_price is in dollars, and run the tests.",
+    "No, wait, that's not right: I checked the finance export and unit_price is stored in cents. Fix the loader to divide by 100 and fix the tests to match, then run everything.",
+    "Can you show me git status first? Then leave data/sales_2025.csv alone from here on, since the nightly export overwrites it and I never edit it by hand. Side note, I looked at polars out of curiosity last week and nothing came of it, and our standup moved to 10:30 tomorrow.",
+    "Add etl/report.py with a function that writes the totals to out/report_<YYYY-MM>.txt, creating out/ if it's missing, and add out/ to .gitignore. Add a test that uses a temporary directory.",
+    "Quick progress summary please. Loader and transform are done and tested, and report.py is written but only has the temporary-directory test. What I want next is the monthly rollup, then a comparison against the finance export. Oh, and the release branch is called SILVERTERN in the tracker. Run the tests too."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "SILVERTERN"
+  },
+  "items": [
+    {
+      "id": "k1",
+      "statement": "Rows with a negative quantity are returns: the transform excludes them from totals and prints a warning with the count to stderr.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Rows with a negative quantity are treated as returns and excluded; the transform warns on stderr with the count.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "rows with negative quantity treated as returns"
+      ]
+    },
+    {
+      "id": "k2",
+      "statement": "Revenue is quantity times unit price, rounded to cents only once, in the final report, never per row.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Revenue = quantity x unit price, rounded to cents once in the final report (never per row).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "rounded to cents only once, in the final report, never per row"
+    },
+    {
+      "id": "k3",
+      "statement": "unit_price in the CSV is stored in cents (it was first assumed to be dollars); the loader divides by 100.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- `unit_price` in the CSV is in cents; the loader divides by 100.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "unit_price is stored in cents"
+    },
+    {
+      "id": "k4",
+      "statement": "data/sales_2025.csv is overwritten by the nightly export, so it must never be edited by hand.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Never hand-edit `data/sales_2025.csv`: the nightly export overwrites it.",
+      "oracle_section": "Warnings",
+      "source": "user",
+      "anchor": "since the nightly export overwrites it and I never edit it by hand"
+    },
+    {
+      "id": "k5",
+      "statement": "Reports are written to out/report_<YYYY-MM>.txt by etl/report.py, which creates out/ if it is missing; out/ is gitignored.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `etl/report.py` writes `out/report_<YYYY-MM>.txt` (creates `out/`; it is gitignored).",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "writes the totals to out/report_<YYYY-MM>.txt, creating out/ if it's missing"
+    },
+    {
+      "id": "k6",
+      "statement": "The loader and the transform are done and tested; report.py is written but lacks tests beyond the temporary-directory one.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: loader and transform. `etl/report.py` is written with only a temporary-directory test.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "Loader and transform are done and tested, and report.py is written but only has the temporary-directory test"
+    },
+    {
+      "id": "k7",
+      "statement": "Remaining work, in order: the monthly rollup, then a comparison against the finance export.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: monthly rollup, then compare against the finance export.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "the monthly rollup, then a comparison against the finance export"
+    },
+    {
+      "id": "n1",
+      "statement": "The user looked at polars out of curiosity last week and nothing came of it.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The standup moved to 10:30 tomorrow.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "k1",
+      "type": "single-fact",
+      "question": "What does the transform do with rows that have a negative quantity?",
+      "answer": "It treats them as returns, excludes them from totals and warns on stderr.",
+      "reject": [
+        "it includes them in totals"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "k2",
+      "type": "single-fact",
+      "question": "When is revenue rounded to cents?",
+      "answer": "Once, in the final report, never per row.",
+      "reject": [
+        "per row"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "k3",
+      "type": "knowledge-update",
+      "question": "In which unit is unit_price stored in the CSV?",
+      "answer": "Cents (the loader divides by 100).",
+      "reject": [
+        "dollars"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": false,
+      "item": "k4",
+      "type": "single-fact",
+      "question": "May data/sales_2025.csv be edited by hand?",
+      "answer": "No; the nightly export overwrites it.",
+      "reject": [
+        "yes"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "k5",
+      "type": "single-fact",
+      "question": "Where does etl/report.py write its output?",
+      "answer": "out/report_<YYYY-MM>.txt.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "k6",
+      "type": "single-fact",
+      "question": "Which part of the code is written but has little test coverage?",
+      "answer": "etl/report.py",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "k7",
+      "type": "temporal",
+      "question": "In what order is the remaining work to be done?",
+      "answer": "The monthly rollup first, then the comparison against the finance export.",
+      "reject": [
+        "comparison first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "How are negative quantity rows counted in the monthly rollup?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "k1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "What currency is the unit price in?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "k3"
+    }
+  ]
+}

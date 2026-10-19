@@ -1,0 +1,258 @@
+{
+  "id": "dev-012-backup-snapshots",
+  "split": "dev",
+  "summary": "A snapshot-and-prune backup tool gains timestamp naming, a manifest and a guard on what prune may delete.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# snap\n\nA command-line tool that copies a directory into dated snapshots and prunes old ones.\n\n## Overview\n\n- Python 3, standard library only.\n- Run it with `python3 -m snap snapshot SRC DEST` or `python3 -m snap prune DEST --keep N`.\n\n## Layout\n\n- `snap/snapshot.py` copies a directory into a new snapshot folder.\n- `snap/prune.py` removes the oldest snapshots.\n- `snap/cli.py` parses arguments and runs the commands.\n- `samples/` holds a small example tree.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m snap snapshot samples/tree out`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "snap/__init__.py": "",
+      "snap/__main__.py": "import sys\n\nfrom snap.cli import main\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "snap/snapshot.py": "\"\"\"Making a snapshot.\"\"\"\nimport os\nimport shutil\n\n\ndef check_destination(src, dest_root):\n    \"\"\"Refuse a destination that sits inside the source tree.\"\"\"\n    src_real = os.path.realpath(src)\n    dest_real = os.path.realpath(dest_root)\n    if dest_real == src_real or dest_real.startswith(src_real + os.sep):\n        raise ValueError(\"destination is inside the source; a snapshot would copy itself\")\n\n\ndef snapshot(src, dest_root, stamp):\n    \"\"\"Copy src into dest_root/stamp and return the new folder.\"\"\"\n    check_destination(src, dest_root)\n    target = os.path.join(dest_root, stamp)\n    shutil.copytree(src, target)\n    return target\n",
+      "snap/prune.py": "\"\"\"Removing old snapshots.\"\"\"\nimport os\nimport shutil\n\n\ndef list_snapshots(dest_root):\n    \"\"\"Return the snapshot folder names, oldest first by name.\"\"\"\n    return sorted(name for name in os.listdir(dest_root) if os.path.isdir(os.path.join(dest_root, name)))\n\n\ndef prune(dest_root, keep):\n    \"\"\"Delete all but the newest `keep` snapshots and return the removed names.\"\"\"\n    names = list_snapshots(dest_root)\n    doomed = names[:-keep] if keep else names\n    for name in doomed:\n        shutil.rmtree(os.path.join(dest_root, name))\n    return doomed\n",
+      "snap/cli.py": "\"\"\"Command-line interface.\"\"\"\nimport argparse\nimport datetime\nimport sys\n\nfrom snap.prune import prune\nfrom snap.snapshot import snapshot\n\n\ndef build_parser():\n    parser = argparse.ArgumentParser(prog=\"snap\")\n    sub = parser.add_subparsers(dest=\"command\", required=True)\n    snap = sub.add_parser(\"snapshot\")\n    snap.add_argument(\"src\")\n    snap.add_argument(\"dest\")\n    pr = sub.add_parser(\"prune\")\n    pr.add_argument(\"dest\")\n    pr.add_argument(\"--keep\", type=int, required=True)\n    return parser\n\n\ndef main(argv):\n    args = build_parser().parse_args(argv)\n    try:\n        if args.command == \"snapshot\":\n            stamp = datetime.datetime.now().strftime(\"%Y%m%d-%H%M%S\")\n            print(snapshot(args.src, args.dest, stamp))\n        else:\n            for name in prune(args.dest, args.keep):\n                print(\"removed\", name)\n    except (OSError, ValueError) as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    return 0\n",
+      "samples/tree/a.txt": "alpha\n",
+      "samples/tree/sub/b.txt": "beta\n",
+      "tests/test_snapshot.py": "import os\nimport tempfile\nimport unittest\n\nfrom snap.snapshot import snapshot\n\n\nclass SnapshotTests(unittest.TestCase):\n    def test_copies_the_tree(self):\n        with tempfile.TemporaryDirectory() as src, tempfile.TemporaryDirectory() as dest:\n            with open(os.path.join(src, \"f.txt\"), \"w\", encoding=\"utf-8\") as handle:\n                handle.write(\"x\")\n            target = snapshot(src, dest, \"one\")\n            self.assertTrue(os.path.exists(os.path.join(target, \"f.txt\")))\n\n    def test_destination_inside_source_is_refused(self):\n        with tempfile.TemporaryDirectory() as src:\n            with self.assertRaises(ValueError):\n                snapshot(src, os.path.join(src, \"out\"), \"one\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_prune.py": "import os\nimport tempfile\nimport unittest\n\nfrom snap.prune import prune\n\n\nclass PruneTests(unittest.TestCase):\n    def test_keeps_the_newest(self):\n        with tempfile.TemporaryDirectory() as root:\n            for name in (\"a\", \"b\", \"c\"):\n                os.mkdir(os.path.join(root, name))\n            self.assertEqual(prune(root, 2), [\"a\"])\n            self.assertEqual(sorted(os.listdir(root)), [\"b\", \"c\"])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Start by listing the repo with ls and telling me what each module is for.",
+    "Run python3 -m snap snapshot samples/tree samples/tree/out and tell me exactly what it prints.",
+    "Name each snapshot folder with a UTC timestamp like 20260502T101500, so a plain alphabetical sort is also chronological. Update snapshot and its tests.",
+    "Add a manifest: write MANIFEST.json, listing file paths with sizes, into every snapshot from a new module snap/manifest.py. Tests should pass the timestamp in rather than sleep to get distinct ones, since sleeping made the suite slow.",
+    "Make prune keep the newest 7 snapshots by default, with --keep N to change it. Add tests.",
+    "Status please, and run the tests: snapshot, manifest and prune are done and tested, and restore hasn't been started. Remaining work, in order: restore, then a verify command that checks the manifest, then a cron example. Don't start any of it yet.",
+    "No action needed: I compared rsync with this tool and ours is slower on big trees, which is fine for now, and I'm out until Wednesday. Run the tests.",
+    "Prune must only ever delete folders whose names look like a snapshot timestamp, because the destination folder also holds other people's files. Add a test with a stray folder in it.",
+    "Change the prune default to keep 10, not 7. Seven turned out to be too few for the nightly runs. Our release branch is called MOONSALT, by the way. Update the tests and run them."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "MOONSALT"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "Snapshot folders are named with a UTC timestamp like 20260502T101500, so alphabetical order is chronological.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Snapshot folders are named by UTC timestamp (`20260502T101500`), so name order is time order.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Name each snapshot folder with a UTC timestamp like 20260502T101500, so a plain alphabetical sort is also chronological"
+    },
+    {
+      "id": "i2",
+      "statement": "snap/manifest.py writes a MANIFEST.json (file paths with sizes) into every snapshot.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `snap/manifest.py` writes `MANIFEST.json` (paths and sizes) into each snapshot.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "write MANIFEST.json, listing file paths with sizes, into every snapshot from a new module snap/manifest.py"
+    },
+    {
+      "id": "i3",
+      "statement": "Tests pass the timestamp in instead of sleeping to get distinct ones, because sleeping made the suite slow.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Tests pass the timestamp in; never sleep for distinct ones (slow suite).",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Tests should pass the timestamp in rather than sleep to get distinct ones, since sleeping made the suite slow"
+    },
+    {
+      "id": "i4",
+      "statement": "prune keeps the newest 10 snapshots by default (it was 7 at first), because 7 was too few for the nightly runs.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `prune` keeps the newest 10 by default (was 7): 7 was too few for nightly runs.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Seven turned out to be too few for the nightly runs"
+    },
+    {
+      "id": "i5",
+      "statement": "A destination inside the source tree is refused, because the snapshot would copy itself.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- A destination inside the source is refused (the snapshot would copy itself).",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "a snapshot would copy itself"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "prune only deletes folders whose names look like a snapshot timestamp, because the destination also holds other people's files.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `prune` only deletes timestamp-named folders: the destination also holds other people's files.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Prune must only ever delete folders whose names look like a snapshot timestamp, because the destination folder also holds other people's files"
+    },
+    {
+      "id": "i7",
+      "statement": "Snapshot, manifest and prune are done and tested; restore has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: snapshot, manifest, prune. Not started: restore.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "snapshot, manifest and prune are done and tested, and restore hasn't been started"
+    },
+    {
+      "id": "i8",
+      "statement": "Remaining work, in order: restore, then a verify command that checks the manifest, then a cron example.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: restore, `verify` (checks the manifest), cron example.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "restore, then a verify command that checks the manifest, then a cron example"
+    },
+    {
+      "id": "n1",
+      "statement": "rsync was compared with the tool and the tool is slower on big trees, which is fine for now.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The user is out until Wednesday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "How are snapshot folders named?",
+      "answer": "With a UTC timestamp like 20260502T101500, so name order is time order.",
+      "reject": [
+        "a counter"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "Which module writes the manifest, and what is it called?",
+      "answer": "snap/manifest.py writes MANIFEST.json.",
+      "reject": []
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "How do tests get distinct snapshot timestamps?",
+      "answer": "They pass the timestamp in rather than sleeping.",
+      "reject": [
+        "sleep"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "How many snapshots does prune keep by default?",
+      "answer": "10.",
+      "reject": [
+        "7",
+        "seven"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "What happens if the destination is inside the source tree?",
+      "answer": "It is refused, because the snapshot would copy itself.",
+      "reject": []
+    },
+    {
+      "id": "p6",
+      "code_answers": true,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which folders may prune delete?",
+      "answer": "Only folders whose names look like a snapshot timestamp.",
+      "reject": [
+        "any folder"
+      ]
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "single-fact",
+      "question": "Which command has not been started?",
+      "answer": "restore.",
+      "reject": []
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": "i8",
+      "type": "temporal",
+      "question": "What is the order of the remaining work?",
+      "answer": "Restore, then verify, then a cron example.",
+      "reject": [
+        "cron example first"
+      ]
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "What time of night do the nightly runs start?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i4"
+    },
+    {
+      "id": "p10",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Does the manifest also record file checksums?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i2"
+    }
+  ]
+}

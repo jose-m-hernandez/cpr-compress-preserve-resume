@@ -1,0 +1,3 @@
+Subject: Welcome, {name}
+Hello {name},
+Your {plan_name} plan is ready: {link}

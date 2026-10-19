@@ -1,0 +1,237 @@
+{
+  "id": "dev-008-photo-renamer",
+  "split": "dev",
+  "summary": "A photo renamer driven by a text sidecar gains an apply command, a slug rule and an undo log.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# renamer\n\nRenames photo files using a text sidecar that lists a date and a title for each file.\n\n## Overview\n\n- Python 3, standard library only.\n- Preview with `python3 -m renamer plan DIR`; DIR must contain an `index.txt` sidecar.\n\n## Layout\n\n- `renamer/sidecar.py` reads the sidecar into records.\n- `renamer/plan.py` turns records into old and new names.\n- `renamer/cli.py` parses arguments and prints the plan.\n- `samples/` holds small example folders.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Try it: `python3 -m renamer plan samples/basic`.\n\n## Conventions\n\n- Four-space indentation and docstrings on public functions.\n- Keep functions short and give each one a test.\n- No third-party dependencies.\n",
+      "renamer/__init__.py": "",
+      "renamer/__main__.py": "import sys\n\nfrom renamer.cli import main\n\nraise SystemExit(main(sys.argv[1:]))\n",
+      "renamer/sidecar.py": "\"\"\"Reading the sidecar file.\"\"\"\nfrom collections import namedtuple\n\nRecord = namedtuple(\"Record\", \"old date title\")\n\n\ndef parse_sidecar(text):\n    \"\"\"Parse lines shaped `OLD | DATE | TITLE` into records.\"\"\"\n    records = []\n    for number, line in enumerate(text.splitlines(), start=1):\n        if not line.strip():\n            continue\n        parts = [part.strip() for part in line.split(\"|\")]\n        if len(parts) != 3:\n            raise ValueError(f\"sidecar line {number}: expected 3 fields\")\n        records.append(Record(*parts))\n    return records\n",
+      "renamer/plan.py": "\"\"\"Turning records into renames.\"\"\"\nimport os\n\n\ndef new_name(record):\n    \"\"\"Build the new file name for one record.\"\"\"\n    ext = os.path.splitext(record.old)[1]\n    return f\"{record.date}_{record.title.replace(' ', '_')}{ext}\"\n\n\ndef make_plan(records):\n    \"\"\"Return (old, new) pairs sorted by old name; refuse two files with one target.\"\"\"\n    seen = {}\n    plan = []\n    for record in sorted(records, key=lambda r: r.old):\n        new = new_name(record)\n        if new in seen:\n            raise ValueError(f\"{seen[new]} and {record.old} would both become {new}\")\n        seen[new] = record.old\n        plan.append((record.old, new))\n    return plan\n",
+      "renamer/cli.py": "\"\"\"Command-line interface.\"\"\"\nimport os\nimport sys\n\nfrom renamer.plan import make_plan\nfrom renamer.sidecar import parse_sidecar\n\n\ndef main(argv):\n    if len(argv) != 2 or argv[0] != \"plan\":\n        print(\"usage: python3 -m renamer plan DIR\", file=sys.stderr)\n        return 2\n    try:\n        with open(os.path.join(argv[1], \"index.txt\"), encoding=\"utf-8\") as handle:\n            plan = make_plan(parse_sidecar(handle.read()))\n    except (OSError, ValueError) as err:\n        print(f\"error: {err}\", file=sys.stderr)\n        return 1\n    for old, new in plan:\n        print(f\"{old} -> {new}\")\n    return 0\n",
+      "samples/basic/index.txt": "IMG_0001.jpg | 2026-04-02 | beach day\nIMG_0002.jpg | 2026-04-03 | market\n",
+      "samples/dup/index.txt": "IMG_0001.jpg | 2026-04-02 | beach day\nIMG_0002.jpg | 2026-04-02 | beach day\n",
+      "tests/test_plan.py": "import unittest\n\nfrom renamer.plan import make_plan, new_name\nfrom renamer.sidecar import Record, parse_sidecar\n\n\nclass PlanTests(unittest.TestCase):\n    def test_new_name_keeps_the_extension(self):\n        self.assertTrue(new_name(Record(\"a.png\", \"2026-01-01\", \"x\")).endswith(\".png\"))\n\n    def test_plan_is_sorted_by_old_name(self):\n        plan = make_plan(parse_sidecar(\"b.jpg | 2026-01-02 | two\\na.jpg | 2026-01-01 | one\\n\"))\n        self.assertEqual([old for old, _ in plan], [\"a.jpg\", \"b.jpg\"])\n\n    def test_same_target_is_refused(self):\n        with self.assertRaises(ValueError):\n            make_plan([Record(\"a.jpg\", \"2026-01-01\", \"x\"), Record(\"b.jpg\", \"2026-01-01\", \"x\")])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+      "tests/test_sidecar.py": "import unittest\n\nfrom renamer.sidecar import parse_sidecar\n\n\nclass SidecarTests(unittest.TestCase):\n    def test_reads_three_fields(self):\n        self.assertEqual(parse_sidecar(\"a.jpg | 2026-01-01 | one\\n\")[0].title, \"one\")\n\n    def test_bad_line_is_named(self):\n        with self.assertRaises(ValueError) as caught:\n            parse_sidecar(\"a.jpg | 2026-01-01\\n\")\n        self.assertIn(\"line 1\", str(caught.exception))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Show me the repo layout with ls and tell me which file holds the plan logic.",
+    "Run python3 -m renamer plan samples/dup and tell me exactly what it prints.",
+    "Add an apply command that performs the renames from the plan. It must refuse to run without --yes, because a rename can't be undone by hand once the originals are gone.",
+    "Make the slug part of every new name lowercase with hyphens, like 2026-04-02_harbour-walk.jpg, and cap the slug at 40 characters. Add tests for both.",
+    "Status check please, and run the tests. I believe plan and apply are done and tested and the undo command is not started. What's left, in this order: the undo command, then a --pattern option for the name format, then the docs.",
+    "No action needed: I tried sorting the plan by date and went back to sorting by old name, the output looked the same. My other laptop is in for repair until Monday, too. Please run the tests.",
+    "Write an undo log to .renamer-undo.json, one entry per rename, from a new module renamer/undo.py, so an apply can be reversed later. Add a test.",
+    "Change the slug cap to 30 characters. The file manager on the NAS truncates anything longer. Update the code and the tests, then run them.",
+    "Our release branch is called FERNGULLY. Show me git status."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "FERNGULLY"
+  },
+  "items": [
+    {
+      "id": "i1",
+      "statement": "apply refuses to run without --yes, because a rename cannot be undone by hand once the originals are gone.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `apply` refuses to run without `--yes`: a rename cannot be undone by hand.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "It must refuse to run without --yes, because a rename can't be undone by hand once the originals are gone"
+    },
+    {
+      "id": "i2",
+      "statement": "New names use a lowercase hyphenated slug, such as 2026-04-02_harbour-walk.jpg.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- New names look like `2026-04-02_harbour-walk.jpg`: lowercase, hyphenated slug.",
+      "oracle_section": "Patterns",
+      "source": "user",
+      "anchor": "Make the slug part of every new name lowercase with hyphens, like 2026-04-02_harbour-walk.jpg"
+    },
+    {
+      "id": "i3",
+      "statement": "The undo log is .renamer-undo.json, written by the new module renamer/undo.py with one entry per rename.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `renamer/undo.py` writes `.renamer-undo.json`, one entry per rename.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "Write an undo log to .renamer-undo.json, one entry per rename, from a new module renamer/undo.py"
+    },
+    {
+      "id": "i4",
+      "statement": "The slug is capped at 30 characters (it was 40), because the NAS file manager truncates longer names.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Slug cap is 30 characters (was 40): the NAS file manager truncates longer names.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "Change the slug cap to 30 characters. The file manager on the NAS truncates anything longer"
+    },
+    {
+      "id": "i5",
+      "statement": "Two photos with the same date and title collide, and the planner refuses rather than adding a counter suffix.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Two files with the same date and title collide; the planner refuses instead of adding a suffix.",
+      "oracle_section": "Warnings",
+      "source": "tool",
+      "evidence": [
+        "would both become 2026-04-02_beach_day.jpg"
+      ]
+    },
+    {
+      "id": "i6",
+      "statement": "plan and apply are done and tested; the undo command has not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: `plan`, `apply`. Not started: the undo command.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "plan and apply are done and tested and the undo command is not started"
+    },
+    {
+      "id": "i7",
+      "statement": "Remaining work, in order: the undo command, then a --pattern option for the name format, then the docs.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: undo command, `--pattern` option, docs.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "the undo command, then a --pattern option for the name format, then the docs"
+    },
+    {
+      "id": "n1",
+      "statement": "Sorting the plan by date was tried and dropped in favour of sorting by old name; the output looked the same.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The user's other laptop is in for repair until Monday.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": false,
+      "item": "i1",
+      "type": "single-fact",
+      "question": "What must be passed for apply to actually rename files, and why?",
+      "answer": "--yes, because a rename can't be undone by hand.",
+      "reject": [
+        "nothing",
+        "it runs by default"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "i2",
+      "type": "single-fact",
+      "question": "What does the slug part of a new name look like?",
+      "answer": "Lowercase with hyphens.",
+      "reject": [
+        "underscores"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "i3",
+      "type": "single-fact",
+      "question": "Which module writes the undo log, and what is the log called?",
+      "answer": "renamer/undo.py writes .renamer-undo.json.",
+      "reject": []
+    },
+    {
+      "id": "p4",
+      "code_answers": true,
+      "item": "i4",
+      "type": "knowledge-update",
+      "question": "What is the maximum slug length?",
+      "answer": "30 characters.",
+      "reject": [
+        "40"
+      ]
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "i5",
+      "type": "single-fact",
+      "question": "What does the planner do when two photos would get the same new name?",
+      "answer": "It refuses with an error; it does not add a counter suffix.",
+      "reject": [
+        "adds a counter"
+      ]
+    },
+    {
+      "id": "p6",
+      "code_answers": false,
+      "item": "i6",
+      "type": "single-fact",
+      "question": "Which part of the work has not been started?",
+      "answer": "The undo command.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "i7",
+      "type": "temporal",
+      "question": "In what order is the remaining work to be done?",
+      "answer": "Undo command, then --pattern, then the docs.",
+      "reject": [
+        "docs first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Does apply also require a confirmation prompt on top of --yes?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "How many entries does the undo log keep before it rotates?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "i3"
+    }
+  ]
+}

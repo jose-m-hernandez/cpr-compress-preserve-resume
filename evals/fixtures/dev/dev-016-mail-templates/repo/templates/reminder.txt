@@ -1,0 +1,3 @@
+Subject: Your plan renews soon
+Hello {name},
+Your {plan} plan renews soon: {link}

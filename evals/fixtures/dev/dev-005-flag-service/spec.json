@@ -1,0 +1,237 @@
+{
+  "id": "dev-005-flag-service",
+  "split": "dev",
+  "summary": "A feature-flag web service changes its cache time, adds a rule for unknown flags and splits a loader.",
+  "repo": {
+    "files": {
+      "CLAUDE.md": "# flag-service\n\nA small HTTP service that answers whether a feature flag is on.\n\n## Overview\n\n- Python 3, standard library only.\n- Start the server with `python3 -m flags.app`.\n- `GET /flags/<name>` answers with JSON such as `{\"enabled\": true}`.\n\n## Layout\n\n- `flags/app.py` is the HTTP layer.\n- `flags/store.py` defines and evaluates flags.\n- `flags/validate.py` checks flag names.\n- `flags/cache.py` caches evaluations for a short time.\n- `config/flags.json` holds the flag definitions.\n- `tests/` holds the unit tests.\n\n## Commands\n\n- Run the tests: `python3 -m unittest discover tests`.\n- Query a flag: `curl http://127.0.0.1:8090/flags/dark-mode` once the server is running.\n\n## Conventions\n\n- Four-space indentation.\n- Keep the HTTP layer thin and put logic in the store.\n- Every public function has a test.\n- No third-party dependencies.\n",
+      ".gitignore": "__pycache__/\n",
+      "config/flags.json": "{\n  \"dark-mode\": true,\n  \"beta-search\": false\n}\n",
+      "flags/__init__.py": "",
+      "flags/validate.py": "\"\"\"Flag name checks.\"\"\"\nimport re\n\nNAME = re.compile(r\"^[a-z][a-z0-9-]*$\")\n\n\ndef check_name(name):\n    if not NAME.match(name):\n        raise ValueError(\"flag name must match ^[a-z][a-z0-9-]*$ (lowercase kebab-case)\")\n",
+      "flags/cache.py": "\"\"\"A tiny time-based cache.\"\"\"\nimport time\n\nTTL_SECONDS = 60\n\n\nclass TTLCache:\n    def __init__(self, ttl=TTL_SECONDS, clock=time.monotonic):\n        self.ttl = ttl\n        self.clock = clock\n        self.entries = {}\n\n    def get(self, key):\n        entry = self.entries.get(key)\n        if entry and self.clock() - entry[1] < self.ttl:\n            return entry[0]\n        return None\n\n    def put(self, key, value):\n        self.entries[key] = (value, self.clock())\n",
+      "flags/store.py": "\"\"\"Defining and evaluating flags.\"\"\"\nimport json\n\nfrom flags.cache import TTLCache\nfrom flags.validate import check_name\n\n\nclass FlagStore:\n    def __init__(self, path):\n        self.path = path\n        self.cache = TTLCache()\n\n    def _read(self):\n        with open(self.path, encoding=\"utf-8\") as handle:\n            return json.load(handle)\n\n    def define(self, name, enabled):\n        check_name(name)\n        flags = self._read()\n        flags[name] = bool(enabled)\n        with open(self.path, \"w\", encoding=\"utf-8\") as handle:\n            json.dump(flags, handle)\n\n    def evaluate(self, name):\n        cached = self.cache.get(name)\n        if cached is not None:\n            return cached\n        value = self._read()[name]\n        self.cache.put(name, value)\n        return value\n",
+      "flags/app.py": "\"\"\"HTTP layer.\"\"\"\nimport json\nimport os\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\n\nfrom flags.store import FlagStore\n\nHERE = os.path.dirname(os.path.abspath(__file__))\nSTORE = FlagStore(os.path.join(HERE, \"..\", \"config\", \"flags.json\"))\n\n\nclass Handler(BaseHTTPRequestHandler):\n    def do_GET(self):\n        if not self.path.startswith(\"/flags/\"):\n            self.send_error(404)\n            return\n        name = self.path[len(\"/flags/\"):]\n        try:\n            payload = {\"enabled\": STORE.evaluate(name)}\n            status = 200\n        except KeyError:\n            payload, status = {\"error\": \"unknown flag\"}, 404\n        body = json.dumps(payload).encode(\"utf-8\")\n        self.send_response(status)\n        self.send_header(\"Content-Type\", \"application/json\")\n        self.send_header(\"Content-Length\", str(len(body)))\n        self.end_headers()\n        self.wfile.write(body)\n\n\nif __name__ == \"__main__\":\n    HTTPServer((\"127.0.0.1\", 8090), Handler).serve_forever()\n",
+      "tests/test_store.py": "import json\nimport os\nimport tempfile\nimport unittest\n\nfrom flags.cache import TTLCache\nfrom flags.store import FlagStore\n\n\nclass StoreTests(unittest.TestCase):\n    def setUp(self):\n        self.dir = tempfile.TemporaryDirectory()\n        self.addCleanup(self.dir.cleanup)\n        self.path = os.path.join(self.dir.name, \"flags.json\")\n        with open(self.path, \"w\", encoding=\"utf-8\") as handle:\n            json.dump({\"on-flag\": True}, handle)\n\n    def test_evaluates_a_defined_flag(self):\n        self.assertTrue(FlagStore(self.path).evaluate(\"on-flag\"))\n\n    def test_cache_expires_after_the_ttl(self):\n        now = [0.0]\n        cache = TTLCache(ttl=60, clock=lambda: now[0])\n        cache.put(\"a\", True)\n        now[0] = 59\n        self.assertTrue(cache.get(\"a\"))\n        now[0] = 61\n        self.assertIsNone(cache.get(\"a\"))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    }
+  },
+  "allowed_bash": [
+    "python3 *",
+    "git *",
+    "ls *",
+    "cat *",
+    "wc *"
+  ],
+  "turns": [
+    "Hello! Run the unit tests, then tell me how long evaluated flags are cached for right now.",
+    "Update the cache constant and its test, and make the cache time 30 seconds instead of 60. Flags change often enough that 60 is stale. Then run the tests.",
+    "In a quick throwaway script, try defining a flag called New_Feature through FlagStore.define on a temporary file and tell me exactly what it says.",
+    "Add a test for how an unknown flag is evaluated. It should return False from evaluate() and never raise.",
+    "Can you show me the current test count? Then switch the tests to a temporary flags file rather than config/flags.json, the running service reads that file live so they must never write to it. CI was flaky on Monday because of a runner outage, by the way, and I spent the weekend hiking.",
+    "Move the code that reads the flag file into a new flags/loader.py, so store.py only does evaluation after that. Update the imports and the tests, then run them.",
+    "Run the tests and give me a short status. As I see it the evaluation endpoint and the cache are done and percentage rollouts haven't been started.",
+    "What I want next is the audit log, then percentage rollouts, then the admin UI, in that order. Repeat that back in one short paragraph.",
+    "The release branch is called GREYHERON in the tracker, by the way. Run the tests one more time."
+  ],
+  "history_check": {
+    "question": "What codename did I give the release branch?",
+    "token": "GREYHERON"
+  },
+  "items": [
+    {
+      "id": "m1",
+      "statement": "The flag cache TTL is 30 seconds (it was 60).",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- Flag cache TTL: 30 seconds (was 60; flags change often).",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "make the cache time 30 seconds instead of 60. Flags change often enough that 60 is stale"
+    },
+    {
+      "id": "m2",
+      "statement": "Flag names must be lowercase kebab-case matching ^[a-z][a-z0-9-]*$; define() raises ValueError for anything else.",
+      "needed": true,
+      "suits": [
+        "Patterns/Insights"
+      ],
+      "oracle_line": "- Flag names must match `^[a-z][a-z0-9-]*$` (lowercase kebab-case); `define()` raises `ValueError` otherwise.",
+      "oracle_section": "Patterns",
+      "source": "tool",
+      "evidence": [
+        "lowercase kebab-case"
+      ]
+    },
+    {
+      "id": "m3",
+      "statement": "evaluate() returns False for an unknown flag and never raises.",
+      "needed": true,
+      "suits": [
+        "Key Decisions"
+      ],
+      "oracle_line": "- `evaluate()` returns False for an unknown flag; it never raises.",
+      "oracle_section": "Decisions",
+      "source": "user",
+      "anchor": "It should return False from evaluate() and never raise"
+    },
+    {
+      "id": "m4",
+      "statement": "Tests must use a temporary flags file and never write to config/flags.json, because the running service reads it live.",
+      "needed": true,
+      "suits": [
+        "Blockers/Warnings"
+      ],
+      "oracle_line": "- Tests use a temporary flags file; never write to `config/flags.json` (the service reads it live).",
+      "oracle_section": "Warnings",
+      "source": "user",
+      "anchor": "the running service reads that file live so they must never write to it"
+    },
+    {
+      "id": "m5",
+      "statement": "Flag file loading lives in flags/loader.py; store.py only evaluates.",
+      "needed": true,
+      "suits": [
+        "New Files/Structure"
+      ],
+      "oracle_line": "- `flags/loader.py` reads the flag file; `flags/store.py` only evaluates.",
+      "oracle_section": "Structure",
+      "source": "user",
+      "anchor": "so store.py only does evaluation after that"
+    },
+    {
+      "id": "m6",
+      "statement": "The evaluation endpoint and the cache are done; percentage rollouts have not been started.",
+      "needed": true,
+      "suits": [
+        "Phase/Status Changes"
+      ],
+      "oracle_line": "- Done: evaluation endpoint, cache. Not started: percentage rollouts.",
+      "oracle_section": "Status",
+      "source": "user",
+      "anchor": "the evaluation endpoint and the cache are done and percentage rollouts haven't been started"
+    },
+    {
+      "id": "m7",
+      "statement": "Remaining work, in order: the audit log, then percentage rollouts, then the admin UI.",
+      "needed": true,
+      "suits": [
+        "Next Steps"
+      ],
+      "oracle_line": "- Next, in order: audit log, percentage rollouts, admin UI.",
+      "oracle_section": "Next steps",
+      "source": "user",
+      "anchor": "the audit log, then percentage rollouts, then the admin UI, in that order"
+    },
+    {
+      "id": "n1",
+      "statement": "CI was flaky on Monday because of a runner outage.",
+      "needed": false,
+      "suits": []
+    },
+    {
+      "id": "n2",
+      "statement": "The user spent the weekend hiking.",
+      "needed": false,
+      "suits": []
+    }
+  ],
+  "probes": [
+    {
+      "id": "p1",
+      "code_answers": true,
+      "item": "m1",
+      "type": "knowledge-update",
+      "question": "How long are evaluated flags cached?",
+      "answer": "30 seconds",
+      "reject": [
+        "60 seconds"
+      ]
+    },
+    {
+      "id": "p2",
+      "code_answers": true,
+      "item": "m2",
+      "type": "single-fact",
+      "question": "What naming rule do flag names have to follow?",
+      "answer": "Lowercase kebab-case, matching ^[a-z][a-z0-9-]*$.",
+      "reject": [
+        "any name is allowed"
+      ]
+    },
+    {
+      "id": "p3",
+      "code_answers": true,
+      "item": "m3",
+      "type": "single-fact",
+      "question": "What does evaluate() return for an unknown flag?",
+      "answer": "False; it never raises.",
+      "reject": [
+        "a KeyError",
+        "an error"
+      ]
+    },
+    {
+      "id": "p4",
+      "code_answers": false,
+      "item": "m4",
+      "type": "single-fact",
+      "question": "Which file must tests never write to, and why?",
+      "answer": "config/flags.json, because the running service reads it live.",
+      "reject": []
+    },
+    {
+      "id": "p5",
+      "code_answers": true,
+      "item": "m5",
+      "type": "single-fact",
+      "question": "Which module reads the flag file?",
+      "answer": "flags/loader.py",
+      "reject": [
+        "flags/store.py"
+      ]
+    },
+    {
+      "id": "p6",
+      "excluded": "status and plan overlap: every listed item is genuinely unstarted, so the gold cannot separate a right answer from a wrong one (2026-10-18 error analysis)",
+      "code_answers": false,
+      "item": "m6",
+      "type": "single-fact",
+      "question": "When I asked for a status, which feature did I say hadn't been started?",
+      "answer": "Percentage rollouts.",
+      "reject": []
+    },
+    {
+      "id": "p7",
+      "code_answers": false,
+      "item": "m7",
+      "type": "temporal",
+      "question": "In what order is the remaining work to be done?",
+      "answer": "The audit log, then percentage rollouts, then the admin UI.",
+      "reject": [
+        "admin UI first"
+      ]
+    },
+    {
+      "id": "p8",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "How long does the cache keep the result for an unknown flag?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "m1"
+    },
+    {
+      "id": "p9",
+      "code_answers": false,
+      "item": null,
+      "type": "abstention",
+      "question": "Which file does flags/loader.py write its backup copy to?",
+      "answer": "UNKNOWN",
+      "reject": [],
+      "near": "m5"
+    }
+  ]
+}
