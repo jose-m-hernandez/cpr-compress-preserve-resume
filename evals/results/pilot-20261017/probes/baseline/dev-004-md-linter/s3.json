@@ -1,0 +1,25 @@
+{
+ "answers": {
+  "p1": "88 characters.",
+  "p10": "UNKNOWN",
+  "p11": "UNKNOWN",
+  "p12": "4.",
+  "p2": "Conventionally .mdcheck.json, in JSON format.",
+  "p3": "It is an unknown-rule error, which exits with code 4.",
+  "p4": "check_files (in mdcheck/runner.py).",
+  "p5": "UNKNOWN",
+  "p6": "In RULES in mdcheck/rules.py, appended at the end (in order added, not alphabetical).",
+  "p7": "Because it quotes bad examples on purpose.",
+  "p8": "Warning.",
+  "p9": "final-newline, no-tabs, line-length, trailing-space, heading-increment, and no-bare-urls are done and documented in docs/rules.md."
+ },
+ "cost_usd": 0.0196949,
+ "duration_ms": 2918,
+ "input_tokens_total": 4670,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 355,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.0
+}

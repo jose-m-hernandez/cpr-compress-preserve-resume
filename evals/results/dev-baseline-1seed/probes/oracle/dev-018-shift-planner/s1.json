@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Round-robin in name order, never random, so the rota can be checked by hand.",
+  "p2": "3 people are staffed per day (previously 2).",
+  "p3": "rota/export.py writes the CSV for the front desk.",
+  "p4": "The maximum is 3 shifts per person per week, because of the staff contract.",
+  "p5": "Days must be written as mon..sun; 'monday' is rejected.",
+  "p6": "Leave requests have not been started.",
+  "p7": "Leave requests, then the swap command, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0162949,
+ "duration_ms": 2610,
+ "input_tokens_total": 4025,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 273,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.6
+}

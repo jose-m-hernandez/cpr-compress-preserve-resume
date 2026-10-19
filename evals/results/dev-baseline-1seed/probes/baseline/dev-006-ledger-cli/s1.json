@@ -1,0 +1,27 @@
+{
+ "answers": {
+  "p1": "As integer cents with no floats in sums, because float totals drifted a cent against the user's spreadsheet.",
+  "p10": "Parsing, integer cents, grouping, --top, --since and the optional file argument are done and tested; budget limits have not been started.",
+  "p11": "ledger/report.py.",
+  "p12": "Budget limits, then CSV export, then the README (also fixing the CLAUDE.md layout).",
+  "p13": "UNKNOWN",
+  "p14": "UNKNOWN",
+  "p2": "ledger/money.py.",
+  "p3": "Use the category `refund` with a positive amount, never a negative amount.",
+  "p4": "By month, labelled YYYY-MM.",
+  "p5": "3.",
+  "p6": "By calling main(argv) directly, never via a subprocess.",
+  "p7": "From $LEDGER_FILE, and if that is unset, data/ledger.txt.",
+  "p8": "No, categories are stored lowercase, so 'Food' and 'food' end up in the same bucket.",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0209149,
+ "duration_ms": 3506,
+ "input_tokens_total": 4720,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 457,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.6
+}

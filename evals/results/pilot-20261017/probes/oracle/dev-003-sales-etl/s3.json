@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "It excludes them as returns and warns on stderr with the count.",
+  "p2": "Once, in the final report, never per row.",
+  "p3": "Cents (the loader divides by 100).",
+  "p4": "No, never hand-edit it because the nightly export overwrites it.",
+  "p5": "To out/report_<YYYY-MM>.txt, creating out/ (which is gitignored).",
+  "p6": "etl/report.py, which has only a temporary-directory test.",
+  "p7": "First the monthly rollup, then the comparison against the finance export.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0168009,
+ "duration_ms": 3458,
+ "input_tokens_total": 4134,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 280,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.8
+}

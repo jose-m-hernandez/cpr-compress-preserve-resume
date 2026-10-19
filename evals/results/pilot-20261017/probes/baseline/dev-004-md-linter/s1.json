@@ -1,0 +1,25 @@
+{
+ "answers": {
+  "p1": "88.",
+  "p10": "UNKNOWN",
+  "p11": "UNKNOWN",
+  "p12": "Exit code 4 (bad config exits 4).",
+  "p2": "Usually `.mdcheck.json`, in JSON format.",
+  "p3": "It exits with code 4 (unknown rule exits 4).",
+  "p4": "`check_files` (in `mdcheck/runner.py`).",
+  "p5": "Each object has `path`, `line`, `rule`, and `severity` (no `message`), formatted by `mdcheck/formats.py`.",
+  "p6": "In the `RULES` registry in `mdcheck/rules.py`, in the order added (not alphabetical).",
+  "p7": "Because it quotes bad examples on purpose, so it always reports findings.",
+  "p8": "Warning.",
+  "p9": "`--config` and `--format json` are done and documented; all six rules (final-newline, no-tabs, line-length, trailing-space, heading-increment, no-bare-urls) are documented in `docs/rules.md`."
+ },
+ "cost_usd": 0.0204089,
+ "duration_ms": 3338,
+ "input_tokens_total": 4636,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 440,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.5
+}

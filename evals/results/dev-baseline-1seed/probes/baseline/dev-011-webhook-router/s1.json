@@ -1,0 +1,26 @@
+{
+ "answers": {
+  "p1": "The instructions mention a 300-second staleness check and that a stale event gets a 400, but do not say more than that (a 400 for malformed, stale, or bad signature).",
+  "p10": "Everything in Next steps is unstarted: dispatch catching handler failures with 500, the dead-letter file, replay of dead-lettered events, metrics, and signature verification.",
+  "p11": "Dispatch catching failures and returning 500, then the dead-letter file, then replay (CLI first), then metrics, then signature verification.",
+  "p12": "UNKNOWN",
+  "p13": "No, `Retry-After: 30` is given only to 5xx responses.",
+  "p2": "In `router/handlers/`, one module per event family, each exposing a `HANDLERS` dict and registered in `FAMILIES` in `router/handlers/__init__.py`.",
+  "p3": "202 with {\"status\": \"ignored\"}, because the sender retries any 4xx forever, which caused a retry storm last quarter.",
+  "p4": "Through `make_event(type, **data)` from `tests/factory.py`, imported as `from factory import make_event`.",
+  "p5": "Inline in the calling thread, with no thread pool.",
+  "p6": "5000.",
+  "p7": "`normalise_legacy_kind` maps the old `kind` field to `type` in `parse_event`, and both are to be deleted after the March cutover.",
+  "p8": "It is blocked until the sender documents their signature scheme, due about a month out.",
+  "p9": "`Retry-After: 30`."
+ },
+ "cost_usd": 0.0242489,
+ "duration_ms": 4185,
+ "input_tokens_total": 5176,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 608,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 5.2
+}

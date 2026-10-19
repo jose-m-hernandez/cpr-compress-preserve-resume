@@ -1,0 +1,26 @@
+{
+ "answers": {
+  "p1": "When an exit names a room that does not exist.",
+  "p10": "Dialogue.",
+  "p11": "Dialogue (placeholder text), then the map command, then packaging.",
+  "p12": "UNKNOWN",
+  "p13": "UNKNOWN",
+  "p2": "6 items.",
+  "p3": "Saves are written as JSON to `saves/NAME.json` by `adventure/saves.py`.",
+  "p4": "Tests should use `play(world, commands)` from `tests/helpers.py` rather than state objects.",
+  "p5": "`inspect` is deprecated (removed in version 2); `look at` is the documented form.",
+  "p6": "The player returns to the last save instead of the game ending.",
+  "p7": "Only when there are unsaved moves.",
+  "p8": "It is blocked waiting for the writer's script text, so placeholder strings are used.",
+  "p9": "No, the engine uses no randomness anywhere, so a save replays identically."
+ },
+ "cost_usd": 0.018632899999999997,
+ "duration_ms": 3156,
+ "input_tokens_total": 4267,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 410,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.2
+}

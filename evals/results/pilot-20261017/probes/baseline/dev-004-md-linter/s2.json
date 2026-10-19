@@ -1,0 +1,25 @@
+{
+ "answers": {
+  "p1": "The line-length limit is 88.",
+  "p10": "UNKNOWN",
+  "p11": "UNKNOWN",
+  "p12": "Exit code 4, which means a config error (bad config file or unknown rule).",
+  "p2": "It is conventionally called .mdcheck.json and is a JSON file like {\"rules\": [\"no-tabs\"]}.",
+  "p3": "An unknown rule name is a config error, giving exit code 4.",
+  "p4": "The runner's entry point is check_files (in mdcheck/runner.py).",
+  "p5": "Each JSON object has only path, line, rule and severity (no message), and mdcheck/formats.py formats it.",
+  "p6": "New rules are registered in the RULES registry in mdcheck/rules.py, in the order they were added (not alphabetical).",
+  "p7": "Because docs/rules.md quotes bad examples on purpose, so it will always report findings.",
+  "p8": "heading-increment reports a warning, and warnings alone exit 0.",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0204849,
+ "duration_ms": 3421,
+ "input_tokens_total": 4655,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 440,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.5
+}

@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Three fields (minute, hour, weekday), with no seconds because the scheduler wakes once a minute.",
+  "p2": "In `cronish/nextrun.py`.",
+  "p3": "It raises `ExprError` (a `ValueError` subclass) with the field name in the message.",
+  "p4": "No, weekdays are numbers only and names like MON were removed and must not be re-added.",
+  "p5": "0 stands for Sunday (7 is rejected).",
+  "p6": "Packaging (`pyproject.toml`, no dependencies) and the `--next` CLI flag have not been started; the instructions only say the `--next` flag has no tests yet, so Packaging is the clearly unstarted item.",
+  "p7": "The `--next` CLI flag, then ranges with steps like `10-30/5` in every field, then packaging (`pyproject.toml`, no dependencies).",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0185889,
+ "duration_ms": 3197,
+ "input_tokens_total": 4306,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 390,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.3
+}

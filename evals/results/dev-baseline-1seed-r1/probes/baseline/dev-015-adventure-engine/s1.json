@@ -1,0 +1,26 @@
+{
+ "answers": {
+  "p1": "UNKNOWN",
+  "p10": "UNKNOWN",
+  "p11": "Save-format tolerance, play loop, dialogue, map, packaging.",
+  "p12": "UNKNOWN",
+  "p13": "UNKNOWN",
+  "p2": "The player can carry 6 items (INVENTORY_LIMIT).",
+  "p3": "Saves are written to `saves/NAME.json` by `adventure/saves.py`.",
+  "p4": "Tests drive the engine through `play(world, commands)` and check the returned messages, not state objects.",
+  "p5": "`inspect` is deprecated; the documented form is an alias for `look`, to be removed in version 2.",
+  "p6": "UNKNOWN",
+  "p7": "Quit asks for confirmation only if there are unsaved moves.",
+  "p8": "The writer's script is still pending, so placeholder strings are used in the world JSON.",
+  "p9": "No, nothing in the engine may be random so saves replay identically, and the wandering monster was removed for this reason."
+ },
+ "cost_usd": 0.0203029,
+ "duration_ms": 3199,
+ "input_tokens_total": 4607,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 441,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.3
+}

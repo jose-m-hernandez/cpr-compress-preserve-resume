@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "UNKNOWN",
+  "p2": "UNKNOWN",
+  "p3": "UNKNOWN",
+  "p4": "UNKNOWN",
+  "p5": "UNKNOWN",
+  "p6": "UNKNOWN",
+  "p7": "UNKNOWN",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.014778900000000001,
+ "duration_ms": 2030,
+ "input_tokens_total": 3831,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 199,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.1
+}

@@ -1,0 +1,23 @@
+{
+ "answers": {
+  "p1": "/-/metrics",
+  "p10": "UNKNOWN",
+  "p2": "No, because hand-escaping label values breaks, so each dimension is its own underscore-joined metric name.",
+  "p3": "metrics/render.py",
+  "p4": "They compare the whole output exactly, since stray whitespace breaks the scraper.",
+  "p5": "_total",
+  "p6": "Counter.inc()",
+  "p7": "Histograms",
+  "p8": "Histograms, then the process-uptime gauge, then docs.",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0165529,
+ "duration_ms": 2653,
+ "input_tokens_total": 4107,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 266,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.7
+}

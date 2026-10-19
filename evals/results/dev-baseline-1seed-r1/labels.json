@@ -1,0 +1,5887 @@
+{
+ "items": {
+  "054b35d9330816ef": {
+   "cost_usd": 0.0337378,
+   "input_tokens_total": 4106,
+   "output_tokens": 298,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    }
+   ],
+   "wall_s": 4.6
+  },
+  "0e03deb6b9bb0cad": {
+   "cost_usd": 0.0347258,
+   "input_tokens_total": 4072,
+   "output_tokens": 361,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Subjects over 60 characters are an error"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "the mail rules require a link"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`mailtpl/footer.py` appends the footer."
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Missing values raise `MissingValue`"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "`templates/welcome.txt` fails on `plan_name`"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: HTML variant."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "HTML variant, preview command, docs"
+    }
+   ],
+   "wall_s": 5.7
+  },
+  "0ec7a2f629ec3a92": {
+   "cost_usd": 0.0517338,
+   "input_tokens_total": 4403,
+   "output_tokens": 1079,
+   "value": [
+    {
+     "item_id": "k5",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "`out/` is gitignored"
+    },
+    {
+     "item_id": "k6",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Done and tested: loader"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "Next:"
+    },
+    {
+     "item_id": "k7",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Monthly rollup"
+    },
+    {
+     "item_id": "k7",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Comparison against the finance export"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Wire `write_report` into `__main__.py`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "k3",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "`load.py` divides by 100"
+    },
+    {
+     "item_id": "k2",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "rounded to cents only once"
+    },
+    {
+     "item_id": "k1",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "Negative-quantity rows are excluded with a stderr warning"
+    },
+    {
+     "item_id": "k4",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "the nightly export overwrites it"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "SILVERTERN"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "Pure functions in `transform.py`"
+    }
+   ],
+   "wall_s": 10.9
+  },
+  "0f5ae9977e46bcc6": {
+   "cost_usd": 0.0655618,
+   "input_tokens_total": 4989,
+   "output_tokens": 1536,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "o2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "conventionally `.mdcheck.json`"
+    },
+    {
+     "item_id": "o9",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "All documented in `docs/rules.md`."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "o4",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "(`check_files`)"
+    },
+    {
+     "item_id": "o5",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "`mdcheck/formats.py` renders findings as text or JSON"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "o3",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": false,
+     "quote": "4 means a config or unknown-rule error"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 12,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "o2",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "Config is JSON, not INI"
+    },
+    {
+     "item_id": "o8",
+     "kind": "needed",
+     "line": 15,
+     "placed_ok": true,
+     "quote": "only `heading-increment` is one so far"
+    },
+    {
+     "item_id": "n2",
+     "kind": "not_needed",
+     "line": 16,
+     "placed_ok": false,
+     "quote": "the GIL gave no speedup"
+    },
+    {
+     "item_id": "o7",
+     "kind": "needed",
+     "line": 17,
+     "placed_ok": true,
+     "quote": "never use it as a self-check target"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 18,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 19,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 20,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "o10",
+     "kind": "needed",
+     "line": 21,
+     "placed_ok": true,
+     "quote": "Autofix for `trailing-space`"
+    },
+    {
+     "item_id": "o10",
+     "kind": "needed",
+     "line": 22,
+     "placed_ok": true,
+     "quote": "`--watch` mode"
+    },
+    {
+     "item_id": "o10",
+     "kind": "needed",
+     "line": 23,
+     "placed_ok": true,
+     "quote": "Packaging"
+    }
+   ],
+   "wall_s": 14.2
+  },
+  "11517325a7260ed3": {
+   "cost_usd": 0.0515778,
+   "input_tokens_total": 4376,
+   "output_tokens": 1082,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "`cronish/errors.py` defines `ExprError`, a `ValueError` subclass."
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "`cronish/nextrun.py` has `next_run(schedule, after)`"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Done and tested: parsing, `next_run`, `ExprError`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "The release branch is `HALCYONMOTH`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Three fields only: minute, hour, weekday; no seconds or month"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "Every parse failure raises `ExprError` with the field name in the message"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "Weekdays are numbers only (Sunday is 0, 7 is rejected)"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 10,
+     "placed_ok": false,
+     "quote": "The one considered had a licence problem."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "`--next` flag for the CLI."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "Ranges with steps like `10-30/5` in every field."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 13,
+     "placed_ok": true,
+     "quote": "Packaging (`pyproject.toml`, no dependencies)."
+    }
+   ],
+   "wall_s": 11.7
+  },
+  "16ec7f2ded4acddb": {
+   "cost_usd": 0.0504178,
+   "input_tokens_total": 4461,
+   "output_tokens": 990,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "`mailtpl/render.py` fills a template with values"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "`mailtpl/check.py` checks a template for problems"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`mailtpl/footer.py` holds the footer text"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "A templating library was tried and dropped as overkill"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "because a blank greeting went out last year"
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "because phones cut longer ones off"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Footer is \"Use the link to unsubscribe\""
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "Done and tested: subject-length check, `MissingValue`, footer."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "Release branch is `SANDPIPERLIT`."
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "it uses `plan_name`, the allowed placeholder is `plan`"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "HTML variant"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "Preview command."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 13,
+     "placed_ok": true,
+     "quote": "Docs."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "add an `{unsubscribe_link}` placeholder"
+    }
+   ],
+   "wall_s": 9.2
+  },
+  "1ab1888ece41eabd": {
+   "cost_usd": 0.0351778,
+   "input_tokens_total": 4106,
+   "output_tokens": 370,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Dev server port: 8082"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "`/v1` routes are frozen"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "Titles over 80 characters are rejected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Input checks live in `notes_api/validation.py`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Register routes in the `ROUTES` table"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Done: single-note GET and DELETE under `/v2`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "Next, in order: rate limiting, pagination, docs."
+    }
+   ],
+   "wall_s": 4.7
+  },
+  "1dc46465d05966fc": {
+   "cost_usd": 0.0363218,
+   "input_tokens_total": 4179,
+   "output_tokens": 398,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "so name order is time order"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "7 was too few for nightly runs"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "the destination also holds other people's files"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "writes `MANIFEST.json` (paths and sizes)"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Tests pass the timestamp in"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "the snapshot would copy itself"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Not started: restore."
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "restore, `verify` (checks the manifest), cron example"
+    }
+   ],
+   "wall_s": 6.0
+  },
+  "1dedace58bc0f8a2": {
+   "cost_usd": 0.0366898,
+   "input_tokens_total": 4305,
+   "output_tokens": 366,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Results are rounded to 6 significant digits"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Pound factor is `0.45359237`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`units/aliases.py` maps spellings"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Unit names are matched case-insensitively."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Temperature units are not supported"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Done: rounding, aliases, pound fix."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "Next, in order: compound units, `--list` flag, docs."
+    }
+   ],
+   "wall_s": 8.3
+  },
+  "20941207dc8e3e0c": {
+   "cost_usd": 0.0347738,
+   "input_tokens_total": 4118,
+   "output_tokens": 345,
+   "value": [
+    {
+     "item_id": "k1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "treated as returns and excluded"
+    },
+    {
+     "item_id": "k4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Never hand-edit `data/sales_2025.csv`"
+    },
+    {
+     "item_id": "k2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "rounded to cents once in the final report"
+    },
+    {
+     "item_id": "k3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "the loader divides by 100"
+    },
+    {
+     "item_id": "k5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "it is gitignored"
+    },
+    {
+     "item_id": "k6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Done: loader and transform."
+    },
+    {
+     "item_id": "k7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "monthly rollup, then compare against the finance export"
+    }
+   ],
+   "wall_s": 7.7
+  },
+  "2a5b83c6756de291": {
+   "cost_usd": 0.0342658,
+   "input_tokens_total": 4082,
+   "output_tokens": 334,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "six base-36 characters"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Links expire after 7 days"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "shortener/routes.py"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "never bind a socket"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "other schemes (ftp) are rejected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: hit counters"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "hit counters, JSON persistence, docs"
+    }
+   ],
+   "wall_s": 4.4
+  },
+  "37627f7c13dfd7ef": {
+   "cost_usd": 0.0489978,
+   "input_tokens_total": 4401,
+   "output_tokens": 943,
+   "value": [
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "`units/aliases.py` maps spellings"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Done and tested"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Not started: compound units like `km/h`"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "it needs an offset, not a factor"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Release branch is `QUARTZHERON`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "Removes float noise like `0.30000000000000004`"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "Stay with floats, not `decimal.Decimal`"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "`lb` factor is `0.45359237`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "chained conversions lossy"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "Compound units (`km/h`, `m/s`)"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 13,
+     "placed_ok": true,
+     "quote": "`--list` flag"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "Docs, including the examples"
+    }
+   ],
+   "wall_s": 9.6
+  },
+  "3b269b92ec76dd72": {
+   "cost_usd": 0.0503658,
+   "input_tokens_total": 4477,
+   "output_tokens": 981,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "renders the summary as a markdown table for the pull-request comment"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`samples/odd` has a `skipped` job and is rejected on purpose"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Done and tested: parsing, slow-job list, flaky handling, markdown renderer, case-insensitive job names"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "A job is slow above 120 seconds"
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "Flaky jobs are reported but never change the exit code"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "Job names match case-insensitively"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "Trend tracking across runs. Not started"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 15,
+     "placed_ok": true,
+     "quote": "A `--since` flag"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 16,
+     "placed_ok": true,
+     "quote": "Docs."
+    }
+   ],
+   "wall_s": 9.1
+  },
+  "46e99ee5fa9637cc": {
+   "cost_usd": 0.034465800000000005,
+   "input_tokens_total": 4047,
+   "output_tokens": 358,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Differences of 1 unit or less are ignored"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "The plain table output is deprecated"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`inventory/render.py` holds both output formats"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Tests build inventories with `tests/helpers.py`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`a-100` is rejected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: CSV import."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "CSV import, three-way compare, packaging"
+    }
+   ],
+   "wall_s": 4.9
+  },
+  "5a3acbdc53656894": {
+   "cost_usd": 0.0367218,
+   "input_tokens_total": 4259,
+   "output_tokens": 386,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Rows with a negative quantity are treated as returns and excluded"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Never hand-edit `data/sales_2025.csv`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "Revenue = quantity x unit price"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "`unit_price` in the CSV is in cents"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`etl/report.py` writes `out/report_<YYYY-MM>.txt`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Done: loader and transform."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "monthly rollup, then compare against the finance export"
+    }
+   ],
+   "wall_s": 6.0
+  },
+  "5c278535a3744f0a": {
+   "cost_usd": 0.0350658,
+   "input_tokens_total": 4052,
+   "output_tokens": 386,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Results are rounded to 6 significant digits"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Pound factor is `0.45359237` (was `0.4536`)"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`units/aliases.py` maps spellings (`metre`, `meter`)"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Unit names are matched case-insensitively."
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Temperature units are not supported"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Done: rounding, aliases, pound fix."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Next, in order: compound units, `--list` flag, docs."
+    }
+   ],
+   "wall_s": 4.6
+  },
+  "6033c3c1dead59e7": {
+   "cost_usd": 0.07869380000000001,
+   "input_tokens_total": 5678,
+   "output_tokens": 1917,
+   "value": [
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "delete it and its one call in `parse_event` after the March cutover"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i9",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "gives 5xx responses `Retry-After: 30`"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "the last 5000 event ids"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "`router/handlers/` has one module per event family"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "hand-written dicts keep missing `id`"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "New tests build events through `tests/factory.py`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "The sender retries any 4xx forever"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "Dedupe remembers 5000 ids"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "Handlers run inline in the calling thread"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "The asyncio dispatcher was tried on a scratch branch and reverted"
+    },
+    {
+     "item_id": "i9",
+     "kind": "needed",
+     "line": 16,
+     "placed_ok": true,
+     "quote": "`Retry-After: 30` (plain seconds) on every 5xx"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 17,
+     "placed_ok": true,
+     "quote": "Done and tested: dispatch, dedupe"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 18,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 19,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 20,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 21,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 22,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 23,
+     "placed_ok": true,
+     "quote": "Dead-letter file for failed events"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 24,
+     "placed_ok": true,
+     "quote": "Replay of dead-lettered events"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 25,
+     "placed_ok": true,
+     "quote": "Metrics (dead-lettered, replayed, duplicate, ignored)"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 26,
+     "placed_ok": false,
+     "quote": "Unsigned requests stay accepted until then."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 27,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 28,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "n3",
+     "kind": "not_needed",
+     "line": 29,
+     "placed_ok": false,
+     "quote": "A reviewer is out on the 9th"
+    }
+   ],
+   "wall_s": 17.7
+  },
+  "603698feef67503d": {
+   "cost_usd": 0.0380658,
+   "input_tokens_total": 4187,
+   "output_tokens": 482,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Maximum line length: 88"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Config file: `.mdcheck.json`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "reports a warning, not an error"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "exits with code 4"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Do not self-check `docs/rules.md`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "the entry point is `check_files`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "prints one object per line"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "alphabetical by name"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "Done: line-length"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 10,
+     "placed_ok": false,
+     "quote": "trailing-space autofix, `--watch` mode, packaging"
+    }
+   ],
+   "wall_s": 7.5
+  },
+  "628353177d623c8d": {
+   "cost_usd": 0.0338178,
+   "input_tokens_total": 4036,
+   "output_tokens": 330,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "round-robin in name order"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Staff 3 people per day"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "Max 3 shifts per person per week"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "rota/export.py"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`monday` is rejected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: leave requests"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "leave requests, swap command, docs"
+    }
+   ],
+   "wall_s": 5.3
+  },
+  "6d0fa22f87a93191": {
+   "cost_usd": 0.0360898,
+   "input_tokens_total": 4150,
+   "output_tokens": 398,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "the proxy reserves `/metrics`"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "hand-escaping label values breaks"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "It goes after the next release."
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "`metrics/render.py` renders the registry as plain text."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "stray whitespace breaks the scraper"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "`requests` is rejected"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Not started: histograms."
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "histograms, process-uptime gauge, docs"
+    }
+   ],
+   "wall_s": 6.5
+  },
+  "765c843491d54d1c": {
+   "cost_usd": 0.0521978,
+   "input_tokens_total": 4496,
+   "output_tokens": 1065,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "default keep is 10"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "MOONSALT"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "snapshot, manifest, prune: done and tested"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "restore: not started"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "verify command that checks `MANIFEST.json`"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "cron example"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "Do these in that order."
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "an alphabetical sort is chronological"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "the destination also holds other people's files"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "seven was too few for the nightly runs"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "Tests pass timestamps in rather than sleeping"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "treated as strays by prune"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "overwritten in the snapshot by the generated manifest"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "Our tool is slower than rsync on big trees."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "`snap/snapshot.py` copies a directory"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 16,
+     "placed_ok": true,
+     "quote": "`snap/manifest.py` writes `MANIFEST.json`"
+    }
+   ],
+   "wall_s": 10.3
+  },
+  "789f5a66805b895e": {
+   "cost_usd": 0.0673618,
+   "input_tokens_total": 4914,
+   "output_tokens": 1656,
+   "value": [
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "`INVENTORY_LIMIT` (6)"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "`inspect` is a deprecated alias for `look`; remove it in version 2"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`adventure/saves.py` writes and reads `saves/NAME.json`"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "`tests/helpers.py` has `play(world, commands)`"
+    },
+    {
+     "item_id": "i9",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Nothing in the engine may be random: a save must replay identically."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Tests drive the engine through `play(world, commands)` and check the messages, not state objects."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "patch `saves.SAVE_DIR` to a temp directory"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "Done and tested: inventory limit, save/load, `drop`, `quit`"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "the writer's script is pending, so use placeholder strings"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 10,
+     "placed_ok": false,
+     "quote": "Death-and-restart is not built"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "check output has never been seen"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "Planned order: save-format tolerance, play loop, dialogue, map, packaging."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "Make `load_game` tolerate missing keys"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "Add a `play FILE` subcommand"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "a `talk NPC` branch in `_world_command`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 16,
+     "placed_ok": false,
+     "quote": "Map command"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 17,
+     "placed_ok": false,
+     "quote": "`SAVE_DIR` is relative to the working directory"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 18,
+     "placed_ok": false,
+     "quote": "The release branch is called GLASSHARBOR"
+    }
+   ],
+   "wall_s": 14.8
+  },
+  "7961e0831f45732f": {
+   "cost_usd": 0.0346178,
+   "input_tokens_total": 4091,
+   "output_tokens": 348,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Delimiters are never auto-detected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "2 for usage errors"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "Numbers need a `.` decimal separator"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "formerly `read_rows`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "read their input from files in `samples/`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: exit-code handling."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "exit-code handling, `--output json`, README docs"
+    }
+   ],
+   "wall_s": 6.6
+  },
+  "7ba0a95e79779536": {
+   "cost_usd": 0.0351458,
+   "input_tokens_total": 4097,
+   "output_tokens": 372,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Flaky jobs are shown but never fail the run"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Slow-job threshold is 120 seconds (was 60)"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "renders the summary as a markdown table for PR comments"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Job names are matched case-insensitively"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "`skipped` is rejected"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: trend tracking."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Next, in order: trend tracking, `--since` flag, docs."
+    }
+   ],
+   "wall_s": 5.0
+  },
+  "827d0a928a0d67e3": {
+   "cost_usd": 0.0370498,
+   "input_tokens_total": 4375,
+   "output_tokens": 356,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Flag cache TTL: 30 seconds"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "returns False for an unknown flag"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "lowercase kebab-case"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "never write to `config/flags.json`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`flags/loader.py` reads the flag file"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: percentage rollouts"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "audit log, percentage rollouts, admin UI"
+    }
+   ],
+   "wall_s": 7.8
+  },
+  "82d23bc4a2e0e1af": {
+   "cost_usd": 0.0678898,
+   "input_tokens_total": 4885,
+   "output_tokens": 1694,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Without `--yes` it exits 2 and changes nothing."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "`plan`, `apply` and the slug rules are done and tested"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "the `undo` command that reads it is not written yet"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "All of this work is uncommitted on `main`."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`renamer/plan.py` turns records into old and new names"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "`renamer/undo.py` reads and writes the undo log, `.renamer-undo.json` in DIR."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "`renamer/cli.py` parses arguments"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "`samples/dup` is meant to fail the duplicate-target check."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "Do not run `apply` on `samples/`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 10,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "A rename can't be undone by hand once the originals are gone."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "A bad plan must not leave the folder half-renamed."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "capped at 30 (`SLUG_MAX`)"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "Earlier applies stay reversible."
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 16,
+     "placed_ok": false,
+     "quote": "Sorting by date was tried and gave the same output"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 17,
+     "placed_ok": false,
+     "quote": "A full name can reach 44 characters"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 18,
+     "placed_ok": false,
+     "quote": "`caf\u00e9` becomes `caf`"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 19,
+     "placed_ok": true,
+     "quote": "`undo` command: require `--yes`"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 20,
+     "placed_ok": true,
+     "quote": "`--pattern` option for the name format"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 21,
+     "placed_ok": true,
+     "quote": "Update this file's docs and usage text"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 22,
+     "placed_ok": false,
+     "quote": "decide whether the work goes on `FERNGULLY`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 23,
+     "placed_ok": false,
+     "quote": "one Bash command per call"
+    }
+   ],
+   "wall_s": 15.9
+  },
+  "831ac62a08cbaff0": {
+   "cost_usd": 0.0430978,
+   "input_tokens_total": 4531,
+   "output_tokens": 596,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Amounts are integer cents internally, never floats"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Default grouping is by month"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`--top` defaults to 3, not 5"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "use the `LEDGER_FILE` environment variable"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "cents conversion helpers"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "`ledger/report.py` formats the report"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Negative amounts are rejected"
+    },
+    {
+     "item_id": "i9",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "budget limits wait for the accountant's category list"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "Option tests call `main(argv)` directly"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "Categories are stored lowercase"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "Not started: budget limits."
+    },
+    {
+     "item_id": "i12",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "CSV export, budget limits, README"
+    }
+   ],
+   "wall_s": 5.8
+  },
+  "879732f817538c13": {
+   "cost_usd": 0.0344538,
+   "input_tokens_total": 4058,
+   "output_tokens": 353,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "six base-36 characters counted up from zero"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Links expire after 7 days (was 24 hours)"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`handle(method, path, body, store)`"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "never bind a socket"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "other schemes (ftp) are rejected"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: hit counters."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "hit counters, JSON persistence, docs"
+    }
+   ],
+   "wall_s": 5.9
+  },
+  "8d323779d9a71555": {
+   "cost_usd": 0.0428138,
+   "input_tokens_total": 4553,
+   "output_tokens": 573,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Events older than 300 seconds are rejected as stale (400)."
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "requests are unsigned until then"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`router/handlers/` has one module per event family"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "the sender retries any 4xx forever"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "the dedupe set is not thread-safe"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Dedupe remembers the last 5000 event ids (was 1000)"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "support ends after the March cutover"
+    },
+    {
+     "item_id": "i9",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "5xx responses carry `Retry-After: 30`."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "hand-written dicts miss the id"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "Not started: dead-letter handling."
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "dead-letter file, retry endpoint, metrics"
+    }
+   ],
+   "wall_s": 7.8
+  },
+  "8d68a4d565de23ee": {
+   "cost_usd": 0.0377898,
+   "input_tokens_total": 4400,
+   "output_tokens": 383,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Expressions are `minute hour weekday` only"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Weekdays are numbers only"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`cronish/nextrun.py` holds `next_run(schedule, after)`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Parse failures raise `ExprError`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Weekday 7 is rejected; Sunday is 0."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: the `--next` flag."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "`--next` flag, ranges with steps in every field, packaging"
+    }
+   ],
+   "wall_s": 5.5
+  },
+  "942887122ff6b2dd": {
+   "cost_usd": 0.0348098,
+   "input_tokens_total": 4095,
+   "output_tokens": 356,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Delimiters are never auto-detected"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "2 for usage errors, 3 for data errors"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "fails with a ValueError on purpose"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "(formerly `read_rows`)"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "read their input from files in `samples/`"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: exit-code handling."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "exit-code handling, `--output json`, README docs"
+    }
+   ],
+   "wall_s": 4.5
+  },
+  "94693e1124e2ff6b": {
+   "cost_usd": 0.0327218,
+   "input_tokens_total": 4069,
+   "output_tokens": 262,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    }
+   ],
+   "wall_s": 4.3
+  },
+  "966014016d28ae08": {
+   "cost_usd": 0.049049800000000005,
+   "input_tokens_total": 4425,
+   "output_tokens": 936,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "`rota/planner.py` assigns people to days"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "`rota/export.py` writes the rota as CSV for the front desk"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Done and tested"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Changes are uncommitted on `main`."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Round-robin in name order, never random"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "Spreads shifts evenly."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "Staff contract limit."
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "3 people per day (`PER_DAY`)"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "No error or warning is raised."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "at least 7 people"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 13,
+     "placed_ok": true,
+     "quote": "Leave requests (not started)."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "Swap command."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 15,
+     "placed_ok": true,
+     "quote": "Docs."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 16,
+     "placed_ok": false,
+     "quote": "Optional: a command-line option to write the CSV export."
+    }
+   ],
+   "wall_s": 9.1
+  },
+  "9e5aa15a18595ae7": {
+   "cost_usd": 0.041781799999999994,
+   "input_tokens_total": 4454,
+   "output_tokens": 561,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "A world file is rejected"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "NPC dialogue waits for the writer's script text"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Inventory limit is 6 items (was 4)"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "`inspect` is deprecated"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Death returns the player to the last save"
+    },
+    {
+     "item_id": "i9",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "No randomness anywhere in the engine"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "`adventure/saves.py` writes saves as JSON"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "Tests use `play(world, commands)`"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "`quit` confirms only when there are unsaved moves"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "Not started: dialogue"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "dialogue (placeholder text), map command, packaging"
+    }
+   ],
+   "wall_s": 5.6
+  },
+  "a30eaaf094ca0b05": {
+   "cost_usd": 0.06654180000000001,
+   "input_tokens_total": 4984,
+   "output_tokens": 1587,
+   "value": [
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "FILE falls back to `$LEDGER_FILE`, then `data/ledger.txt`"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "default `month`"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Done and tested: parsing, integer cents, grouping"
+    },
+    {
+     "item_id": "i12",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Next, in this order: budget limits, CSV export, README"
+    },
+    {
+     "item_id": "i10",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Not started."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "CSV export: decide whether it honours `--since`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "`--top` also cuts week and month groups"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "`ledger/money.py` converts between dollar text and integer cents"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "`ledger/summary.py` filters and totals the entries"
+    },
+    {
+     "item_id": "i11",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "`ledger/report.py` formats the printed report"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "refunds use category `refund`, never a negative amount"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "stored lowercase"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "| Decision | Reason |"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 14,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 15,
+     "placed_ok": true,
+     "quote": "Amounts are integer cents, no floats anywhere in sums"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 16,
+     "placed_ok": false,
+     "quote": "More than two decimals is an error, not rounded"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 17,
+     "placed_ok": true,
+     "quote": "Default grouping is `month`"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 18,
+     "placed_ok": true,
+     "quote": "`--top` defaults to 3"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 19,
+     "placed_ok": true,
+     "quote": "Option tests call `main(argv)` directly, never a subprocess"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 20,
+     "placed_ok": false,
+     "quote": "No ANSI colour in output"
+    }
+   ],
+   "wall_s": 15.2
+  },
+  "a63df291b0fc09b8": {
+   "cost_usd": 0.0505578,
+   "input_tokens_total": 4331,
+   "output_tokens": 1049,
+   "value": [
+    {
+     "item_id": "n2",
+     "kind": "not_needed",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "The demo moved to the 14th."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Done and tested: `POST /shorten`, `GET /<code>` redirect (302), link expiry."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Not started: hit counters."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Hit counters."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "JSON file for persistence"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Docs."
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "`shortener/routes.py` holds `handle(method, path, body, store)`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "| Decision | Reason |"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "Codes are 6 base-36 characters counted up from `000000`, no randomness"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "Links expire after 7 days"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "`Store(clock=time.time)` takes a clock function"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "`POST /shorten` answers 201 with the code as the body"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "never by binding a socket: the CI sandbox refuses ports"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "Sequential codes are guessable, so links are not private."
+    }
+   ],
+   "wall_s": 10.2
+  },
+  "a7dc19ec10e3a962": {
+   "cost_usd": 0.0341338,
+   "input_tokens_total": 4028,
+   "output_tokens": 349,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "round-robin in name order, never random"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Staff 3 people per day (was 2)"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Max 3 shifts per person per week"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "`rota/export.py` writes the rota as CSV"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "`monday` is rejected"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: leave requests"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "leave requests, swap command, docs"
+    }
+   ],
+   "wall_s": 5.3
+  },
+  "a8f9323e5e32bfdc": {
+   "cost_usd": 0.0356098,
+   "input_tokens_total": 4110,
+   "output_tokens": 390,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Subjects over 60 characters are an error"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "the mail rules require a link"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`mailtpl/footer.py` appends the footer"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "never render a blank"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`templates/welcome.txt` fails on `plan_name`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: HTML variant"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "HTML variant, preview command, docs"
+    }
+   ],
+   "wall_s": 5.6
+  },
+  "ac15890004f83e22": {
+   "cost_usd": 0.0367618,
+   "input_tokens_total": 4214,
+   "output_tokens": 406,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 10,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": ""
+    }
+   ],
+   "wall_s": 4.6
+  },
+  "ade2246abd3b9cdf": {
+   "cost_usd": 0.0347458,
+   "input_tokens_total": 4052,
+   "output_tokens": 370,
+   "value": [
+    {
+     "item_id": "m1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Flag cache TTL: 30 seconds (was 60"
+    },
+    {
+     "item_id": "m3",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "returns False for an unknown flag; it never raises"
+    },
+    {
+     "item_id": "m2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`define()` raises `ValueError` otherwise"
+    },
+    {
+     "item_id": "m4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "never write to `config/flags.json`"
+    },
+    {
+     "item_id": "m5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "`flags/store.py` only evaluates"
+    },
+    {
+     "item_id": "m6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: percentage rollouts"
+    },
+    {
+     "item_id": "m7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "audit log, percentage rollouts, admin UI"
+    }
+   ],
+   "wall_s": 5.5
+  },
+  "af2553389781efff": {
+   "cost_usd": 0.0544778,
+   "input_tokens_total": 4456,
+   "output_tokens": 1195,
+   "value": [
+    {
+     "item_id": "m5",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "`flags/loader.py` reads the flag file"
+    },
+    {
+     "item_id": "m2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "`^[a-z][a-z0-9-]*$`"
+    },
+    {
+     "item_id": "m1",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "caches evaluations for 30 seconds"
+    },
+    {
+     "item_id": "m6",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Done: evaluation endpoint, cache"
+    },
+    {
+     "item_id": "m6",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Not started: audit log, percentage rollouts"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "GREYHERON"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "m1",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "Cache TTL is 30s, not 60s"
+    },
+    {
+     "item_id": "m3",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "returns `False` for an unknown flag and never raises"
+    },
+    {
+     "item_id": "m4",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "Tests must never write to it; use a temp file"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "Do not import `flags.app` in tests"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "Remove the dead branch or restore 404 deliberately."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "still raises if the flag file is missing"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "`flags/app.py` has no tests."
+    },
+    {
+     "item_id": "m7",
+     "kind": "needed",
+     "line": 16,
+     "placed_ok": true,
+     "quote": "Build in this order:"
+    },
+    {
+     "item_id": "m7",
+     "kind": "needed",
+     "line": 17,
+     "placed_ok": true,
+     "quote": "Audit log"
+    },
+    {
+     "item_id": "m7",
+     "kind": "needed",
+     "line": 18,
+     "placed_ok": true,
+     "quote": "Percentage rollouts"
+    },
+    {
+     "item_id": "m7",
+     "kind": "needed",
+     "line": 19,
+     "placed_ok": true,
+     "quote": "Admin UI"
+    }
+   ],
+   "wall_s": 11.5
+  },
+  "b3e46b8cbf0a8874": {
+   "cost_usd": 0.0564978,
+   "input_tokens_total": 4471,
+   "output_tokens": 1290,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "`plugins/registry.py` holds the registry and `PluginNotFound`"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "`plugins/hooks.py` holds `HOOKS`, the only hook points plugins may attach to"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Done and tested: registry, name rule, `PluginNotFound`, `HOOKS`"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Not started: directory discovery, reload command, docs (in that order)"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`HOOKS` is not enforced yet"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Unchecked: whether `data/names.txt` and `data/dupes.txt` contain names"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "The release branch is `SPINDLEWREN`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "Plugin names are lowercase kebab-case, such as `csv-export`"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "A silent `None` hid a config typo for a week"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "Factories take no arguments; settings arrive through `configure(settings)` afterwards"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "Hook points are `before_run` and `after_run` only"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "Tried and dropped as overkill"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 15,
+     "placed_ok": true,
+     "quote": "Directory discovery"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 16,
+     "placed_ok": true,
+     "quote": "Reload command"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 17,
+     "placed_ok": true,
+     "quote": "Docs"
+    }
+   ],
+   "wall_s": 11.5
+  },
+  "bd0bbd5ee7c6036e": {
+   "cost_usd": 0.0349538,
+   "input_tokens_total": 4073,
+   "output_tokens": 372,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "`apply` refuses to run without `--yes`"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Slug cap is 30 characters (was 40)"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "lowercase, hyphenated slug"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "`renamer/undo.py` writes `.renamer-undo.json`"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "the planner refuses instead of adding a suffix"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: the undo command."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "undo command, `--pattern` option, docs"
+    }
+   ],
+   "wall_s": 5.6
+  },
+  "c674b8a6f5fdadae": {
+   "cost_usd": 0.0522658,
+   "input_tokens_total": 4452,
+   "output_tokens": 1086,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "`--delimiter` (default `,`)"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "Done and tested: `--delimiter`, `--count`."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Not started: exit codes"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "`load_rows`, formerly `read_rows`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`samples/` holds small example input files"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "New tests read their input from files in `samples/`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "| Decision | Reason |"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "never sniff it"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "usage errors 2 (as argparse), data errors such as a bad number 3"
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "No `--jobs` / multiprocessing"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "`samples/eu.csv` fails by design"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "leftover duplicate"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": true,
+     "quote": "Exit-code handling"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 15,
+     "placed_ok": true,
+     "quote": "`--output json`"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 16,
+     "placed_ok": true,
+     "quote": "README docs, last."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 17,
+     "placed_ok": false,
+     "quote": "BLUEFINCH"
+    }
+   ],
+   "wall_s": 10.1
+  },
+  "c84a1b027cebb0ea": {
+   "cost_usd": 0.0401698,
+   "input_tokens_total": 4390,
+   "output_tokens": 506,
+   "value": [
+    {
+     "item_id": "o1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Maximum line length: 88"
+    },
+    {
+     "item_id": "o2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "(JSON, not INI)"
+    },
+    {
+     "item_id": "o8",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "reports a warning, not an error"
+    },
+    {
+     "item_id": "o3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "exits with code 4"
+    },
+    {
+     "item_id": "o7",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Do not self-check `docs/rules.md`"
+    },
+    {
+     "item_id": "o4",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "(formerly `run_checks`)"
+    },
+    {
+     "item_id": "o5",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "code in `mdcheck/formats.py`"
+    },
+    {
+     "item_id": "o6",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "alphabetical by name"
+    },
+    {
+     "item_id": "o9",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "Done: line-length, trailing-space, heading-increment, no-bare-urls"
+    },
+    {
+     "item_id": "o10",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "trailing-space autofix, `--watch` mode, packaging"
+    }
+   ],
+   "wall_s": 7.5
+  },
+  "d072a1e6f08e70e6": {
+   "cost_usd": 0.034369800000000006,
+   "input_tokens_total": 4080,
+   "output_tokens": 340,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Plugin names are lowercase kebab-case"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "a silent `None` hid a config typo"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "plugins attach only to those"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Factories take no arguments"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "the first registration is kept"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: directory discovery"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "directory discovery, reload command, docs"
+    }
+   ],
+   "wall_s": 4.6
+  },
+  "d107b299b94b8911": {
+   "cost_usd": 0.0347058,
+   "input_tokens_total": 4082,
+   "output_tokens": 356,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Flaky jobs are shown but never fail the run"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Slow-job threshold is 120 seconds"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "renders the summary as a markdown table"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Job names are matched case-insensitively"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`skipped` is rejected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: trend tracking."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "trend tracking, `--since` flag, docs"
+    }
+   ],
+   "wall_s": 5.4
+  },
+  "d4c7f21bb9802ded": {
+   "cost_usd": 0.0540298,
+   "input_tokens_total": 4555,
+   "output_tokens": 1133,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "python3 -m inventory [--json] OLD.json NEW.json"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "The release branch is `LANTERNFISH`."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "Done and tested: loader, diff, tolerance, `--json`."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "Not started: CSV import."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "CSV import"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Compare against a third list."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "Packaging."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "The counting scale reads to the unit (was 2 on the old scale)."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "`--json` is the lasting format."
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "The data files drifted from the code last time."
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 13,
+     "placed_ok": true,
+     "quote": "`inventory/render.py` formats differences"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "`inventory/cli.py` parses arguments"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": "`data/` holds small example stock lists"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 16,
+     "placed_ok": false,
+     "quote": "`tests/helpers.py` has the shared setup"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 17,
+     "placed_ok": false,
+     "quote": "python3 -m unittest discover tests"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 18,
+     "placed_ok": false,
+     "quote": "Switch to argparse when a second flag arrives."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 19,
+     "placed_ok": false,
+     "quote": "No test checks that the CLI passes `SCALE_TOLERANCE` to `compare`"
+    }
+   ],
+   "wall_s": 11.2
+  },
+  "dda36e569ae22659": {
+   "cost_usd": 0.0349338,
+   "input_tokens_total": 4078,
+   "output_tokens": 369,
+   "value": [
+    {
+     "item_id": "j1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Dev server port: 8082"
+    },
+    {
+     "item_id": "j2",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "`/v1` routes are frozen (bug fixes only)"
+    },
+    {
+     "item_id": "j3",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`ValueError('title too long (max 80)')`"
+    },
+    {
+     "item_id": "j4",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "`notes_api/validation.py` (moved out of `store.py`)"
+    },
+    {
+     "item_id": "j5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "the handler never branches on the path"
+    },
+    {
+     "item_id": "j6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: pagination, rate limiting."
+    },
+    {
+     "item_id": "j7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "rate limiting, pagination, docs"
+    }
+   ],
+   "wall_s": 13.8
+  },
+  "df68a42cde4d1f1d": {
+   "cost_usd": 0.0346978,
+   "input_tokens_total": 4096,
+   "output_tokens": 350,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Plugin names are lowercase kebab-case"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "`get()` raises `PluginNotFound`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`plugins/hooks.py`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Factories take no arguments"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Registering a name twice raises an error"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Not started: directory discovery"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "directory discovery, reload command, docs"
+    }
+   ],
+   "wall_s": 5.1
+  },
+  "e228fa4062a40574": {
+   "cost_usd": 0.0501018,
+   "input_tokens_total": 4474,
+   "output_tokens": 969,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "`metrics/render.py` renders a registry as plain text"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "[x] Counters, name validation, render, the scrape endpoint, `Counter.add(n)`"
+    },
+    {
+     "item_id": "i8",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "then a process-uptime gauge, then docs, in that order"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": ""
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "Escaping label values by hand is where the formatter would break."
+    },
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "The proxy in front of us reserves `/metrics`."
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 12,
+     "placed_ok": true,
+     "quote": "`inc()` is deprecated."
+    },
+    {
+     "item_id": "n1",
+     "kind": "not_needed",
+     "line": 13,
+     "placed_ok": false,
+     "quote": "It needs a compiler on the build box."
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 14,
+     "placed_ok": false,
+     "quote": "Render tests compare the whole output text exactly."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 15,
+     "placed_ok": false,
+     "quote": ""
+    }
+   ],
+   "wall_s": 9.7
+  },
+  "e322a134f8a07373": {
+   "cost_usd": 0.0415218,
+   "input_tokens_total": 4304,
+   "output_tokens": 608,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Events older than 300 seconds are rejected as stale (400)."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "signature verification waits for the sender's signing scheme"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`router/handlers/` has one module per event family"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "Unknown event types answer 202 `ignored`, not 404"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Handlers run inline, no thread pool"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Dedupe remembers the last 5000 event ids (was 1000)"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "Legacy `kind` is normalised to `type` in one small function"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "5xx responses carry `Retry-After: 30`."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "Handler tests build events with `make_event()`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 10,
+     "placed_ok": false,
+     "quote": "Not started: dead-letter handling."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "Next, in order: dead-letter file, retry endpoint, metrics."
+    }
+   ],
+   "wall_s": 8.4
+  },
+  "e494d40d68ccb65a": {
+   "cost_usd": 0.0358498,
+   "input_tokens_total": 4105,
+   "output_tokens": 404,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Scrape endpoint is `/-/metrics`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "No labels"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`Counter.inc()` is deprecated"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "`metrics/render.py` renders the registry as plain text."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Render tests compare the whole output exactly"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "Counter names must end in `_total`"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "Not started: histograms."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "histograms, process-uptime gauge, docs"
+    }
+   ],
+   "wall_s": 6.4
+  },
+  "ef9b4dba1c815a95": {
+   "cost_usd": 0.047981800000000005,
+   "input_tokens_total": 4314,
+   "output_tokens": 927,
+   "value": [
+    {
+     "item_id": "j4",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "`notes_api/validation.py` holds input checks"
+    },
+    {
+     "item_id": "j1",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "The dev server port is 8082 (8081 is taken by the metrics sidecar on dev boxes)"
+    },
+    {
+     "item_id": "j2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`/v1` routes are frozen: bug fixes only."
+    },
+    {
+     "item_id": "j5",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "it must not branch on the path"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "Use `NoteStore.find` (returns `None`)"
+    },
+    {
+     "item_id": "j6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Done: `GET` and `DELETE /v2/notes/<id>`."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "The release branch is called COPPERWREN"
+    },
+    {
+     "item_id": "j7",
+     "kind": "needed",
+     "line": 8,
+     "placed_ok": true,
+     "quote": "In this order:"
+    },
+    {
+     "item_id": "j7",
+     "kind": "needed",
+     "line": 9,
+     "placed_ok": true,
+     "quote": "- [ ] Rate limiting."
+    },
+    {
+     "item_id": "j7",
+     "kind": "needed",
+     "line": 10,
+     "placed_ok": true,
+     "quote": "- [ ] Pagination."
+    },
+    {
+     "item_id": "j7",
+     "kind": "needed",
+     "line": 11,
+     "placed_ok": true,
+     "quote": "- [ ] Docs"
+    }
+   ],
+   "wall_s": 9.4
+  },
+  "f43f9b762f1939ec": {
+   "cost_usd": 0.0343098,
+   "input_tokens_total": 4080,
+   "output_tokens": 337,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "the scheduler wakes once a minute"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "removed because of locale trouble"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`cronish/nextrun.py`"
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "naming the field"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "Weekday 7 is rejected"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: the `--next` flag"
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "ranges with steps in every field"
+    }
+   ],
+   "wall_s": 6.6
+  },
+  "f6a71248c309620e": {
+   "cost_usd": 0.0344178,
+   "input_tokens_total": 4056,
+   "output_tokens": 352,
+   "value": [
+    {
+     "item_id": "i1",
+     "kind": "needed",
+     "line": 1,
+     "placed_ok": true,
+     "quote": "Differences of 1 unit or less are ignored (was 2)"
+    },
+    {
+     "item_id": "i4",
+     "kind": "needed",
+     "line": 2,
+     "placed_ok": true,
+     "quote": "The plain table output is deprecated"
+    },
+    {
+     "item_id": "i2",
+     "kind": "needed",
+     "line": 3,
+     "placed_ok": true,
+     "quote": "`inventory/render.py` holds both output formats."
+    },
+    {
+     "item_id": "i3",
+     "kind": "needed",
+     "line": 4,
+     "placed_ok": true,
+     "quote": "they drifted from the code"
+    },
+    {
+     "item_id": "i5",
+     "kind": "needed",
+     "line": 5,
+     "placed_ok": true,
+     "quote": "`a-100` is rejected"
+    },
+    {
+     "item_id": "i6",
+     "kind": "needed",
+     "line": 6,
+     "placed_ok": true,
+     "quote": "Not started: CSV import."
+    },
+    {
+     "item_id": "i7",
+     "kind": "needed",
+     "line": 7,
+     "placed_ok": true,
+     "quote": "CSV import, three-way compare, packaging"
+    }
+   ],
+   "wall_s": 4.9
+  },
+  "fb44d61eef282f3f": {
+   "cost_usd": 0.0407778,
+   "input_tokens_total": 4226,
+   "output_tokens": 602,
+   "value": [
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 1,
+     "placed_ok": false,
+     "quote": "Amounts are integer cents internally"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 2,
+     "placed_ok": false,
+     "quote": "Default grouping is by month"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 3,
+     "placed_ok": false,
+     "quote": "`--top` defaults to 3, not 5"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 4,
+     "placed_ok": false,
+     "quote": "use the `LEDGER_FILE` environment variable"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 5,
+     "placed_ok": false,
+     "quote": "`ledger/money.py`: cents conversion helpers."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 6,
+     "placed_ok": false,
+     "quote": "`ledger/report.py` formats the report"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 7,
+     "placed_ok": false,
+     "quote": "Negative amounts are rejected"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 8,
+     "placed_ok": false,
+     "quote": "budget limits wait for the accountant's category list"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 9,
+     "placed_ok": false,
+     "quote": "Option tests call `main(argv)` directly"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 10,
+     "placed_ok": false,
+     "quote": "Categories are stored lowercase"
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 11,
+     "placed_ok": false,
+     "quote": "Not started: budget limits."
+    },
+    {
+     "item_id": "",
+     "kind": "unplanted",
+     "line": 12,
+     "placed_ok": false,
+     "quote": "CSV export, budget limits, README"
+    }
+   ],
+   "wall_s": 6.5
+  }
+ },
+ "probe": {
+  "077199afc0196ddf": {
+   "cost_usd": 0.023105800000000003,
+   "excluded": 0,
+   "input_tokens_total": 3397,
+   "output_tokens": 50,
+   "probes": 1,
+   "value": {
+    "4a633a142aabf33c": "abstained"
+   },
+   "wall_s": 3.0
+  },
+  "102df478810593e3": {
+   "cost_usd": 0.0320338,
+   "excluded": 0,
+   "input_tokens_total": 4038,
+   "output_tokens": 240,
+   "probes": 7,
+   "value": {
+    "03258f323edc474b": "incorrect",
+    "146e870616f151db": "correct",
+    "159634729690087b": "correct",
+    "3418c611b583be5c": "correct",
+    "9ea0d56067db362c": "correct",
+    "b444611ca899450b": "correct",
+    "d8f9e310052d9ada": "correct"
+   },
+   "wall_s": 3.8
+  },
+  "1288c30d69c2a550": {
+   "cost_usd": 0.0326778,
+   "excluded": 0,
+   "input_tokens_total": 3891,
+   "output_tokens": 331,
+   "probes": 6,
+   "value": {
+    "2a40193ae0ae01f3": "correct",
+    "98526db2a996098d": "correct",
+    "a159dbf2aae28e0b": "correct",
+    "dddc1773a5e6efae": "correct",
+    "e866f8fedbbb5303": "correct",
+    "ed442a11f308707b": "correct"
+   },
+   "wall_s": 5.6
+  },
+  "13a22bf6c62bd1db": {
+   "cost_usd": 0.0332818,
+   "excluded": 0,
+   "input_tokens_total": 3999,
+   "output_tokens": 318,
+   "probes": 7,
+   "value": {
+    "08ad75364e8b26f0": "correct",
+    "0ca439773a5c7290": "correct",
+    "4c74d4541c42a556": "correct",
+    "56dc81d5c5b6e982": "correct",
+    "96b75b3a88328196": "correct",
+    "9cc4595e2c6191e9": "correct",
+    "d0627995c972d18b": "correct"
+   },
+   "wall_s": 5.6
+  },
+  "146ef4c0ee5ca7a6": {
+   "cost_usd": 0.038313799999999995,
+   "excluded": 0,
+   "input_tokens_total": 4238,
+   "output_tokens": 474,
+   "probes": 9,
+   "value": {
+    "0cd9ea9ac89210b4": "correct",
+    "7b3ba1ea47b4485a": "correct",
+    "81fb53a2170e0233": "correct",
+    "ab79361babe6e557": "incorrect",
+    "bd67df54fc3bf6b0": "correct",
+    "d3ee96417b154a06": "incorrect",
+    "e780c7c87cd3de28": "correct",
+    "f00ceb968f57184d": "incorrect",
+    "f6dc050199adf9b2": "correct"
+   },
+   "wall_s": 8.9
+  },
+  "157362f1f6a42354": {
+   "cost_usd": 0.035857799999999995,
+   "excluded": 0,
+   "input_tokens_total": 4056,
+   "output_tokens": 424,
+   "probes": 7,
+   "value": {
+    "195c220b0356ab89": "correct",
+    "358a99ce69fc70bd": "correct",
+    "69543a29556b9970": "correct",
+    "88b07608b2742d5a": "correct",
+    "a9b9d850e249f75e": "incorrect",
+    "ad189d7702b11d1d": "incorrect",
+    "d8797c271f553e97": "correct"
+   },
+   "wall_s": 7.0
+  },
+  "1b651db536aa3e74": {
+   "cost_usd": 0.0323018,
+   "excluded": 0,
+   "input_tokens_total": 3934,
+   "output_tokens": 295,
+   "probes": 6,
+   "value": {
+    "3bd0ae088e5f0d4e": "correct",
+    "4681a650bb311ee4": "correct",
+    "6d0dd286ea4479da": "correct",
+    "a8bc1cfdabc93462": "correct",
+    "b625e893151c421c": "correct",
+    "e7366380e5dd87ec": "correct"
+   },
+   "wall_s": 4.4
+  },
+  "207c39e7932cc96b": {
+   "cost_usd": 0.0301178,
+   "excluded": 0,
+   "input_tokens_total": 3856,
+   "output_tokens": 217,
+   "probes": 6,
+   "value": {
+    "219369e0d9104a0b": "correct",
+    "4a8455754d0cfc96": "correct",
+    "b933e10f918d3683": "correct",
+    "d17093189d71dff7": "correct",
+    "e011593b19ae32c3": "correct",
+    "fd4f8c4ae5809f28": "correct"
+   },
+   "wall_s": 3.4
+  },
+  "2148a467b231f469": {
+   "cost_usd": 0.028513800000000002,
+   "excluded": 0,
+   "input_tokens_total": 3773,
+   "output_tokens": 170,
+   "probes": 5,
+   "value": {
+    "2cdae9a89171e12b": "correct",
+    "787595125557da5b": "correct",
+    "8e19429bf4b75146": "correct",
+    "e028b7e36c6f5418": "correct",
+    "fd0f76d7b0c26464": "correct"
+   },
+   "wall_s": 4.3
+  },
+  "2193dcb2c37ab497": {
+   "cost_usd": 0.029081799999999998,
+   "excluded": 0,
+   "input_tokens_total": 3804,
+   "output_tokens": 186,
+   "probes": 5,
+   "value": {
+    "0079a3c34ac481a9": "incorrect",
+    "743f04d9b8d08bb3": "correct",
+    "a0c89217f74d1cf8": "incorrect",
+    "c2100ee5bf5a423f": "correct",
+    "ca6ca7edea821319": "correct"
+   },
+   "wall_s": 3.5
+  },
+  "2802124d8a9d840c": {
+   "cost_usd": 0.0315058,
+   "excluded": 0,
+   "input_tokens_total": 3947,
+   "output_tokens": 250,
+   "probes": 7,
+   "value": {
+    "38e3a41359a80e07": "correct",
+    "591bc8a37f66640c": "correct",
+    "5c8060a3680b07b8": "correct",
+    "7bd5fe67a1d3c8c3": "correct",
+    "a79f9f0779ba6b6e": "correct",
+    "c81dde7ab09aca5a": "correct",
+    "eece7f2bb602453f": "correct"
+   },
+   "wall_s": 4.4
+  },
+  "2e0b9737260734e6": {
+   "cost_usd": 0.0374098,
+   "excluded": 0,
+   "input_tokens_total": 4155,
+   "output_tokens": 462,
+   "probes": 7,
+   "value": {
+    "1ed1b1bffc6cb64c": "abstained",
+    "28a2383a11215c86": "correct",
+    "45432082df6c30c3": "correct",
+    "48230c3d632da435": "correct",
+    "9096b431ad84de47": "correct",
+    "df65e2045968c059": "correct",
+    "ff551d97a7dfaeb1": "correct"
+   },
+   "wall_s": 7.8
+  },
+  "3017ea3ac4162693": {
+   "cost_usd": 0.0318378,
+   "excluded": 0,
+   "input_tokens_total": 3971,
+   "output_tokens": 257,
+   "probes": 7,
+   "value": {
+    "249f6d5254e1aed2": "correct",
+    "604e5242c5aa1e88": "correct",
+    "6053b45a0813e7d6": "correct",
+    "ca48870f70edb235": "correct",
+    "d4c729414794052b": "correct",
+    "dcc22697fe1010bb": "correct",
+    "e71a4d90f4a3a229": "correct"
+   },
+   "wall_s": 3.8
+  },
+  "330243a53b4258bd": {
+   "cost_usd": 0.024113799999999998,
+   "excluded": 0,
+   "input_tokens_total": 3473,
+   "output_tokens": 70,
+   "probes": 2,
+   "value": {
+    "72d00756210d4da7": "incorrect",
+    "cbb79da0cc6457fe": "incorrect"
+   },
+   "wall_s": 3.3
+  },
+  "3b99f8e821383ce2": {
+   "cost_usd": 0.0318818,
+   "excluded": 0,
+   "input_tokens_total": 3989,
+   "output_tokens": 252,
+   "probes": 7,
+   "value": {
+    "01c9a77a4bfa6647": "correct",
+    "02197137183e6249": "correct",
+    "557252fff079007a": "correct",
+    "7a8483446c3a745b": "correct",
+    "957f67b5e8886989": "correct",
+    "a08c4ac344e8f8e5": "correct",
+    "cfadc222e168c1d5": "correct"
+   },
+   "wall_s": 3.8
+  },
+  "3df42fde6f732600": {
+   "cost_usd": 0.025921800000000002,
+   "excluded": 0,
+   "input_tokens_total": 3589,
+   "output_tokens": 114,
+   "probes": 3,
+   "value": {
+    "45f4ed563430bee8": "correct",
+    "e2c153db7ca8b293": "correct",
+    "f1ad67922d973e3b": "correct"
+   },
+   "wall_s": 4.0
+  },
+  "426c11076291f9ab": {
+   "cost_usd": 0.0297178,
+   "excluded": 0,
+   "input_tokens_total": 3741,
+   "output_tokens": 243,
+   "probes": 4,
+   "value": {
+    "4fb80df5ea1f8c28": "incorrect",
+    "4fcf0e67874f1ddd": "correct",
+    "7ccfebba68207094": "correct",
+    "b88851d451bdf294": "correct"
+   },
+   "wall_s": 5.1
+  },
+  "487c39481c64ad6b": {
+   "cost_usd": 0.0269138,
+   "excluded": 0,
+   "input_tokens_total": 3438,
+   "output_tokens": 224,
+   "probes": 1,
+   "value": {
+    "e171ef65f33557ea": "incorrect"
+   },
+   "wall_s": 6.0
+  },
+  "4c62b05d1ad92eff": {
+   "cost_usd": 0.0275818,
+   "excluded": 0,
+   "input_tokens_total": 3709,
+   "output_tokens": 149,
+   "probes": 4,
+   "value": {
+    "321686e7a98bd43f": "correct",
+    "6c9f97518480af0e": "correct",
+    "71c67e949e5d90f8": "correct",
+    "77c9e9b9ce11f10d": "correct"
+   },
+   "wall_s": 3.3
+  },
+  "503344df625086cd": {
+   "cost_usd": 0.0286938,
+   "excluded": 0,
+   "input_tokens_total": 3758,
+   "output_tokens": 185,
+   "probes": 5,
+   "value": {
+    "0981027c8a6fa807": "correct",
+    "24ec808a469b3482": "correct",
+    "3efe07cb03909b3d": "correct",
+    "678e9a87c1abdb3c": "correct",
+    "942e82fb012360db": "correct"
+   },
+   "wall_s": 4.1
+  },
+  "55c2086fea69f992": {
+   "cost_usd": 0.0323498,
+   "excluded": 0,
+   "input_tokens_total": 4015,
+   "output_tokens": 265,
+   "probes": 7,
+   "value": {
+    "8a135fb16794bac2": "correct",
+    "8bc83dc718733866": "correct",
+    "9328278772e6d3c6": "correct",
+    "c583c5051b569537": "correct",
+    "d52db71cd46a98da": "correct",
+    "e994ef68ea74f7b5": "correct",
+    "f59baaf5e6bc5656": "correct"
+   },
+   "wall_s": 4.4
+  },
+  "573eaed342f9ce0a": {
+   "cost_usd": 0.0301098,
+   "excluded": 0,
+   "input_tokens_total": 3860,
+   "output_tokens": 215,
+   "probes": 6,
+   "value": {
+    "00821dde674a52b8": "correct",
+    "4e025085b9727612": "correct",
+    "5b12f721de2074d5": "correct",
+    "704f5b70e7187343": "correct",
+    "89692e1edeebb755": "correct",
+    "a0dc8191131a2371": "correct"
+   },
+   "wall_s": 5.1
+  },
+  "57aeb1a093418a6f": {
+   "cost_usd": 0.038161799999999996,
+   "excluded": 0,
+   "input_tokens_total": 4349,
+   "output_tokens": 422,
+   "probes": 10,
+   "value": {
+    "17521a4bf490d606": "correct",
+    "3485718742017c03": "correct",
+    "381aceab2d73f1a2": "correct",
+    "39a2835cf7a3a7c0": "correct",
+    "5465dd120bf072e6": "correct",
+    "86b2e6afcee6f503": "correct",
+    "9c60bb913dff8172": "correct",
+    "9db70f42ddfd300d": "correct",
+    "c2f4d6c3bf02a339": "correct",
+    "ebcec40046f17e30": "correct"
+   },
+   "wall_s": 6.0
+  },
+  "597dd1af021fe15a": {
+   "cost_usd": 0.0237978,
+   "excluded": 0,
+   "input_tokens_total": 3451,
+   "output_tokens": 63,
+   "probes": 2,
+   "value": {
+    "56bfe48e8e393ec0": "correct",
+    "63c9551b25554275": "correct"
+   },
+   "wall_s": 4.0
+  },
+  "63c10baff445afc4": {
+   "cost_usd": 0.0271058,
+   "excluded": 0,
+   "input_tokens_total": 3672,
+   "output_tokens": 140,
+   "probes": 4,
+   "value": {
+    "3690782fb4da024d": "correct",
+    "943d7618a105038a": "correct",
+    "9672f1c408551054": "correct",
+    "b9a113557d45964d": "correct"
+   },
+   "wall_s": 3.6
+  },
+  "67bea215cc3df2a5": {
+   "cost_usd": 0.037241800000000005,
+   "excluded": 0,
+   "input_tokens_total": 4384,
+   "output_tokens": 362,
+   "probes": 11,
+   "value": {
+    "0130c72b8fc03f23": "correct",
+    "0e6fd2eba0c6016e": "correct",
+    "13ef0cc325f074ab": "correct",
+    "2adbb9aba5b1ee2d": "correct",
+    "6be9dc142634939d": "correct",
+    "72515d906aa0391a": "correct",
+    "853a038810868a01": "correct",
+    "b51deb3cc0a1a66c": "correct",
+    "d12906a8c3a06810": "correct",
+    "d691d7f8ba8f42fa": "correct",
+    "fafd0d73e5bed498": "correct"
+   },
+   "wall_s": 5.4
+  },
+  "6881e7a98dd11b1e": {
+   "cost_usd": 0.0325018,
+   "excluded": 0,
+   "input_tokens_total": 3999,
+   "output_tokens": 279,
+   "probes": 7,
+   "value": {
+    "208ca28daf516009": "correct",
+    "4f2309276092859b": "correct",
+    "6da765983ccc1b22": "correct",
+    "77725c7069288f5c": "correct",
+    "77c9606ef7fe1af4": "correct",
+    "959e65b0723ab0cf": "correct",
+    "ec799d4da0fc6489": "correct"
+   },
+   "wall_s": 4.8
+  },
+  "693fd3f232fe7fa7": {
+   "cost_usd": 0.0423138,
+   "excluded": 0,
+   "input_tokens_total": 4228,
+   "output_tokens": 678,
+   "probes": 9,
+   "value": {
+    "1b1ebb59c8105ed1": "correct",
+    "6eede7951e3da8ab": "correct",
+    "7e359e556a19f5c1": "correct",
+    "8054d10fe85de28c": "correct",
+    "8de4817ff5c85fe1": "correct",
+    "c0dc88b6db400197": "correct",
+    "e02b9591fda7f279": "correct",
+    "f54bdc10a6029c50": "correct",
+    "f7e67533f2fc8628": "correct"
+   },
+   "wall_s": 7.6
+  },
+  "69ad440b0619b7f6": {
+   "cost_usd": 0.0366978,
+   "excluded": 0,
+   "input_tokens_total": 4386,
+   "output_tokens": 334,
+   "probes": 10,
+   "value": {
+    "32c40332d4042540": "correct",
+    "5b756cdb4b84f060": "correct",
+    "626c3f45af21b47b": "correct",
+    "68ccdd04ca2a9c3c": "correct",
+    "71d090b512bf1d60": "incorrect",
+    "b1c97c3c67249cfc": "correct",
+    "c9c1531d919008ac": "correct",
+    "cae6b22f35be0b2d": "correct",
+    "d9e4e3d3c3b3640f": "incorrect",
+    "e16907ef3c5ad7a4": "incorrect"
+   },
+   "wall_s": 5.3
+  },
+  "6af6b3d81ae174fb": {
+   "cost_usd": 0.0320378,
+   "excluded": 0,
+   "input_tokens_total": 3921,
+   "output_tokens": 287,
+   "probes": 7,
+   "value": {
+    "09c9d8c82473ee71": "correct",
+    "2aef31d4a75674be": "correct",
+    "4470f7267750d149": "correct",
+    "703bc821a95b3cae": "correct",
+    "a26538dedf136dd2": "correct",
+    "b050df1077b57dc7": "correct",
+    "ec43be39c91aaabe": "correct"
+   },
+   "wall_s": 5.7
+  },
+  "721bc65a4c3ff09d": {
+   "cost_usd": 0.034997799999999996,
+   "excluded": 0,
+   "input_tokens_total": 4046,
+   "output_tokens": 385,
+   "probes": 7,
+   "value": {
+    "04d81ba7ac67a902": "correct",
+    "232a817a515be11c": "correct",
+    "4062f0ddb5afb0be": "correct",
+    "7f5b15fc326c655c": "correct",
+    "8c75b716b6e2ab3b": "correct",
+    "8d396efb720e4a7d": "correct",
+    "f7b83d8f2fd69590": "correct"
+   },
+   "wall_s": 8.5
+  },
+  "7668dccb8a35aa24": {
+   "cost_usd": 0.0325578,
+   "excluded": 0,
+   "input_tokens_total": 4016,
+   "output_tokens": 275,
+   "probes": 7,
+   "value": {
+    "039b3802ee7d101d": "correct",
+    "134ba50a75727f25": "correct",
+    "5618d6bac44f3fbb": "correct",
+    "65d15188dc348e96": "correct",
+    "76a1880cc13c67ea": "correct",
+    "ab9ae66a1a892f57": "correct",
+    "da1ebb100497bde1": "correct"
+   },
+   "wall_s": 8.6
+  },
+  "7c1200c6e7dcced4": {
+   "cost_usd": 0.0243618,
+   "excluded": 0,
+   "input_tokens_total": 3489,
+   "output_tokens": 76,
+   "probes": 2,
+   "value": {
+    "609fc686d80af8e9": "correct",
+    "8bbe37841f8a41ae": "correct"
+   },
+   "wall_s": 3.0
+  },
+  "85b99097d3771fb4": {
+   "cost_usd": 0.0286178,
+   "excluded": 0,
+   "input_tokens_total": 3656,
+   "output_tokens": 222,
+   "probes": 3,
+   "value": {
+    "199cb355ef5c45aa": "correct",
+    "8e0fc054952a8120": "correct",
+    "a9953243afd29486": "correct"
+   },
+   "wall_s": 7.2
+  },
+  "85eeacbe552d414a": {
+   "cost_usd": 0.029169800000000003,
+   "excluded": 0,
+   "input_tokens_total": 3540,
+   "output_tokens": 296,
+   "probes": 2,
+   "value": {
+    "2262b08aa9c92a7d": "correct",
+    "504b4910db17e802": "incorrect"
+   },
+   "wall_s": 5.5
+  },
+  "8c63e0ee11783b99": {
+   "cost_usd": 0.0358978,
+   "excluded": 0,
+   "input_tokens_total": 4261,
+   "output_tokens": 344,
+   "probes": 9,
+   "value": {
+    "0303ec6ffaaf4103": "correct",
+    "128548a1e0eebff9": "correct",
+    "332cf64f8358deb4": "correct",
+    "3cbf6b7bc8824032": "correct",
+    "750c7c29da492cb8": "correct",
+    "835d5e71781e070b": "correct",
+    "bfdfc78953a3dc87": "correct",
+    "c83fdfd32a1ac0b2": "correct",
+    "e5ef40e81e5bcaa6": "correct"
+   },
+   "wall_s": 45.8
+  },
+  "9174788cab2d5f19": {
+   "cost_usd": 0.0304378,
+   "excluded": 0,
+   "input_tokens_total": 3886,
+   "output_tokens": 221,
+   "probes": 6,
+   "value": {
+    "2cd13512840e979a": "correct",
+    "39537e8346674955": "correct",
+    "7fa249d6135a7b9d": "correct",
+    "80bf1deb70c0c77f": "correct",
+    "d602f446fa648c8e": "correct",
+    "edb6f5938bc3ed10": "correct"
+   },
+   "wall_s": 5.6
+  },
+  "98a9f5d68b91b14a": {
+   "cost_usd": 0.039353799999999994,
+   "excluded": 0,
+   "input_tokens_total": 4443,
+   "output_tokens": 444,
+   "probes": 11,
+   "value": {
+    "17d445039dc32f7b": "correct",
+    "2d8d028239e51bd8": "correct",
+    "36aa729e01dd8d08": "correct",
+    "53074bb110a00421": "correct",
+    "8af3a3ea62663ff8": "correct",
+    "97eb740aa4f7bc8e": "correct",
+    "9a48120b9796a390": "correct",
+    "aa82384e65952d83": "correct",
+    "ab69ad7daac11608": "correct",
+    "cbda86de120f7b3e": "incorrect",
+    "f8b488b12e436dba": "correct"
+   },
+   "wall_s": 6.3
+  },
+  "9b375baa75f063a3": {
+   "cost_usd": 0.0299938,
+   "excluded": 0,
+   "input_tokens_total": 3843,
+   "output_tokens": 216,
+   "probes": 5,
+   "value": {
+    "32fb813d79453cf5": "correct",
+    "56808eaca8a63578": "correct",
+    "b69a099d61105c98": "correct",
+    "b6d2515fe59f932b": "correct",
+    "c70e7fbee41fbbb8": "correct"
+   },
+   "wall_s": 6.0
+  },
+  "9e3d43b58cc60024": {
+   "cost_usd": 0.031001800000000003,
+   "excluded": 0,
+   "input_tokens_total": 3929,
+   "output_tokens": 232,
+   "probes": 7,
+   "value": {
+    "0577dcaea2233275": "correct",
+    "13baf7b9740cfe49": "correct",
+    "27de7e4a70c3787e": "correct",
+    "2a95df623eebc12c": "correct",
+    "597b7c80564172d0": "correct",
+    "8ba2be23b5bf83e0": "correct",
+    "9a4d0425377e2959": "correct"
+   },
+   "wall_s": 3.5
+  },
+  "9e55a1b333000c37": {
+   "cost_usd": 0.0242858,
+   "excluded": 0,
+   "input_tokens_total": 3437,
+   "output_tokens": 93,
+   "probes": 1,
+   "value": {
+    "695d1b0ab589f3dd": "abstained"
+   },
+   "wall_s": 2.8
+  },
+  "a10263e3be7ac3f6": {
+   "cost_usd": 0.033881800000000004,
+   "excluded": 0,
+   "input_tokens_total": 4114,
+   "output_tokens": 302,
+   "probes": 7,
+   "value": {
+    "274c566a2a9ded64": "correct",
+    "2e5376a591eb6ef8": "correct",
+    "35d6534d696261b9": "correct",
+    "648f0001fe5212a1": "correct",
+    "6ced9bec93118792": "correct",
+    "a34c0f5805abcb64": "correct",
+    "f436d7f2945720d1": "incorrect"
+   },
+   "wall_s": 4.5
+  },
+  "a3b64ae191427fce": {
+   "cost_usd": 0.036869799999999994,
+   "excluded": 0,
+   "input_tokens_total": 4110,
+   "output_tokens": 453,
+   "probes": 6,
+   "value": {
+    "038b2cf49c94926b": "incorrect",
+    "6d2b000e5e500ce0": "correct",
+    "77adc33513dbdb05": "incorrect",
+    "b7cf52db2a36bfd7": "correct",
+    "cfed94270dfb4178": "correct",
+    "e114bccf388cfcfc": "correct"
+   },
+   "wall_s": 6.2
+  },
+  "aaeee6adbb5fed0d": {
+   "cost_usd": 0.0270698,
+   "excluded": 0,
+   "input_tokens_total": 3680,
+   "output_tokens": 135,
+   "probes": 4,
+   "value": {
+    "3c802c72f5f2cc9c": "correct",
+    "530ea8af398a44c7": "correct",
+    "684f60325e8c1428": "correct",
+    "fdec8cce6423cc05": "correct"
+   },
+   "wall_s": 3.0
+  },
+  "aeadea916d090b45": {
+   "cost_usd": 0.0259658,
+   "excluded": 0,
+   "input_tokens_total": 3632,
+   "output_tokens": 99,
+   "probes": 3,
+   "value": {
+    "1c9d7026347d62aa": "correct",
+    "386187b96e7c6613": "correct",
+    "94f398c6ef33a2ac": "correct"
+   },
+   "wall_s": 2.9
+  },
+  "aed6b200ea3f6ebf": {
+   "cost_usd": 0.0321178,
+   "excluded": 0,
+   "input_tokens_total": 3766,
+   "output_tokens": 353,
+   "probes": 4,
+   "value": {
+    "4f8ca83ab0ea10d4": "incorrect",
+    "971481c2e08471ba": "correct",
+    "b85814bffc960e08": "correct",
+    "d9f74cc967cc81e4": "correct"
+   },
+   "wall_s": 5.1
+  },
+  "b017a91bd6a99d6c": {
+   "cost_usd": 0.0246258,
+   "excluded": 0,
+   "input_tokens_total": 3497,
+   "output_tokens": 86,
+   "probes": 2,
+   "value": {
+    "17a05af5e2821c4d": "correct",
+    "7a00f6c439f6fd28": "correct"
+   },
+   "wall_s": 3.7
+  },
+  "bdd18c3ea5c5c77e": {
+   "cost_usd": 0.0308498,
+   "excluded": 0,
+   "input_tokens_total": 3915,
+   "output_tokens": 230,
+   "probes": 6,
+   "value": {
+    "055ad4dd3c8bdccd": "correct",
+    "05c74c98a4f0923f": "correct",
+    "228e45c6716e35c6": "correct",
+    "429b852516ae6756": "correct",
+    "79ef2cb6712d1f42": "correct",
+    "d74ebd788ab31d77": "correct"
+   },
+   "wall_s": 4.4
+  },
+  "bdf1205f8708a235": {
+   "cost_usd": 0.0267138,
+   "excluded": 0,
+   "input_tokens_total": 3438,
+   "output_tokens": 214,
+   "probes": 1,
+   "value": {
+    "9dc61ec476df863c": "incorrect"
+   },
+   "wall_s": 6.0
+  },
+  "be5ee16ccb73abb5": {
+   "cost_usd": 0.0329058,
+   "excluded": 0,
+   "input_tokens_total": 3927,
+   "output_tokens": 328,
+   "probes": 6,
+   "value": {
+    "01b815cf7b49d7b8": "correct",
+    "5d35fec80dda7768": "correct",
+    "af2c3f89a3d8f37c": "correct",
+    "b7902f188b98c66f": "correct",
+    "cd4005f0feb39241": "incorrect",
+    "d11df580f30e4761": "correct"
+   },
+   "wall_s": 5.7
+  },
+  "c11c8f1f977dbc3e": {
+   "cost_usd": 0.0299378,
+   "excluded": 0,
+   "input_tokens_total": 3866,
+   "output_tokens": 204,
+   "probes": 6,
+   "value": {
+    "0a9fba4fa8e89076": "correct",
+    "20e5da81c2619f50": "correct",
+    "42c8b84ba4452c8c": "correct",
+    "4c1726037e2ed256": "correct",
+    "9a510c2f72e0913f": "incorrect",
+    "b96e6b409ef1ecaa": "correct"
+   },
+   "wall_s": 5.0
+  },
+  "c6ae193f5ffef8f4": {
+   "cost_usd": 0.0289578,
+   "excluded": 0,
+   "input_tokens_total": 3806,
+   "output_tokens": 179,
+   "probes": 5,
+   "value": {
+    "1d3d3e33458596d0": "correct",
+    "24e2c39b2d1e4c06": "correct",
+    "2cfc20588ca0eb0c": "correct",
+    "91ff303b87033c92": "correct",
+    "9e56eac3de77fede": "correct"
+   },
+   "wall_s": 4.3
+  },
+  "c9c263d7f71be48d": {
+   "cost_usd": 0.0257538,
+   "excluded": 0,
+   "input_tokens_total": 3578,
+   "output_tokens": 110,
+   "probes": 3,
+   "value": {
+    "24c1635515d58753": "correct",
+    "519b6fbbb7c49eb6": "correct",
+    "e844e8ac118f596c": "correct"
+   },
+   "wall_s": 3.2
+  },
+  "ca04075b66e66eae": {
+   "cost_usd": 0.0231018,
+   "excluded": 0,
+   "input_tokens_total": 3424,
+   "output_tokens": 39,
+   "probes": 1,
+   "value": {
+    "25dcc0ca0cbf187c": "abstained"
+   },
+   "wall_s": 2.8
+  },
+  "cf1cda6afc1d05a2": {
+   "cost_usd": 0.0277138,
+   "excluded": 0,
+   "input_tokens_total": 3728,
+   "output_tokens": 148,
+   "probes": 4,
+   "value": {
+    "713de137da86adf6": "correct",
+    "8d360f432fd58813": "correct",
+    "a5d88f635b30ee93": "correct",
+    "d234f6b4edffd35e": "correct"
+   },
+   "wall_s": 14.5
+  },
+  "d0271ed9ccb6dc6a": {
+   "cost_usd": 0.0350418,
+   "excluded": 0,
+   "input_tokens_total": 3999,
+   "output_tokens": 406,
+   "probes": 7,
+   "value": {
+    "3a27bea8224fb13d": "correct",
+    "52a0045157b3fbee": "correct",
+    "b8dfb295c27015fd": "correct",
+    "bf8ccfeb61c23e69": "incorrect",
+    "d32fc8e93cd767ff": "correct",
+    "d67da0f8fa8c75d4": "correct",
+    "dd290bed068488ea": "correct"
+   },
+   "wall_s": 5.7
+  },
+  "d193c790f5a08187": {
+   "cost_usd": 0.0315738,
+   "excluded": 0,
+   "input_tokens_total": 3943,
+   "output_tokens": 255,
+   "probes": 7,
+   "value": {
+    "0bfc5655174ef204": "correct",
+    "137b108ad4f30ba2": "correct",
+    "4ed979f27a7a3c06": "correct",
+    "67c19824c4c80a52": "correct",
+    "99f3e0e1d53f73e8": "correct",
+    "b7199c6df37a8cc0": "correct",
+    "d9d6012b087094b3": "correct"
+   },
+   "wall_s": 3.8
+  },
+  "d8b474fcd7827294": {
+   "cost_usd": 0.035053799999999996,
+   "excluded": 0,
+   "input_tokens_total": 4228,
+   "output_tokens": 315,
+   "probes": 9,
+   "value": {
+    "0089203d86b89f49": "correct",
+    "01cdbb5842adb820": "correct",
+    "238360c98224fb23": "correct",
+    "44a584af5121bc9e": "correct",
+    "95342d1d239f8a41": "correct",
+    "a18d1c49c7b1c3bb": "correct",
+    "a32bd376bd3d9ef9": "correct",
+    "c5d53d7923c6b98c": "correct",
+    "e132023defa75061": "correct"
+   },
+   "wall_s": 5.0
+  },
+  "e077418cd5ca31db": {
+   "cost_usd": 0.0390738,
+   "excluded": 0,
+   "input_tokens_total": 4468,
+   "output_tokens": 420,
+   "probes": 11,
+   "value": {
+    "00bbcfb086d09e75": "correct",
+    "0dd06f249fe29c4b": "correct",
+    "2611f5f8a3bc0b6c": "correct",
+    "3e1d5733b0e2997d": "correct",
+    "549459ae859d97a9": "correct",
+    "6674849bc2ff6844": "correct",
+    "6a46ad80890a7d7a": "correct",
+    "7512f83f9d29ebf2": "correct",
+    "b506cf18a2030aa2": "correct",
+    "cdc7ca84a63aeaed": "correct",
+    "e2dad9cc658c520f": "correct"
+   },
+   "wall_s": 4.9
+  },
+  "e1441c736e593d39": {
+   "cost_usd": 0.045377799999999996,
+   "excluded": 0,
+   "input_tokens_total": 4691,
+   "output_tokens": 646,
+   "probes": 12,
+   "value": {
+    "05904a8ce82e11bb": "correct",
+    "22c09130e5f6173e": "correct",
+    "30af6762c4f3254c": "correct",
+    "355ba71462d380c2": "incorrect",
+    "361d031b779b369e": "correct",
+    "401e1afe054c0c1f": "correct",
+    "4a4bb1171cf18a92": "incorrect",
+    "71edb51d98a4ca94": "correct",
+    "82836cdbf3571b08": "correct",
+    "a004fc9424fa345f": "correct",
+    "a2f16d0446d67ae2": "incorrect",
+    "a6d75a40ece9b7e3": "correct"
+   },
+   "wall_s": 6.8
+  },
+  "eaaf18578bef24c4": {
+   "cost_usd": 0.0365698,
+   "excluded": 0,
+   "input_tokens_total": 4065,
+   "output_tokens": 456,
+   "probes": 6,
+   "value": {
+    "376964bb926d704e": "correct",
+    "3a026fa154c1be3a": "correct",
+    "af1579960ba833c8": "correct",
+    "be0df83c0d41bb2e": "correct",
+    "d62db3a61c1a43e6": "abstained",
+    "f5166bde9de0e221": "correct"
+   },
+   "wall_s": 6.4
+  },
+  "ed2ef105e19d38f4": {
+   "cost_usd": 0.0336858,
+   "excluded": 0,
+   "input_tokens_total": 4027,
+   "output_tokens": 327,
+   "probes": 7,
+   "value": {
+    "02d5232d6e1f315b": "correct",
+    "08d05af20e808962": "correct",
+    "147c0465cb2f389d": "correct",
+    "2a69bec8a33e49bb": "correct",
+    "48489ddc616d408a": "incorrect",
+    "740319707c37ea38": "correct",
+    "abd3940301b18dd7": "correct"
+   },
+   "wall_s": 6.8
+  },
+  "f53fabd26abfdfed": {
+   "cost_usd": 0.0314938,
+   "excluded": 0,
+   "input_tokens_total": 3983,
+   "output_tokens": 235,
+   "probes": 7,
+   "value": {
+    "0934c0aa8b9368e1": "correct",
+    "1abfbbbf5dd67c70": "correct",
+    "227980f6cd92dac8": "correct",
+    "2f3b556185b40af4": "correct",
+    "7ddd6865927b7891": "correct",
+    "8a3f1c5467fc0a14": "incorrect",
+    "a39d0487a671a856": "correct"
+   },
+   "wall_s": 5.0
+  },
+  "f654c5273b91b758": {
+   "cost_usd": 0.0295298,
+   "excluded": 0,
+   "input_tokens_total": 3845,
+   "output_tokens": 192,
+   "probes": 5,
+   "value": {
+    "673721bc83a2cb9e": "correct",
+    "8e47dc798ae70d06": "correct",
+    "926354c92e63f55c": "correct",
+    "a5ed9225e74bc0f8": "correct",
+    "cb39b8897acf4634": "correct"
+   },
+   "wall_s": 3.9
+  }
+ }
+}

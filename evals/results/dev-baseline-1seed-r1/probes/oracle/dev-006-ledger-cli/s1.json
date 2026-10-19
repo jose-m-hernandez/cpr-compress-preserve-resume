@@ -1,0 +1,27 @@
+{
+ "answers": {
+  "p1": "As integer cents, never floats, because float sums drifted by a cent against a spreadsheet.",
+  "p10": "Done: parsing, cents, grouping, `--top`, `--since`; not started: budget limits.",
+  "p11": "`ledger/report.py` formats the report.",
+  "p12": "CSV export, then budget limits, then README.",
+  "p13": "UNKNOWN",
+  "p14": "UNKNOWN",
+  "p2": "`ledger/money.py`.",
+  "p3": "As a positive amount under the category `refund`, since negative amounts are rejected.",
+  "p4": "By month (the `--by` default, changed from week).",
+  "p5": "3.",
+  "p6": "By calling `main(argv)` directly, not via a subprocess, since subprocesses are slow in CI.",
+  "p7": "From the `LEDGER_FILE` environment variable, else `data/ledger.txt`.",
+  "p8": "No, categories are stored lowercase so 'Food' and 'food' are one bucket.",
+  "p9": "They are blocked waiting for the accountant's category list."
+ },
+ "cost_usd": 0.0197289,
+ "duration_ms": 3506,
+ "input_tokens_total": 4416,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 460,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.6
+}

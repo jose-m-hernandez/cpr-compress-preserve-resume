@@ -1,0 +1,24 @@
+{
+ "arms": [
+  "floor",
+  "baseline",
+  "oracle"
+ ],
+ "claude_code_version": "2.1.302",
+ "date": "20261017",
+ "fixtures": [
+  "dev-001-csv-tally",
+  "dev-002-notes-api",
+  "dev-003-sales-etl",
+  "dev-004-md-linter",
+  "dev-005-flag-service"
+ ],
+ "judge_model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
+ "plugin_ref": "cfd1e77e07d2b3698591688e7e151d83d3ef51c3",
+ "rng_seed": 20261017,
+ "run_id": "pilot-20261017",
+ "seeds": 3,
+ "split": "dev",
+ "version": 1
+}

@@ -1,0 +1,26 @@
+{
+ "answers": {
+  "p1": "The instructions mention a 300-second staleness check (stale events get a 400), but don't state how the router treats such events beyond that, so: stale events are rejected with a 400.",
+  "p10": "UNKNOWN",
+  "p11": "Dispatch catching failures and returning 500, then dead-letter file, then replay of dead-lettered events (CLI first), then metrics, then signature verification (blocked on the sender).",
+  "p12": "UNKNOWN",
+  "p13": "No; `response_headers` gives `Retry-After: 30` only to 5xx responses.",
+  "p2": "In `router/handlers/`, one module per event family, each exposing a `HANDLERS` dict and listed in `FAMILIES` in `router/handlers/__init__.py`.",
+  "p3": "It gets `202 {\"status\": \"ignored\"}` because the sender retries any 4xx forever, which caused a retry storm last quarter.",
+  "p4": "Through `make_event(type, **data)` from `tests/factory.py`, imported as `from factory import make_event`.",
+  "p5": "Inline in the calling thread, with no thread pool.",
+  "p6": "5000.",
+  "p7": "`normalise_legacy_kind` maps the legacy `kind` field to `type` in `parse_event`, and it is to be deleted after the March cutover.",
+  "p8": "It is blocked until the sender documents their signature scheme, due about a month out.",
+  "p9": "`Retry-After: 30`."
+ },
+ "cost_usd": 0.024080900000000002,
+ "duration_ms": 4276,
+ "input_tokens_total": 5189,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 586,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 5.3
+}

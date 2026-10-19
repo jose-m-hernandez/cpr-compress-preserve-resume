@@ -1,0 +1,23 @@
+{
+ "answers": {
+  "p1": "They are named with a UTC timestamp like 20260502T101500.",
+  "p10": "UNKNOWN",
+  "p2": "snap/manifest.py writes the manifest, called MANIFEST.json.",
+  "p3": "Tests pass timestamps in rather than sleeping to get distinct ones.",
+  "p4": "Prune keeps 10 snapshots by default.",
+  "p5": "UNKNOWN",
+  "p6": "Only folders matching [0-9]{8}T[0-9]{6}; stray folders and files are never touched.",
+  "p7": "restore has not been started.",
+  "p8": "First restore, then the verify command that checks MANIFEST.json, then the cron example.",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0180289,
+ "duration_ms": 2752,
+ "input_tokens_total": 4341,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 320,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.9
+}

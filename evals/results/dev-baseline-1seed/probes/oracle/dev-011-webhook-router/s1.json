@@ -1,0 +1,26 @@
+{
+ "answers": {
+  "p1": "It rejects the event as stale with a 400 response.",
+  "p10": "Dead-letter handling has not been started.",
+  "p11": "Dead-letter file, then retry endpoint, then metrics.",
+  "p12": "UNKNOWN",
+  "p13": "UNKNOWN",
+  "p2": "In `router/handlers/`, one module per event family (e.g. `orders.py` for order events).",
+  "p3": "202 `ignored`, because the sender retries any 4xx forever.",
+  "p4": "Build them with `make_event()` from `tests/factory.py`, since hand-written dicts miss the id.",
+  "p5": "Inline, with no thread pool, because the dedupe set is not thread-safe.",
+  "p6": "The last 5000 event ids (previously 1000).",
+  "p7": "Legacy `kind` is normalised to `type` in one small function, and support ends after the March cutover.",
+  "p8": "It is blocked waiting for the sender's signing scheme, so requests are unsigned until then.",
+  "p9": "`Retry-After: 30`."
+ },
+ "cost_usd": 0.019080899999999998,
+ "duration_ms": 3459,
+ "input_tokens_total": 4284,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 448,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.6
+}

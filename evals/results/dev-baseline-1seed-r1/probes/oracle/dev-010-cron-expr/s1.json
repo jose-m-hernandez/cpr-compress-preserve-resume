@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Minute, hour and weekday only; there are no seconds (or month) because the scheduler wakes once a minute.",
+  "p2": "In `cronish/nextrun.py`.",
+  "p3": "It raises `ExprError` (a `ValueError` subclass) naming the field.",
+  "p4": "No, weekdays are numbers only; names like MON were removed because of locale trouble.",
+  "p5": "0 stands for Sunday (7 is rejected).",
+  "p6": "The `--next` flag.",
+  "p7": "First the `--next` flag, then ranges with steps in every field, then packaging.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0167709,
+ "duration_ms": 2775,
+ "input_tokens_total": 4084,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 297,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.9
+}

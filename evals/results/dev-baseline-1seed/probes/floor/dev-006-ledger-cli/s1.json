@@ -1,0 +1,27 @@
+{
+ "answers": {
+  "p1": "UNKNOWN",
+  "p10": "UNKNOWN",
+  "p11": "ledger/summary.py formats the report.",
+  "p12": "UNKNOWN",
+  "p13": "UNKNOWN",
+  "p14": "UNKNOWN",
+  "p2": "UNKNOWN",
+  "p3": "UNKNOWN",
+  "p4": "The report prints one line per category with the total spent.",
+  "p5": "UNKNOWN",
+  "p6": "UNKNOWN",
+  "p7": "UNKNOWN",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0167869,
+ "duration_ms": 2794,
+ "input_tokens_total": 4043,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 315,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.0
+}

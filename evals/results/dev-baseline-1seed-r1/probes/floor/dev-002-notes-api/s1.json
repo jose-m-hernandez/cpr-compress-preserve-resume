@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "UNKNOWN",
+  "p2": "The instructions only show the list endpoint at /v1/notes, but do not say which prefix all new endpoints must use, so UNKNOWN.",
+  "p3": "UNKNOWN",
+  "p4": "UNKNOWN",
+  "p5": "UNKNOWN",
+  "p6": "UNKNOWN",
+  "p7": "UNKNOWN",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.015122900000000002,
+ "duration_ms": 2407,
+ "input_tokens_total": 3822,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 237,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.6
+}

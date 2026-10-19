@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Results are rounded to 6 significant digits because float noise showed up in the docs examples.",
+  "p2": "`units/aliases.py`.",
+  "p3": "Yes, unit names are matched case-insensitively.",
+  "p4": "0.45359237.",
+  "p5": "Temperature units need an offset, not just a factor, so they are not supported.",
+  "p6": "Compound units (`km/h`).",
+  "p7": "Compound units, then the `--list` flag, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0161349,
+ "duration_ms": 3083,
+ "input_tokens_total": 4025,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 257,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.2
+}

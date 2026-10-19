@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "No, flaky jobs are shown but never fail the run.",
+  "p2": "120 seconds.",
+  "p3": "cisum/markdown.py",
+  "p4": "Yes, job names are matched case-insensitively.",
+  "p5": "passed, failed and flaky (skipped is rejected).",
+  "p6": "Trend tracking has not been started.",
+  "p7": "Trend tracking, then the --since flag, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0161789,
+ "duration_ms": 2317,
+ "input_tokens_total": 4076,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 241,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.5
+}

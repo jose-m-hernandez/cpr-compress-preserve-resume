@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "No, the user passes `--delimiter` explicitly and there is no sniffing.",
+  "p2": "Decimals must use `.` as the separator.",
+  "p3": "Exit code 3 (chosen by the user, not yet implemented).",
+  "p4": "`load_rows`.",
+  "p5": "From files in `samples/`, not inline strings.",
+  "p6": "`--delimiter` and `--count` (and the `read_rows` to `load_rows` rename) are done, while exit-code handling, `--output json` and README docs have not been done.",
+  "p7": "First exit-code handling, then the `--output json` option, then README docs last.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0182269,
+ "duration_ms": 2537,
+ "input_tokens_total": 4423,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 307,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.7
+}

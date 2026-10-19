@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Differences of 1 unit or less are ignored.",
+  "p2": "`inventory/render.py` holds both output formats.",
+  "p3": "Tests build inventories with `tests/helpers.py` rather than data files, because the data files drifted from the code.",
+  "p4": "The plain table output is deprecated and will be removed after the next release (`--json` stays).",
+  "p5": "Upper-case letters, a dash, then digits (e.g. `a-100` is rejected).",
+  "p6": "CSV import has not been started.",
+  "p7": "CSV import comes first and packaging comes last.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0165749,
+ "duration_ms": 2629,
+ "input_tokens_total": 4045,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 293,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.7
+}

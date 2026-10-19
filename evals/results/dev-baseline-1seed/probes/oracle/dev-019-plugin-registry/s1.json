@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Lowercase kebab-case (e.g. `csv-export`), because names appear in config files and URLs.",
+  "p2": "It raises `PluginNotFound` instead of returning `None`.",
+  "p3": "`before_run` and `after_run`.",
+  "p4": "Through `configure(settings)`, since factories take no arguments.",
+  "p5": "Registering a name twice raises an error, and the first registration is kept.",
+  "p6": "Directory discovery has not been started.",
+  "p7": "Directory discovery, then the reload command, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0164989,
+ "duration_ms": 2523,
+ "input_tokens_total": 4061,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 279,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.6
+}

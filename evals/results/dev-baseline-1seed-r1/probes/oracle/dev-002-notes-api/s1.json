@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "The dev server uses port 8082.",
+  "p2": "New endpoints go under `/v2/`.",
+  "p3": "Titles may be at most 80 characters; longer ones are rejected.",
+  "p4": "`notes_api/validation.py` holds input checks, though the instructions don't specifically mention body validation.",
+  "p5": "In the `ROUTES` table in `app.py`.",
+  "p6": "Pagination and rate limiting have not been started.",
+  "p7": "Rate limiting, then pagination, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0164709,
+ "duration_ms": 2441,
+ "input_tokens_total": 4074,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 271,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.5
+}

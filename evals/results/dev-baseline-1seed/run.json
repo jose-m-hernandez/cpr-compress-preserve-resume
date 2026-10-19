@@ -1,0 +1,38 @@
+{
+ "arms": [
+  "floor",
+  "baseline",
+  "oracle"
+ ],
+ "claude_code_version": "2.1.302",
+ "date": "20261018",
+ "fixtures": [
+  "dev-001-csv-tally",
+  "dev-002-notes-api",
+  "dev-003-sales-etl",
+  "dev-004-md-linter",
+  "dev-005-flag-service",
+  "dev-006-ledger-cli",
+  "dev-007-link-shortener",
+  "dev-008-photo-renamer",
+  "dev-009-inventory-diff",
+  "dev-010-cron-expr",
+  "dev-011-webhook-router",
+  "dev-012-backup-snapshots",
+  "dev-013-unit-convert",
+  "dev-015-adventure-engine",
+  "dev-016-mail-templates",
+  "dev-017-metrics-exporter",
+  "dev-018-shift-planner",
+  "dev-019-plugin-registry",
+  "dev-020-ci-summary"
+ ],
+ "judge_model": "claude-opus-5-5",
+ "model": "claude-sonnet-5-5",
+ "plugin_ref": "cfd1e77e07d2b3698591688e7e151d83d3ef51c3",
+ "rng_seed": 20261017,
+ "run_id": "dev-baseline-1seed",
+ "seeds": 1,
+ "split": "dev",
+ "version": 1
+}

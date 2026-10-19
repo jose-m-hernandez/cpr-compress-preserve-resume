@@ -1,0 +1,23 @@
+{
+ "answers": {
+  "p1": "By UTC timestamp, e.g. `20260502T101500`, so name order is time order.",
+  "p10": "UNKNOWN",
+  "p2": "`snap/manifest.py` writes `MANIFEST.json`.",
+  "p3": "Tests pass the timestamp in rather than sleeping for distinct ones.",
+  "p4": "Prune keeps the newest 10 snapshots by default.",
+  "p5": "It is refused, because the snapshot would copy itself.",
+  "p6": "Prune only deletes timestamp-named folders.",
+  "p7": "Restore has not been started.",
+  "p8": "Restore, then `verify` (checks the manifest), then a cron example.",
+  "p9": "Snapshot folders are named by UTC timestamp, though the instructions don't say what happens when the machine is set to local time."
+ },
+ "cost_usd": 0.0175949,
+ "duration_ms": 2969,
+ "input_tokens_total": 4165,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 347,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.1
+}

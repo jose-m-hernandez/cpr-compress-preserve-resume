@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "No, `--delimiter` is user-supplied and never sniffed.",
+  "p2": "UNKNOWN",
+  "p3": "Exit code 3.",
+  "p4": "`core.load_rows`.",
+  "p5": "From files in `samples/`, not inline strings.",
+  "p6": "Done and tested: `--delimiter` and `--count`; not started: exit codes, `--output json`, and README docs.",
+  "p7": "Exit-code handling, then `--output json`, then README docs (last).",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.017426900000000002,
+ "duration_ms": 2881,
+ "input_tokens_total": 4328,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 265,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.1
+}

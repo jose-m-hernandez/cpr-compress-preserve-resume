@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Codes are six base-36 characters counted up from zero with no randomness, so tests are deterministic.",
+  "p2": "In `shortener/routes.py`, in the function `handle(method, path, body, store)`.",
+  "p3": "Tests call `handle()` directly and never bind a socket, since the CI sandbox refuses ports.",
+  "p4": "After 7 days.",
+  "p5": "Only http and https URLs can be shortened; other schemes like ftp are rejected.",
+  "p6": "Hit counters.",
+  "p7": "Hit counters, then JSON persistence, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0165449,
+ "duration_ms": 2579,
+ "input_tokens_total": 4035,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 294,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.7
+}

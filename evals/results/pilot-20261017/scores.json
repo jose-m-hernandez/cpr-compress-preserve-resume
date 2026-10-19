@@ -1,0 +1,898 @@
+{
+ "arms": [
+  "floor",
+  "baseline",
+  "oracle"
+ ],
+ "calls": {
+  "judge": {
+   "judge": {
+    "cost_usd": 4.7783678,
+    "input_tokens": 647277.0,
+    "n": 191,
+    "output_tokens": 28428.0,
+    "wall_s": 840.8
+   }
+  },
+  "preserve": {
+   "baseline": {
+    "cost_usd": 2.0463704,
+    "input_tokens": 1687520.0,
+    "n": 15,
+    "output_tokens": 27156.0,
+    "wall_s": 239.8
+   }
+  },
+  "probe": {
+   "baseline": {
+    "cost_usd": 0.2717995,
+    "input_tokens": 65969.0,
+    "n": 15,
+    "output_tokens": 4595.0,
+    "wall_s": 58.1
+   },
+   "floor": {
+    "cost_usd": 0.2272375,
+    "input_tokens": 58221.0,
+    "n": 15,
+    "output_tokens": 3238.0,
+    "wall_s": 49.8
+   },
+   "oracle": {
+    "cost_usd": 0.2553255,
+    "input_tokens": 62433.0,
+    "n": 15,
+    "output_tokens": 4362.0,
+    "wall_s": 56.1
+   }
+  }
+ },
+ "dropped": {
+  "dev-001-csv-tally": {},
+  "dev-002-notes-api": {},
+  "dev-003-sales-etl": {},
+  "dev-004-md-linter": {
+   "p9": [
+    "oracle_minority"
+   ]
+  },
+  "dev-005-flag-service": {}
+ },
+ "dropped_floor": 0,
+ "dropped_oracle": 1,
+ "dropped_total": 1,
+ "fixtures": [
+  "dev-001-csv-tally",
+  "dev-002-notes-api",
+  "dev-003-sales-etl",
+  "dev-004-md-linter",
+  "dev-005-flag-service"
+ ],
+ "gallery": {
+  "missed_items": [
+   {
+    "fixture": "dev-002-notes-api",
+    "item": "j3",
+    "statement": "Note titles are limited to 80 characters; the store raises ValueError('title too long (max 80)') beyond that."
+   }
+  ],
+  "probes": [
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-001-csv-tally",
+    "gold": "A period ('.').",
+    "label": "abstained",
+    "probe": "p2",
+    "question": "Which decimal separator do numeric columns need?",
+    "seed": 2
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-002-notes-api",
+    "gold": "At most 80 characters.",
+    "label": "abstained",
+    "probe": "p3",
+    "question": "How long may a note title be?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-002-notes-api",
+    "gold": "notes_api/validation.py",
+    "label": "abstained",
+    "probe": "p4",
+    "question": "Which module holds the title and body validation?",
+    "seed": 1
+   },
+   {
+    "answer": "Rate limiting, pagination, and docs have not been started.",
+    "fixture": "dev-002-notes-api",
+    "gold": "Pagination and rate limiting.",
+    "label": "incorrect",
+    "probe": "p6",
+    "question": "Which features have not been started?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-003-sales-etl",
+    "gold": "etl/report.py",
+    "label": "abstained",
+    "probe": "p6",
+    "question": "Which part of the code is written but has little test coverage?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-003-sales-etl",
+    "gold": "The monthly rollup first, then the comparison against the finance export.",
+    "label": "abstained",
+    "probe": "p7",
+    "question": "In what order is the remaining work to be done?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-004-md-linter",
+    "gold": "path, line, rule and severity; mdcheck/formats.py.",
+    "label": "abstained",
+    "probe": "p5",
+    "question": "Which keys does each JSON output object have, and which module formats it?",
+    "seed": 3
+   },
+   {
+    "answer": "In the `RULES` registry in `mdcheck/rules.py`, in the order added (not alphabetical).",
+    "fixture": "dev-004-md-linter",
+    "gold": "In the RULES list at the bottom of rules.py, alphabetical by rule name.",
+    "label": "incorrect",
+    "probe": "p6",
+    "question": "Where and in what order are new rules registered?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-004-md-linter",
+    "gold": "Trailing-space autofix, then --watch mode, then packaging.",
+    "label": "abstained",
+    "probe": "p10",
+    "question": "In what order is the remaining work to be done?",
+    "seed": 1
+   },
+   {
+    "answer": "The audit log, percentage rollouts, and admin UI have not been started.",
+    "fixture": "dev-005-flag-service",
+    "gold": "Percentage rollouts.",
+    "label": "incorrect",
+    "probe": "p6",
+    "question": "Which feature has not been started yet?",
+    "seed": 1
+   }
+  ]
+ },
+ "invalid": {
+  "judge_labels_invalid": 0,
+  "probe_answers_missing": 0
+ },
+ "judge": {
+  "cached_hits": 68,
+  "calls_made": 191
+ },
+ "non_abstention_total": 38,
+ "per_fixture": {
+  "baseline": {
+   "dev-001-csv-tally": {
+    "d_lines": 29.3333333333,
+    "d_tokens": 538.0,
+    "false_answer": 0.0,
+    "placement": 0.7619047619,
+    "precision": 0.5408312448,
+    "primary": 0.9047619047,
+    "primary_all": 0.9047619047,
+    "recall": 1.0
+   },
+   "dev-002-notes-api": {
+    "d_lines": 16.6666666667,
+    "d_tokens": 350.0,
+    "false_answer": 0.0,
+    "placement": 0.7777777778,
+    "precision": 0.8484848485,
+    "primary": 0.6666666667,
+    "primary_all": 0.6666666667,
+    "recall": 0.8571428571
+   },
+   "dev-003-sales-etl": {
+    "d_lines": 24.0,
+    "d_tokens": 508.6666666667,
+    "false_answer": 0.0,
+    "placement": 0.6666666667,
+    "precision": 0.6194139194,
+    "primary": 0.7619047619,
+    "primary_all": 0.7619047619,
+    "recall": 1.0
+   },
+   "dev-004-md-linter": {
+    "d_lines": 28.0,
+    "d_tokens": 676.6666666667,
+    "false_answer": 0.5,
+    "placement": 0.7473544974,
+    "precision": 0.5710803689,
+    "primary": 0.7407407408,
+    "primary_all": 0.6666666667,
+    "recall": 0.8
+   },
+   "dev-005-flag-service": {
+    "d_lines": 28.6666666667,
+    "d_tokens": 509.3333333333,
+    "false_answer": 0.3333333333,
+    "placement": 0.7142857143,
+    "precision": 0.6563467492,
+    "primary": 0.8571428571,
+    "primary_all": 0.8571428571,
+    "recall": 1.0
+   }
+  },
+  "floor": {
+   "dev-001-csv-tally": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "recall": 0.0
+   },
+   "dev-002-notes-api": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "recall": 0.0
+   },
+   "dev-003-sales-etl": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "recall": 0.0
+   },
+   "dev-004-md-linter": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "recall": 0.0
+   },
+   "dev-005-flag-service": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "recall": 0.0
+   }
+  },
+  "oracle": {
+   "dev-001-csv-tally": {
+    "d_lines": 19.0,
+    "d_tokens": 260.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "recall": 1.0
+   },
+   "dev-002-notes-api": {
+    "d_lines": 19.0,
+    "d_tokens": 255.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "recall": 1.0
+   },
+   "dev-003-sales-etl": {
+    "d_lines": 19.0,
+    "d_tokens": 264.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "recall": 1.0
+   },
+   "dev-004-md-linter": {
+    "d_lines": 22.0,
+    "d_tokens": 369.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 0.9333333333,
+    "recall": 1.0
+   },
+   "dev-005-flag-service": {
+    "d_lines": 19.0,
+    "d_tokens": 256.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "recall": 1.0
+   }
+  }
+ },
+ "per_seed": {
+  "baseline": {
+   "dev-001-csv-tally": {
+    "1": {
+     "d_lines": 29,
+     "d_tokens": 569,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.4736842105,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 28,
+     "d_tokens": 474,
+     "false_answer": 0.0,
+     "placement": 0.8571428571,
+     "precision": 0.625,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 31,
+     "d_tokens": 571,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.5238095238,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "recall": 1.0
+    }
+   },
+   "dev-002-notes-api": {
+    "1": {
+     "d_lines": 17,
+     "d_tokens": 333,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.9090909091,
+     "primary": 0.5714285714,
+     "primary_all": 0.5714285714,
+     "recall": 0.8571428571
+    },
+    "2": {
+     "d_lines": 17,
+     "d_tokens": 385,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.8181818182,
+     "primary": 0.7142857143,
+     "primary_all": 0.7142857143,
+     "recall": 0.8571428571
+    },
+    "3": {
+     "d_lines": 16,
+     "d_tokens": 332,
+     "false_answer": 0.0,
+     "placement": 0.6666666667,
+     "precision": 0.8181818182,
+     "primary": 0.7142857143,
+     "primary_all": 0.7142857143,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-003-sales-etl": {
+    "1": {
+     "d_lines": 21,
+     "d_tokens": 511,
+     "false_answer": 0.0,
+     "placement": 0.5714285714,
+     "precision": 0.6153846154,
+     "primary": 0.7142857143,
+     "primary_all": 0.7142857143,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 25,
+     "d_tokens": 515,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.6428571429,
+     "primary": 0.7142857143,
+     "primary_all": 0.7142857143,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 26,
+     "d_tokens": 500,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.6,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "recall": 1.0
+    }
+   },
+   "dev-004-md-linter": {
+    "1": {
+     "d_lines": 29,
+     "d_tokens": 662,
+     "false_answer": 0.5,
+     "placement": 0.75,
+     "precision": 0.65,
+     "primary": 0.7777777778,
+     "primary_all": 0.7,
+     "recall": 0.8
+    },
+    "2": {
+     "d_lines": 25,
+     "d_tokens": 678,
+     "false_answer": 0.5,
+     "placement": 0.7142857143,
+     "precision": 0.4545454545,
+     "primary": 0.7777777778,
+     "primary_all": 0.7,
+     "recall": 0.7
+    },
+    "3": {
+     "d_lines": 30,
+     "d_tokens": 690,
+     "false_answer": 0.5,
+     "placement": 0.7777777778,
+     "precision": 0.6086956522,
+     "primary": 0.6666666667,
+     "primary_all": 0.6,
+     "recall": 0.9
+    }
+   },
+   "dev-005-flag-service": {
+    "1": {
+     "d_lines": 27,
+     "d_tokens": 495,
+     "false_answer": 0.5,
+     "placement": 0.7142857143,
+     "precision": 0.7058823529,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 29,
+     "d_tokens": 493,
+     "false_answer": 0.5,
+     "placement": 0.7142857143,
+     "precision": 0.6315789474,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 30,
+     "d_tokens": 540,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.6315789474,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "recall": 1.0
+    }
+   }
+  },
+  "floor": {
+   "dev-001-csv-tally": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "2": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-002-notes-api": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "2": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-003-sales-etl": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "2": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-004-md-linter": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "2": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-005-flag-service": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "2": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    },
+    "3": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "recall": 0.0
+    }
+   }
+  },
+  "oracle": {
+   "dev-001-csv-tally": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 266,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 19,
+     "d_tokens": 257,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 19,
+     "d_tokens": 257,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-002-notes-api": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 258,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 19,
+     "d_tokens": 249,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 19,
+     "d_tokens": 258,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-003-sales-etl": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 266,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 19,
+     "d_tokens": 263,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 19,
+     "d_tokens": 263,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-004-md-linter": {
+    "1": {
+     "d_lines": 22,
+     "d_tokens": 370,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 0.9,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 22,
+     "d_tokens": 370,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 0.9,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 22,
+     "d_tokens": 367,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-005-flag-service": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 259,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "2": {
+     "d_lines": 19,
+     "d_tokens": 256,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    },
+    "3": {
+     "d_lines": 19,
+     "d_tokens": 253,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "recall": 1.0
+    }
+   }
+  }
+ },
+ "preserve": {
+  "baseline": {
+   "changed": 15,
+   "runs": 15
+  }
+ },
+ "sanity": {
+  "mismatch_recall": 0.0,
+  "mismatch_recall_max": 0.05,
+  "ok": true,
+  "oracle_recall": 1.0,
+  "oracle_recall_min": 0.95
+ },
+ "scorable": {
+  "dev-001-csv-tally": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-002-notes-api": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-003-sales-etl": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-004-md-linter": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8",
+   "p10"
+  ],
+  "dev-005-flag-service": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ]
+ },
+ "scorable_counts": {
+  "dev-001-csv-tally": 7,
+  "dev-002-notes-api": 7,
+  "dev-003-sales-etl": 7,
+  "dev-004-md-linter": 9,
+  "dev-005-flag-service": 7
+ },
+ "seeds": 3,
+ "version": 1
+}

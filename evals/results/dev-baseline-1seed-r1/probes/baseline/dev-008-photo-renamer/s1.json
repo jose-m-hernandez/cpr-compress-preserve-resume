@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "`--yes` must be passed, because a rename can't be undone by hand once the originals are gone; without it apply exits 2 and changes nothing.",
+  "p2": "It is lowercase, with each run of non-`a-z0-9` characters collapsed to a single hyphen, capped at 30 characters.",
+  "p3": "`renamer/undo.py` writes the undo log, which is called `.renamer-undo.json` in DIR.",
+  "p4": "30 characters (`SLUG_MAX`).",
+  "p5": "The `samples/dup` sample is meant to fail the duplicate-target check, but the instructions do not describe exactly what the planner does beyond that.",
+  "p6": "The `undo` command (which reads the undo log) is not written yet, and the `--pattern` option and the commit/FERNGULLY work are also not done.",
+  "p7": "The Next steps list gives them as: `undo` command, then `--pattern` option, then docs/usage update, then commit and decide on `FERNGULLY`, though it does not explicitly state this is a required order.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.020842899999999998,
+ "duration_ms": 3755,
+ "input_tokens_total": 4727,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 447,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 5.0
+}

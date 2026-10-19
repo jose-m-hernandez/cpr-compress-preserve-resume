@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "No, delimiters are never auto-detected; you pass `--delimiter` (default comma).",
+  "p2": "A `.` decimal separator.",
+  "p3": "Exit code 3.",
+  "p4": "`load_rows` (formerly `read_rows`).",
+  "p5": "From files in `samples/`, not inline strings.",
+  "p6": "`--delimiter` and `--count` are done, and exit-code handling has not been started.",
+  "p7": "Exit-code handling first, then `--output json`, then README docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0166549,
+ "duration_ms": 2594,
+ "input_tokens_total": 4120,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 271,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.8
+}

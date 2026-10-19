@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "It excludes them with a stderr warning rather than netting them.",
+  "p2": "Only once, at output (`:.2f`), never per row.",
+  "p3": "Cents.",
+  "p4": "No, the nightly export overwrites it, so it must never be edited.",
+  "p5": "To `out/report_<YYYY-MM>.txt` (via `write_report`).",
+  "p6": "UNKNOWN",
+  "p7": "UNKNOWN",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0172589,
+ "duration_ms": 2620,
+ "input_tokens_total": 4326,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 249,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.8
+}

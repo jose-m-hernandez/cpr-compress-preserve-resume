@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "No, flaky jobs are reported but never change the exit code; only `failed` exits 1.",
+  "p2": "A job is flagged as slow above 120 seconds.",
+  "p3": "`cisum/markdown.py` renders the markdown table.",
+  "p4": "Yes, job names match case-insensitively, with the later entry (sorted by file name) winning.",
+  "p5": "UNKNOWN",
+  "p6": "Trend tracking across runs has not been started.",
+  "p7": "Trend tracking across runs, then a `--since` flag, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0175709,
+ "duration_ms": 2469,
+ "input_tokens_total": 4319,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 283,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.5
+}

@@ -1,0 +1,2086 @@
+{
+ "arms": [
+  "floor",
+  "baseline",
+  "oracle"
+ ],
+ "calls": {
+  "judge": {
+   "judge": {
+    "cost_usd": 4.4501858,
+    "input_tokens": 495235.0,
+    "n": 121,
+    "output_tokens": 55090.0,
+    "wall_s": 821.5
+   }
+  },
+  "preserve": {
+   "baseline": {
+    "cost_usd": 2.7682189,
+    "input_tokens": 2346857.0,
+    "n": 19,
+    "output_tokens": 36214.0,
+    "wall_s": 319.9
+   }
+  },
+  "probe": {
+   "baseline": {
+    "cost_usd": 0.3566371,
+    "input_tokens": 84596.0,
+    "n": 19,
+    "output_tokens": 6642.0,
+    "wall_s": 78.2
+   },
+   "floor": {
+    "cost_usd": 0.2882551,
+    "input_tokens": 73368.0,
+    "n": 19,
+    "output_tokens": 4295.0,
+    "wall_s": 65.3
+   },
+   "oracle": {
+    "cost_usd": 0.3249831,
+    "input_tokens": 78610.0,
+    "n": 19,
+    "output_tokens": 5871.0,
+    "wall_s": 72.1
+   }
+  }
+ },
+ "dropped": {
+  "dev-001-csv-tally": {},
+  "dev-002-notes-api": {},
+  "dev-003-sales-etl": {},
+  "dev-004-md-linter": {
+   "p9": [
+    "oracle_minority"
+   ]
+  },
+  "dev-005-flag-service": {},
+  "dev-006-ledger-cli": {},
+  "dev-007-link-shortener": {},
+  "dev-008-photo-renamer": {},
+  "dev-009-inventory-diff": {},
+  "dev-010-cron-expr": {},
+  "dev-011-webhook-router": {},
+  "dev-012-backup-snapshots": {},
+  "dev-013-unit-convert": {},
+  "dev-015-adventure-engine": {},
+  "dev-016-mail-templates": {},
+  "dev-017-metrics-exporter": {},
+  "dev-018-shift-planner": {},
+  "dev-019-plugin-registry": {},
+  "dev-020-ci-summary": {}
+ },
+ "dropped_floor": 0,
+ "dropped_oracle": 1,
+ "dropped_total": 1,
+ "excluded": {
+  "dev-001-csv-tally": [],
+  "dev-002-notes-api": [
+   "p6"
+  ],
+  "dev-003-sales-etl": [],
+  "dev-004-md-linter": [],
+  "dev-005-flag-service": [
+   "p6"
+  ],
+  "dev-006-ledger-cli": [],
+  "dev-007-link-shortener": [],
+  "dev-008-photo-renamer": [],
+  "dev-009-inventory-diff": [],
+  "dev-010-cron-expr": [
+   "p6"
+  ],
+  "dev-011-webhook-router": [
+   "p10"
+  ],
+  "dev-012-backup-snapshots": [],
+  "dev-013-unit-convert": [
+   "p6"
+  ],
+  "dev-015-adventure-engine": [
+   "p10"
+  ],
+  "dev-016-mail-templates": [
+   "p6"
+  ],
+  "dev-017-metrics-exporter": [],
+  "dev-018-shift-planner": [],
+  "dev-019-plugin-registry": [
+   "p6"
+  ],
+  "dev-020-ci-summary": []
+ },
+ "fixtures": [
+  "dev-001-csv-tally",
+  "dev-002-notes-api",
+  "dev-003-sales-etl",
+  "dev-004-md-linter",
+  "dev-005-flag-service",
+  "dev-006-ledger-cli",
+  "dev-007-link-shortener",
+  "dev-008-photo-renamer",
+  "dev-009-inventory-diff",
+  "dev-010-cron-expr",
+  "dev-011-webhook-router",
+  "dev-012-backup-snapshots",
+  "dev-013-unit-convert",
+  "dev-015-adventure-engine",
+  "dev-016-mail-templates",
+  "dev-017-metrics-exporter",
+  "dev-018-shift-planner",
+  "dev-019-plugin-registry",
+  "dev-020-ci-summary"
+ ],
+ "gallery": {
+  "missed_items": [
+   {
+    "fixture": "dev-002-notes-api",
+    "item": "j3",
+    "statement": "Note titles are limited to 80 characters; the store raises ValueError('title too long (max 80)') beyond that."
+   },
+   {
+    "fixture": "dev-004-md-linter",
+    "item": "o1",
+    "statement": "The maximum line length is 88 characters (it was first set to 100)."
+   },
+   {
+    "fixture": "dev-004-md-linter",
+    "item": "o6",
+    "statement": "New rules are registered in the RULES list at the bottom of rules.py, in alphabetical order by rule name."
+   },
+   {
+    "fixture": "dev-006-ledger-cli",
+    "item": "i9",
+    "statement": "Budget limits per category are blocked until the accountant sends the category list; categories stay free text until then."
+   },
+   {
+    "fixture": "dev-007-link-shortener",
+    "item": "i5",
+    "statement": "Only http and https URLs can be shortened; other schemes such as ftp are rejected."
+   },
+   {
+    "fixture": "dev-008-photo-renamer",
+    "item": "i2",
+    "statement": "New names use a lowercase hyphenated slug, such as 2026-04-02_harbour-walk.jpg."
+   },
+   {
+    "fixture": "dev-008-photo-renamer",
+    "item": "i5",
+    "statement": "Two photos with the same date and title collide, and the planner refuses rather than adding a counter suffix."
+   },
+   {
+    "fixture": "dev-009-inventory-diff",
+    "item": "i5",
+    "statement": "SKUs must be upper-case letters, a dash and digits; a lower-case SKU such as a-100 is rejected."
+   },
+   {
+    "fixture": "dev-010-cron-expr",
+    "item": "i5",
+    "statement": "Weekday 7 is rejected: Sunday is 0."
+   },
+   {
+    "fixture": "dev-011-webhook-router",
+    "item": "i1",
+    "statement": "Events older than 300 seconds are rejected as stale with a 400."
+   }
+  ],
+  "probes": [
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-002-notes-api",
+    "gold": "At most 80 characters.",
+    "label": "abstained",
+    "probe": "p3",
+    "question": "How long may a note title be?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-003-sales-etl",
+    "gold": "etl/report.py",
+    "label": "abstained",
+    "probe": "p6",
+    "question": "Which part of the code is written but has little test coverage?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-003-sales-etl",
+    "gold": "The monthly rollup first, then the comparison against the finance export.",
+    "label": "abstained",
+    "probe": "p7",
+    "question": "In what order is the remaining work to be done?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-004-md-linter",
+    "gold": "path, line, rule and severity; mdcheck/formats.py.",
+    "label": "abstained",
+    "probe": "p5",
+    "question": "Which keys does each JSON output object have, and which module formats it?",
+    "seed": 1
+   },
+   {
+    "answer": "In the RULES registry in mdcheck/rules.py, in the order the rules were added (not alphabetical).",
+    "fixture": "dev-004-md-linter",
+    "gold": "In the RULES list at the bottom of rules.py, alphabetical by rule name.",
+    "label": "incorrect",
+    "probe": "p6",
+    "question": "Where and in what order are new rules registered?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-006-ledger-cli",
+    "gold": "They wait for the accountant's category list; categories stay free text until then.",
+    "label": "abstained",
+    "probe": "p9",
+    "question": "Why can the budget limits not be built yet?",
+    "seed": 1
+   },
+   {
+    "answer": "Budget limits, then CSV export, then the README (also fixing the CLAUDE.md layout).",
+    "fixture": "dev-006-ledger-cli",
+    "gold": "CSV export, then the budget limits, then a README.",
+    "label": "incorrect",
+    "probe": "p12",
+    "question": "In what order is the remaining work planned?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-007-link-shortener",
+    "gold": "Only http and https.",
+    "label": "abstained",
+    "probe": "p5",
+    "question": "Which URL schemes can be shortened?",
+    "seed": 1
+   },
+   {
+    "answer": "The `samples/dup` sample is meant to fail the duplicate-target check, but the instructions do not describe exactly what the planner does beyond that.",
+    "fixture": "dev-008-photo-renamer",
+    "gold": "It refuses with an error; it does not add a counter suffix.",
+    "label": "abstained",
+    "probe": "p5",
+    "question": "What does the planner do when two photos would get the same new name?",
+    "seed": 1
+   },
+   {
+    "answer": "UNKNOWN",
+    "fixture": "dev-009-inventory-diff",
+    "gold": "Upper-case letters, a dash and digits.",
+    "label": "abstained",
+    "probe": "p5",
+    "question": "What form must a SKU take?",
+    "seed": 1
+   }
+  ]
+ },
+ "invalid": {
+  "judge_labels_invalid": 0,
+  "probe_answers_missing": 0
+ },
+ "judge": {
+  "cached_hits": 367,
+  "calls_made": 0
+ },
+ "judge_model": "claude-opus-5-5",
+ "non_abstention_total": 143,
+ "per_fixture": {
+  "baseline": {
+   "dev-001-csv-tally": {
+    "d_lines": 28.0,
+    "d_tokens": 505.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 0.5882352941,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-002-notes-api": {
+    "d_lines": 17.0,
+    "d_tokens": 419.0,
+    "false_answer": 0.0,
+    "placement": 0.6666666667,
+    "precision": 0.8181818182,
+    "primary": 0.8333333333,
+    "primary_all": 0.8333333333,
+    "primary_code": 0.5,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-003-sales-etl": {
+    "d_lines": 22.0,
+    "d_tokens": 455.0,
+    "false_answer": 0.0,
+    "placement": 0.5714285714,
+    "precision": 0.5714285714,
+    "primary": 0.7142857143,
+    "primary_all": 0.7142857143,
+    "primary_code": 1.0,
+    "primary_nocode": 0.3333333333,
+    "recall": 1.0
+   },
+   "dev-004-md-linter": {
+    "d_lines": 29.0,
+    "d_tokens": 742.0,
+    "false_answer": 0.5,
+    "placement": 0.875,
+    "precision": 0.4782608696,
+    "primary": 0.7777777778,
+    "primary_all": 0.7,
+    "primary_code": 0.8,
+    "primary_nocode": 0.75,
+    "recall": 0.8
+   },
+   "dev-005-flag-service": {
+    "d_lines": 30.0,
+    "d_tokens": 528.0,
+    "false_answer": 0.5,
+    "placement": 0.8571428571,
+    "precision": 0.6315789474,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-006-ledger-cli": {
+    "d_lines": 23.0,
+    "d_tokens": 677.0,
+    "false_answer": 0.0,
+    "placement": 0.6363636364,
+    "precision": 0.7,
+    "primary": 0.8333333333,
+    "primary_all": 0.8333333333,
+    "primary_code": 1.0,
+    "primary_nocode": 0.6,
+    "recall": 0.9166666667
+   },
+   "dev-007-link-shortener": {
+    "d_lines": 27.0,
+    "d_tokens": 458.0,
+    "false_answer": 0.0,
+    "placement": 0.8333333333,
+    "precision": 0.6,
+    "primary": 0.8571428571,
+    "primary_all": 0.8571428571,
+    "primary_code": 0.6666666667,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-008-photo-renamer": {
+    "d_lines": 32.0,
+    "d_tokens": 867.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 0.3913043478,
+    "primary": 0.8571428571,
+    "primary_all": 0.8571428571,
+    "primary_code": 0.75,
+    "primary_nocode": 1.0,
+    "recall": 0.7142857143
+   },
+   "dev-009-inventory-diff": {
+    "d_lines": 27.0,
+    "d_tokens": 564.0,
+    "false_answer": 0.0,
+    "placement": 0.8333333333,
+    "precision": 0.4736842105,
+    "primary": 0.8571428571,
+    "primary_all": 0.8571428571,
+    "primary_code": 0.75,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-010-cron-expr": {
+    "d_lines": 22.0,
+    "d_tokens": 493.0,
+    "false_answer": 0.0,
+    "placement": 0.8333333333,
+    "precision": 0.6153846154,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-011-webhook-router": {
+    "d_lines": 38.0,
+    "d_tokens": 1278.0,
+    "false_answer": 0.5,
+    "placement": 0.8,
+    "precision": 0.5172413793,
+    "primary": 0.9,
+    "primary_all": 0.9,
+    "primary_code": 1.0,
+    "primary_nocode": 0.6666666667,
+    "recall": 0.9090909091
+   },
+   "dev-012-backup-snapshots": {
+    "d_lines": 24.0,
+    "d_tokens": 460.0,
+    "false_answer": 0.0,
+    "placement": 0.7142857143,
+    "precision": 0.625,
+    "primary": 0.875,
+    "primary_all": 0.875,
+    "primary_code": 0.8333333333,
+    "primary_nocode": 1.0,
+    "recall": 0.875
+   },
+   "dev-013-unit-convert": {
+    "d_lines": 26.0,
+    "d_tokens": 531.0,
+    "false_answer": 0.0,
+    "placement": 0.8333333333,
+    "precision": 0.6428571429,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-015-adventure-engine": {
+    "d_lines": 25.0,
+    "d_tokens": 695.0,
+    "false_answer": 0.0,
+    "placement": 0.5,
+    "precision": 0.5,
+    "primary": 0.6,
+    "primary_all": 0.6,
+    "primary_code": 0.8,
+    "primary_nocode": 0.4,
+    "recall": 0.7272727273
+   },
+   "dev-016-mail-templates": {
+    "d_lines": 23.0,
+    "d_tokens": 513.0,
+    "false_answer": 0.0,
+    "placement": 0.8571428571,
+    "precision": 0.6428571429,
+    "primary": 0.8333333333,
+    "primary_all": 0.8333333333,
+    "primary_code": 0.8,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-017-metrics-exporter": {
+    "d_lines": 23.0,
+    "d_tokens": 514.0,
+    "false_answer": 0.0,
+    "placement": 0.7142857143,
+    "precision": 0.4666666667,
+    "primary": 0.875,
+    "primary_all": 0.875,
+    "primary_code": 0.75,
+    "primary_nocode": 1.0,
+    "recall": 0.875
+   },
+   "dev-018-shift-planner": {
+    "d_lines": 27.0,
+    "d_tokens": 501.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 0.5,
+    "primary": 0.8571428571,
+    "primary_all": 0.8571428571,
+    "primary_code": 0.8,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-019-plugin-registry": {
+    "d_lines": 25.0,
+    "d_tokens": 536.0,
+    "false_answer": 0.0,
+    "placement": 0.8333333333,
+    "precision": 0.5882352941,
+    "primary": 0.8333333333,
+    "primary_all": 0.8333333333,
+    "primary_code": 0.6666666667,
+    "primary_nocode": 1.0,
+    "recall": 0.8571428571
+   },
+   "dev-020-ci-summary": {
+    "d_lines": 22.0,
+    "d_tokens": 492.0,
+    "false_answer": 0.0,
+    "placement": 0.7142857143,
+    "precision": 0.5625,
+    "primary": 0.8571428571,
+    "primary_all": 0.8571428571,
+    "primary_code": 0.8,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   }
+  },
+  "floor": {
+   "dev-001-csv-tally": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-002-notes-api": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-003-sales-etl": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-004-md-linter": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-005-flag-service": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-006-ledger-cli": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-007-link-shortener": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-008-photo-renamer": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-009-inventory-diff": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-010-cron-expr": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-011-webhook-router": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-012-backup-snapshots": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-013-unit-convert": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-015-adventure-engine": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-016-mail-templates": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-017-metrics-exporter": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-018-shift-planner": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-019-plugin-registry": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   },
+   "dev-020-ci-summary": {
+    "d_lines": 0.0,
+    "d_tokens": 0.0,
+    "false_answer": 0.0,
+    "placement": null,
+    "precision": null,
+    "primary": 0.0,
+    "primary_all": 0.0,
+    "primary_code": 0.0,
+    "primary_nocode": 0.0,
+    "recall": 0.0
+   }
+  },
+  "oracle": {
+   "dev-001-csv-tally": {
+    "d_lines": 19.0,
+    "d_tokens": 260.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-002-notes-api": {
+    "d_lines": 19.0,
+    "d_tokens": 252.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-003-sales-etl": {
+    "d_lines": 19.0,
+    "d_tokens": 263.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-004-md-linter": {
+    "d_lines": 22.0,
+    "d_tokens": 373.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 0.9,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-005-flag-service": {
+    "d_lines": 19.0,
+    "d_tokens": 262.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-006-ledger-cli": {
+    "d_lines": 24.0,
+    "d_tokens": 373.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-007-link-shortener": {
+    "d_lines": 19.0,
+    "d_tokens": 252.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-008-photo-renamer": {
+    "d_lines": 19.0,
+    "d_tokens": 251.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-009-inventory-diff": {
+    "d_lines": 19.0,
+    "d_tokens": 234.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-010-cron-expr": {
+    "d_lines": 19.0,
+    "d_tokens": 258.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-011-webhook-router": {
+    "d_lines": 23.0,
+    "d_tokens": 377.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-012-backup-snapshots": {
+    "d_lines": 20.0,
+    "d_tokens": 278.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-013-unit-convert": {
+    "d_lines": 19.0,
+    "d_tokens": 235.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-015-adventure-engine": {
+    "d_lines": 23.0,
+    "d_tokens": 355.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-016-mail-templates": {
+    "d_lines": 19.0,
+    "d_tokens": 240.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-017-metrics-exporter": {
+    "d_lines": 20.0,
+    "d_tokens": 276.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-018-shift-planner": {
+    "d_lines": 17.0,
+    "d_tokens": 198.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-019-plugin-registry": {
+    "d_lines": 19.0,
+    "d_tokens": 256.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   },
+   "dev-020-ci-summary": {
+    "d_lines": 19.0,
+    "d_tokens": 249.0,
+    "false_answer": 0.0,
+    "placement": 1.0,
+    "precision": 1.0,
+    "primary": 1.0,
+    "primary_all": 1.0,
+    "primary_code": 1.0,
+    "primary_nocode": 1.0,
+    "recall": 1.0
+   }
+  }
+ },
+ "per_seed": {
+  "baseline": {
+   "dev-001-csv-tally": {
+    "1": {
+     "d_lines": 28,
+     "d_tokens": 505,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 0.5882352941,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-002-notes-api": {
+    "1": {
+     "d_lines": 17,
+     "d_tokens": 419,
+     "false_answer": 0.0,
+     "placement": 0.6666666667,
+     "precision": 0.8181818182,
+     "primary": 0.8333333333,
+     "primary_all": 0.8333333333,
+     "primary_code": 0.5,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-003-sales-etl": {
+    "1": {
+     "d_lines": 22,
+     "d_tokens": 455,
+     "false_answer": 0.0,
+     "placement": 0.5714285714,
+     "precision": 0.5714285714,
+     "primary": 0.7142857143,
+     "primary_all": 0.7142857143,
+     "primary_code": 1.0,
+     "primary_nocode": 0.3333333333,
+     "recall": 1.0
+    }
+   },
+   "dev-004-md-linter": {
+    "1": {
+     "d_lines": 29,
+     "d_tokens": 742,
+     "false_answer": 0.5,
+     "placement": 0.875,
+     "precision": 0.4782608696,
+     "primary": 0.7777777778,
+     "primary_all": 0.7,
+     "primary_code": 0.8,
+     "primary_nocode": 0.75,
+     "recall": 0.8
+    }
+   },
+   "dev-005-flag-service": {
+    "1": {
+     "d_lines": 30,
+     "d_tokens": 528,
+     "false_answer": 0.5,
+     "placement": 0.8571428571,
+     "precision": 0.6315789474,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-006-ledger-cli": {
+    "1": {
+     "d_lines": 23,
+     "d_tokens": 677,
+     "false_answer": 0.0,
+     "placement": 0.6363636364,
+     "precision": 0.7,
+     "primary": 0.8333333333,
+     "primary_all": 0.8333333333,
+     "primary_code": 1.0,
+     "primary_nocode": 0.6,
+     "recall": 0.9166666667
+    }
+   },
+   "dev-007-link-shortener": {
+    "1": {
+     "d_lines": 27,
+     "d_tokens": 458,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.6,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "primary_code": 0.6666666667,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-008-photo-renamer": {
+    "1": {
+     "d_lines": 32,
+     "d_tokens": 867,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 0.3913043478,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "primary_code": 0.75,
+     "primary_nocode": 1.0,
+     "recall": 0.7142857143
+    }
+   },
+   "dev-009-inventory-diff": {
+    "1": {
+     "d_lines": 27,
+     "d_tokens": 564,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.4736842105,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "primary_code": 0.75,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-010-cron-expr": {
+    "1": {
+     "d_lines": 22,
+     "d_tokens": 493,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.6153846154,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-011-webhook-router": {
+    "1": {
+     "d_lines": 38,
+     "d_tokens": 1278,
+     "false_answer": 0.5,
+     "placement": 0.8,
+     "precision": 0.5172413793,
+     "primary": 0.9,
+     "primary_all": 0.9,
+     "primary_code": 1.0,
+     "primary_nocode": 0.6666666667,
+     "recall": 0.9090909091
+    }
+   },
+   "dev-012-backup-snapshots": {
+    "1": {
+     "d_lines": 24,
+     "d_tokens": 460,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.625,
+     "primary": 0.875,
+     "primary_all": 0.875,
+     "primary_code": 0.8333333333,
+     "primary_nocode": 1.0,
+     "recall": 0.875
+    }
+   },
+   "dev-013-unit-convert": {
+    "1": {
+     "d_lines": 26,
+     "d_tokens": 531,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.6428571429,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-015-adventure-engine": {
+    "1": {
+     "d_lines": 25,
+     "d_tokens": 695,
+     "false_answer": 0.0,
+     "placement": 0.5,
+     "precision": 0.5,
+     "primary": 0.6,
+     "primary_all": 0.6,
+     "primary_code": 0.8,
+     "primary_nocode": 0.4,
+     "recall": 0.7272727273
+    }
+   },
+   "dev-016-mail-templates": {
+    "1": {
+     "d_lines": 23,
+     "d_tokens": 513,
+     "false_answer": 0.0,
+     "placement": 0.8571428571,
+     "precision": 0.6428571429,
+     "primary": 0.8333333333,
+     "primary_all": 0.8333333333,
+     "primary_code": 0.8,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-017-metrics-exporter": {
+    "1": {
+     "d_lines": 23,
+     "d_tokens": 514,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.4666666667,
+     "primary": 0.875,
+     "primary_all": 0.875,
+     "primary_code": 0.75,
+     "primary_nocode": 1.0,
+     "recall": 0.875
+    }
+   },
+   "dev-018-shift-planner": {
+    "1": {
+     "d_lines": 27,
+     "d_tokens": 501,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 0.5,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "primary_code": 0.8,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-019-plugin-registry": {
+    "1": {
+     "d_lines": 25,
+     "d_tokens": 536,
+     "false_answer": 0.0,
+     "placement": 0.8333333333,
+     "precision": 0.5882352941,
+     "primary": 0.8333333333,
+     "primary_all": 0.8333333333,
+     "primary_code": 0.6666666667,
+     "primary_nocode": 1.0,
+     "recall": 0.8571428571
+    }
+   },
+   "dev-020-ci-summary": {
+    "1": {
+     "d_lines": 22,
+     "d_tokens": 492,
+     "false_answer": 0.0,
+     "placement": 0.7142857143,
+     "precision": 0.5625,
+     "primary": 0.8571428571,
+     "primary_all": 0.8571428571,
+     "primary_code": 0.8,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   }
+  },
+  "floor": {
+   "dev-001-csv-tally": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-002-notes-api": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-003-sales-etl": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-004-md-linter": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-005-flag-service": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-006-ledger-cli": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-007-link-shortener": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-008-photo-renamer": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-009-inventory-diff": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-010-cron-expr": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-011-webhook-router": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-012-backup-snapshots": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-013-unit-convert": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-015-adventure-engine": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-016-mail-templates": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-017-metrics-exporter": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-018-shift-planner": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-019-plugin-registry": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   },
+   "dev-020-ci-summary": {
+    "1": {
+     "d_lines": 0,
+     "d_tokens": 0,
+     "false_answer": 0.0,
+     "placement": null,
+     "precision": null,
+     "primary": 0.0,
+     "primary_all": 0.0,
+     "primary_code": 0.0,
+     "primary_nocode": 0.0,
+     "recall": 0.0
+    }
+   }
+  },
+  "oracle": {
+   "dev-001-csv-tally": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 260,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-002-notes-api": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 252,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-003-sales-etl": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 263,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-004-md-linter": {
+    "1": {
+     "d_lines": 22,
+     "d_tokens": 373,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 0.9,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-005-flag-service": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 262,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-006-ledger-cli": {
+    "1": {
+     "d_lines": 24,
+     "d_tokens": 373,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-007-link-shortener": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 252,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-008-photo-renamer": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 251,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-009-inventory-diff": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 234,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-010-cron-expr": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 258,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-011-webhook-router": {
+    "1": {
+     "d_lines": 23,
+     "d_tokens": 377,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-012-backup-snapshots": {
+    "1": {
+     "d_lines": 20,
+     "d_tokens": 278,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-013-unit-convert": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 235,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-015-adventure-engine": {
+    "1": {
+     "d_lines": 23,
+     "d_tokens": 355,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-016-mail-templates": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 240,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-017-metrics-exporter": {
+    "1": {
+     "d_lines": 20,
+     "d_tokens": 276,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-018-shift-planner": {
+    "1": {
+     "d_lines": 17,
+     "d_tokens": 198,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-019-plugin-registry": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 256,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   },
+   "dev-020-ci-summary": {
+    "1": {
+     "d_lines": 19,
+     "d_tokens": 249,
+     "false_answer": 0.0,
+     "placement": 1.0,
+     "precision": 1.0,
+     "primary": 1.0,
+     "primary_all": 1.0,
+     "primary_code": 1.0,
+     "primary_nocode": 1.0,
+     "recall": 1.0
+    }
+   }
+  }
+ },
+ "preserve": {
+  "baseline": {
+   "changed": 19,
+   "runs": 19
+  }
+ },
+ "sanity": {
+  "mismatch_recall": 0.0,
+  "mismatch_recall_max": 0.05,
+  "ok": true,
+  "oracle_recall": 1.0,
+  "oracle_recall_min": 0.95
+ },
+ "scorable": {
+  "dev-001-csv-tally": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-002-notes-api": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p7"
+  ],
+  "dev-003-sales-etl": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-004-md-linter": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8",
+   "p10"
+  ],
+  "dev-005-flag-service": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p7"
+  ],
+  "dev-006-ledger-cli": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8",
+   "p9",
+   "p10",
+   "p11",
+   "p12"
+  ],
+  "dev-007-link-shortener": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-008-photo-renamer": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-009-inventory-diff": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-010-cron-expr": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p7"
+  ],
+  "dev-011-webhook-router": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8",
+   "p9",
+   "p11"
+  ],
+  "dev-012-backup-snapshots": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8"
+  ],
+  "dev-013-unit-convert": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p7"
+  ],
+  "dev-015-adventure-engine": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8",
+   "p9",
+   "p11"
+  ],
+  "dev-016-mail-templates": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p7"
+  ],
+  "dev-017-metrics-exporter": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7",
+   "p8"
+  ],
+  "dev-018-shift-planner": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ],
+  "dev-019-plugin-registry": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p7"
+  ],
+  "dev-020-ci-summary": [
+   "p1",
+   "p2",
+   "p3",
+   "p4",
+   "p5",
+   "p6",
+   "p7"
+  ]
+ },
+ "scorable_counts": {
+  "dev-001-csv-tally": 7,
+  "dev-002-notes-api": 6,
+  "dev-003-sales-etl": 7,
+  "dev-004-md-linter": 9,
+  "dev-005-flag-service": 6,
+  "dev-006-ledger-cli": 12,
+  "dev-007-link-shortener": 7,
+  "dev-008-photo-renamer": 7,
+  "dev-009-inventory-diff": 7,
+  "dev-010-cron-expr": 6,
+  "dev-011-webhook-router": 10,
+  "dev-012-backup-snapshots": 8,
+  "dev-013-unit-convert": 6,
+  "dev-015-adventure-engine": 10,
+  "dev-016-mail-templates": 6,
+  "dev-017-metrics-exporter": 8,
+  "dev-018-shift-planner": 7,
+  "dev-019-plugin-registry": 6,
+  "dev-020-ci-summary": 7
+ },
+ "scorable_split": {
+  "dev-001-csv-tally": {
+   "code": 3,
+   "nocode": 4
+  },
+  "dev-002-notes-api": {
+   "code": 2,
+   "nocode": 4
+  },
+  "dev-003-sales-etl": {
+   "code": 4,
+   "nocode": 3
+  },
+  "dev-004-md-linter": {
+   "code": 5,
+   "nocode": 4
+  },
+  "dev-005-flag-service": {
+   "code": 4,
+   "nocode": 2
+  },
+  "dev-006-ledger-cli": {
+   "code": 7,
+   "nocode": 5
+  },
+  "dev-007-link-shortener": {
+   "code": 3,
+   "nocode": 4
+  },
+  "dev-008-photo-renamer": {
+   "code": 4,
+   "nocode": 3
+  },
+  "dev-009-inventory-diff": {
+   "code": 4,
+   "nocode": 3
+  },
+  "dev-010-cron-expr": {
+   "code": 3,
+   "nocode": 3
+  },
+  "dev-011-webhook-router": {
+   "code": 7,
+   "nocode": 3
+  },
+  "dev-012-backup-snapshots": {
+   "code": 6,
+   "nocode": 2
+  },
+  "dev-013-unit-convert": {
+   "code": 4,
+   "nocode": 2
+  },
+  "dev-015-adventure-engine": {
+   "code": 5,
+   "nocode": 5
+  },
+  "dev-016-mail-templates": {
+   "code": 5,
+   "nocode": 1
+  },
+  "dev-017-metrics-exporter": {
+   "code": 4,
+   "nocode": 4
+  },
+  "dev-018-shift-planner": {
+   "code": 5,
+   "nocode": 2
+  },
+  "dev-019-plugin-registry": {
+   "code": 3,
+   "nocode": 3
+  },
+  "dev-020-ci-summary": {
+   "code": 5,
+   "nocode": 2
+  }
+ },
+ "seeds": 1,
+ "version": 1
+}

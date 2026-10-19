@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Lowercase kebab-case (e.g. csv-export), because names appear in config files and URLs.",
+  "p2": "It raises PluginNotFound (a KeyError subclass) and never returns None.",
+  "p3": "before_run and after_run.",
+  "p4": "Factories take no arguments, and settings arrive afterwards through configure(settings), which the registry does not call.",
+  "p5": "UNKNOWN",
+  "p6": "Directory discovery, the reload command, and docs have not been started.",
+  "p7": "Directory discovery first, then the reload command, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0177309,
+ "duration_ms": 2547,
+ "input_tokens_total": 4344,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 289,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.6
+}

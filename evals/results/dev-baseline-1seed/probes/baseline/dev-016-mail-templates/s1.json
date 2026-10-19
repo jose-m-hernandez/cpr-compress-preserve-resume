@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "60 characters (`MAX_SUBJECT`), because phones cut longer subjects off.",
+  "p2": "`mailtpl/footer.py`.",
+  "p3": "`render` raises `MissingValue` for a missing, `None`, empty or whitespace-only value (real falsy values like `0` are kept).",
+  "p4": "\"Use the link to unsubscribe\" (text only, no URL added).",
+  "p5": "The instructions only name `plan` as an allowed placeholder (not `plan_name`); the full list is not given.",
+  "p6": "The Preview command, Docs, and HTML variant are all unchecked next steps; the instructions don't single out one as not started.",
+  "p7": "HTML variant, then Preview command, then Docs, then the open unsubscribe-link placeholder question.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0184509,
+ "duration_ms": 3017,
+ "input_tokens_total": 4334,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 365,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.1
+}

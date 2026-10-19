@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "60 characters, because phones cut off longer subjects.",
+  "p2": "mailtpl/footer.py handles the footer.",
+  "p3": "It raises MissingValue and never renders a blank.",
+  "p4": "The footer says \"Use the link to unsubscribe\".",
+  "p5": "The placeholders name, plan, and link are allowed.",
+  "p6": "The HTML variant has not been started.",
+  "p7": "HTML variant, then preview command, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.016270899999999998,
+ "duration_ms": 2464,
+ "input_tokens_total": 4064,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 255,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.5
+}

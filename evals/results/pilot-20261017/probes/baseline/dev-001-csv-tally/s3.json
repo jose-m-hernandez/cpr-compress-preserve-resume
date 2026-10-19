@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "No, the user passes `--delimiter` and there is no sniffing, because sniffing misreads quoted fields.",
+  "p2": "UNKNOWN",
+  "p3": "Exit code 3.",
+  "p4": "`load_rows`.",
+  "p5": "New tests read their input from files in `samples/`, not inline strings.",
+  "p6": "`--delimiter` and `--count` are done and tested (plus the `read_rows` rename), while exit codes, `--output json`, and README docs are not started.",
+  "p7": "Exit-code handling first, then `--output json`, and README docs last.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0181289,
+ "duration_ms": 2383,
+ "input_tokens_total": 4431,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 294,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.5
+}

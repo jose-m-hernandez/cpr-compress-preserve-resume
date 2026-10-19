@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "The dev server uses port 8082.",
+  "p2": "New endpoints go under the `/v2` prefix.",
+  "p3": "UNKNOWN",
+  "p4": "`notes_api/validation.py` holds the input checks, though the instructions only mention title length, not body.",
+  "p5": "New routes must be registered in the `ROUTES` table in `notes_api/app.py`.",
+  "p6": "Rate limiting, pagination, and docs have not been started.",
+  "p7": "Rate limiting first, then pagination, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0167649,
+ "duration_ms": 3230,
+ "input_tokens_total": 4135,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 276,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.4
+}

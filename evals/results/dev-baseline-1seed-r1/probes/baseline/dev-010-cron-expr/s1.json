@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Three fields: minute, hour, weekday; no seconds because the scheduler wakes once a minute.",
+  "p2": "In `cronish/nextrun.py`.",
+  "p3": "It raises ExprError (a ValueError subclass) with the field name in the message.",
+  "p4": "No, weekdays are numbers only; names like MON were removed and must not be re-added.",
+  "p5": "Sunday is 0 (7 is rejected).",
+  "p6": "The instructions list the `--next` CLI flag, range-with-step confirmation, and packaging as unchecked next steps, but the status doesn't single out one piece as \"not started\"; it only says work is not committed yet and the `--next` flag/CLI main has no tests yet.",
+  "p7": "1) `--next` flag for the CLI (guard `__main__.py` first), 2) ranges with steps like `10-30/5` in every field, 3) packaging (`pyproject.toml`, no dependencies).",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.018920899999999997,
+ "duration_ms": 3337,
+ "input_tokens_total": 4319,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 418,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.4
+}

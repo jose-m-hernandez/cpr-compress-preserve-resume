@@ -1,0 +1,9 @@
+{
+ "changed": true,
+ "cost_usd": 0.11558660000000001,
+ "duration_ms": 12856,
+ "input_tokens_total": 100431,
+ "output_tokens": 1490,
+ "rate_limit_events": 1,
+ "wall_s": 14.0
+}

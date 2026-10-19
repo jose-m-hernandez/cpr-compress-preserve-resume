@@ -1,0 +1,42 @@
+{
+ "budget_usd": 9.0,
+ "cap_usd": 30.0,
+ "head_sha": "52b20814827d35826a88e57dd57fef68aba1f0c8",
+ "isolation_failures": 0,
+ "judge_calls": {
+  "count": 98,
+  "failed": 0,
+  "successful": 98,
+  "throttled": 0
+ },
+ "judge_rate_limit_events": 98,
+ "judge_throttle_messages": [],
+ "min_scorable": 3,
+ "plan_usage": {
+  "events": 174,
+  "statuses": {
+   "allowed": 174
+  },
+  "windows": {
+   "five_hour": {
+    "first": 0.01,
+    "last": 0.04,
+    "max": 0.04,
+    "n": 174
+   },
+   "seven_day": {
+    "first": 0.68,
+    "last": 0.68,
+    "max": 0.68,
+    "n": 174
+   }
+  }
+ },
+ "reasons": [],
+ "scored": true,
+ "spent_usd": 7.556446,
+ "status": "COMPLETE",
+ "throttles": [],
+ "tree_dirty": false,
+ "version": 1
+}

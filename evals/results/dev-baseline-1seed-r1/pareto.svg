@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360" font-family="sans-serif" font-size="12">
+<rect width="480" height="360" fill="#ffffff"/>
+<text x="240" y="18" text-anchor="middle">Recall against added probe-context tokens (dev-baseline-1seed-r1)</text>
+<line x1="70.0" y1="30.0" x2="70.0" y2="300.0" stroke="#000000"/>
+<line x1="70.0" y1="300.0" x2="450.0" y2="300.0" stroke="#000000"/>
+<text x="64.0" y="304.0" text-anchor="end">0.0</text>
+<text x="64.0" y="169.0" text-anchor="end">0.5</text>
+<text x="64.0" y="34.0" text-anchor="end">1.0</text>
+<text x="70.0" y="316.0" text-anchor="middle">0</text>
+<text x="450.0" y="316.0" text-anchor="middle">591</text>
+<text x="260.0" y="346.0" text-anchor="middle">Delta input tokens vs floor</text>
+<text x="16" y="165.0" text-anchor="middle" transform="rotate(-90 16 165.0)">Recall</text>
+<circle cx="70.0" cy="300.0" r="6" fill="#555555"/>
+<text x="79.0" y="292.0">floor</text>
+<circle cx="450.0" cy="61.0" r="6" fill="#1f77b4"/>
+<text x="459.0" y="53.0">baseline</text>
+<circle cx="247.4" cy="30.0" r="6" fill="#d62728"/>
+<text x="256.4" y="22.0">oracle</text>
+</svg>

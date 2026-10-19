@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Differences of 1 unit or less are ignored (`SCALE_TOLERANCE = 1` in the CLI; `compare` defaults to exact, 0).",
+  "p2": "`inventory/render.py` holds `render_table` and `render_json`.",
+  "p3": "Tests build inventories in code via `tests/helpers.py`, never from `data/`, because the data files drifted from the code last time.",
+  "p4": "The plain table output (`render_table`).",
+  "p5": "UNKNOWN",
+  "p6": "CSV import.",
+  "p7": "CSV import comes first and packaging comes last.",
+  "p8": "It is an absolute number of units (`SCALE_TOLERANCE = 1`, since the scale reads to the unit).",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0183409,
+ "duration_ms": 2825,
+ "input_tokens_total": 4384,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 334,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.9
+}

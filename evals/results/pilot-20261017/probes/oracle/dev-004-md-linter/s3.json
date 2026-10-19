@@ -1,0 +1,25 @@
+{
+ "answers": {
+  "p1": "88.",
+  "p10": "Trailing-space autofix, then --watch mode, then packaging.",
+  "p11": "UNKNOWN",
+  "p12": "UNKNOWN",
+  "p2": ".mdcheck.json, in JSON format.",
+  "p3": "It is a hard error that lists the known rules and exits with code 4.",
+  "p4": "check_files.",
+  "p5": "Each object has path, line, rule, and severity, and mdcheck/formats.py formats it.",
+  "p6": "In the RULES registry at the bottom of mdcheck/rules.py, in alphabetical order by name.",
+  "p7": "Because its bad examples always produce findings.",
+  "p8": "A warning.",
+  "p9": "line-length, trailing-space, heading-increment, and no-bare-urls are done, but the instructions do not say which are documented, only that docs/rules.md documents each rule."
+ },
+ "cost_usd": 0.0186629,
+ "duration_ms": 2965,
+ "input_tokens_total": 4347,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 381,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.0
+}

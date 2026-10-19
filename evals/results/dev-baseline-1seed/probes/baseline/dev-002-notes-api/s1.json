@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Port 8082.",
+  "p2": "`/v2`.",
+  "p3": "UNKNOWN",
+  "p4": "`notes_api/validation.py` (though it is only described as holding `MAX_TITLE` and `validate_title`, with no mention of body validation).",
+  "p5": "In the `ROUTES` table in `notes_api/app.py`.",
+  "p6": "Rate limiting, pagination, and docs (all three next steps are unchecked).",
+  "p7": "Rate limiting first, then pagination, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0172069,
+ "duration_ms": 2724,
+ "input_tokens_total": 4243,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 277,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.8
+}

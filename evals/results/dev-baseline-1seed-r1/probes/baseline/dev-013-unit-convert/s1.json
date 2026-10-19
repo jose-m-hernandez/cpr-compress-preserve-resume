@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Results are rounded to 6 significant digits to remove float noise like 0.30000000000000004 for library and CLI alike.",
+  "p2": "units/aliases.py, via resolve().",
+  "p3": "Yes, aliases are mapped case-insensitively via resolve(), though the instructions don't explicitly mention KM.",
+  "p4": "0.45359237.",
+  "p5": "Temperature needs an offset, not just a factor, so it is recognised but deliberately rejected.",
+  "p6": "Compound units like km/h, the --list flag, and docs were listed as not started.",
+  "p7": "Compound units (km/h, m/s), then the --list flag, then docs.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0180209,
+ "duration_ms": 3314,
+ "input_tokens_total": 4334,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 322,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 4.4
+}

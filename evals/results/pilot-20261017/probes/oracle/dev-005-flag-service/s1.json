@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "30 seconds.",
+  "p2": "Flag names must match ^[a-z][a-z0-9-]*$ (lowercase kebab-case).",
+  "p3": "False; it never raises.",
+  "p4": "config/flags.json, because the service reads it live.",
+  "p5": "flags/loader.py reads the flag file.",
+  "p6": "Percentage rollouts.",
+  "p7": "Audit log, then percentage rollouts, then admin UI.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0165769,
+ "duration_ms": 2339,
+ "input_tokens_total": 4153,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 250,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.4
+}

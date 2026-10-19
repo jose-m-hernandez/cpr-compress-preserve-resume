@@ -1,0 +1,27 @@
+# mailtpl
+
+A small library that fills in and checks plain-text message templates.
+
+## Overview
+
+- Python 3, standard library only.
+- Check a template with `python3 -m mailtpl check FILE`.
+
+## Layout
+
+- `mailtpl/render.py` fills a template with values.
+- `mailtpl/check.py` checks a template for problems.
+- `mailtpl/__main__.py` is the command-line entry point.
+- `templates/` holds the message templates.
+- `tests/` holds the unit tests.
+
+## Commands
+
+- Run the tests: `python3 -m unittest discover tests`.
+- Try it: `python3 -m mailtpl check templates/reminder.txt`.
+
+## Conventions
+
+- Four-space indentation and docstrings on public functions.
+- Keep functions short and give each one a test.
+- No third-party dependencies.

@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Evaluated flags are cached for 30 seconds (TTL_SECONDS).",
+  "p2": "Flag names must be lowercase kebab-case, matching ^[a-z][a-z0-9-]*$.",
+  "p3": "evaluate() returns False for an unknown flag and never raises.",
+  "p4": "Tests must never write to config/flags.json because the running service reads it live.",
+  "p5": "flags/loader.py (via load_flags) reads the flag file.",
+  "p6": "Audit log, percentage rollouts, and admin UI have not been started.",
+  "p7": "Audit log, then percentage rollouts, then admin UI.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0182449,
+ "duration_ms": 2659,
+ "input_tokens_total": 4410,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 314,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.8
+}

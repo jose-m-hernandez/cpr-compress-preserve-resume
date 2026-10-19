@@ -1,0 +1,22 @@
+{
+ "answers": {
+  "p1": "Round-robin in name order, never random, with each day carrying on from the person after the last one picked, because people check the rota by hand and it spreads shifts evenly.",
+  "p2": "3 people per day (PER_DAY).",
+  "p3": "rota/export.py.",
+  "p4": "At most 3 shifts per person per week (MAX_SHIFTS), because of the staff contract limit.",
+  "p5": "UNKNOWN",
+  "p6": "Leave requests.",
+  "p7": "Leave requests, then swap command, then docs, then the optional command-line option to write the CSV export.",
+  "p8": "UNKNOWN",
+  "p9": "UNKNOWN"
+ },
+ "cost_usd": 0.0177069,
+ "duration_ms": 2730,
+ "input_tokens_total": 4328,
+ "labels": [],
+ "ok": true,
+ "output_tokens": 293,
+ "problems": [],
+ "rate_limit_events": 1,
+ "wall_s": 3.8
+}
