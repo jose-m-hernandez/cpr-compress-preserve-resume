@@ -51,7 +51,7 @@ These were proposals when written; the entries below record what was done with e
 - One exclusion list (`fixtures.active_probes`) is used by scoring, the report and the fixture validator.
 - The report prints the floor and oracle Primary rows as "by construction" and leaves them out of the Holm family.
 - The leak lint stops on symlinked directories and on non-text files instead of skipping them.
-- The judge check gained an abstention-gold case, where both `abstained` and `correct` pass. Its test, on a scripted judge, reports 7 of 7 probe cases and 5 of 5 item cases, and fails at 6 of 7 when an abstention answer is labelled `incorrect`. The committed files record no run of this check against the live judge.
+- The judge check gained an abstention-gold case, where both `abstained` and `correct` pass. Its test, on a scripted judge, reports 7 of 7 probe cases and 5 of 5 item cases, and fails at 6 of 7 when an abstention answer is labelled `incorrect`. The live judge check ran once, on 2026-10-18, against the batched judge, before the review hardening: `backend=claude model=claude-opus-5-5 isolation=PASS`, 2 calls, `probe 6/6 items 5/5`, rc 0. That was before the seventh probe case existed. The output itself is not committed, and the 7-case version has not run live.
 - The r1 results were re-scored offline with this code (0 judge calls, every number unchanged). The committed `labels.json` of the two earlier results dirs were rekeyed in the same commit by a one-off tool; a later commit restored their original labels byte for byte and removed the tool, and the tests that replay them now convert a temporary copy.
 
 ## 2026-10-18: plain-prompt arm built and rehearsed offline; not run (spend paused)

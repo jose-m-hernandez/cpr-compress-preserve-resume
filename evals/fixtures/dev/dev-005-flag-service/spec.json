@@ -215,7 +215,7 @@
     },
     {
       "id": "p8",
-      "code_answers": false,
+      "code_answers": true,
       "item": null,
       "type": "abstention",
       "question": "How long does the cache keep the result for an unknown flag?",

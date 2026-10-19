@@ -51,7 +51,7 @@ Those probe ids are the ones the first-run table assigns to each class; the tabl
 False answers are abstention probes whose label is not `abstained`. In r1 they are `dev-004` p12, `dev-005` p8 and `dev-011` p13, giving 0.079 as the mean of three fixture rates of 0.5 over 19 fixtures. The oracle has none (its two first-run cases were the replaced probes). Quotes are from the r1 probe answers in `probes/baseline/<fixture>/s1.json` and the baseline `CLAUDE.md` in `arms/baseline/<fixture>/s1.md`.
 
 - **`dev-004` p12.** Question: "Which exit code is returned when the config file is malformed JSON?" Answer: "Exit code 4 (config or unknown-rule error), though the instructions don't explicitly mention malformed JSON." Traces to line 38 of the `CLAUDE.md`: "Exit code 0 means clean (or warnings only), 1 means error findings, 4 means a config or unknown-rule error." The answer is a hedged inference from that line, and the repo's code supports it (`EXIT_CONFIG = 4`).
-- **`dev-005` p8 (not analysed before).** Question: "How long does the cache keep the result for an unknown flag?" Gold: UNKNOWN (the probe has `near: m1`, the 30-second TTL, and `code_answers: false`). Answer: "It doesn't; unknown results are not cached." Traces to line 32 of the `CLAUDE.md`, a Decisions row: "`evaluate()` returns `False` for an unknown flag and never raises | Requested behavior; unknown results are not cached." The clause "unknown results are not cached" is the run's own addition: the fixture's item `m3` says only that `evaluate()` returns `False` for an unknown flag and never raises, and no item mentions caching of unknown flags. The clause is true of the repo, since `FlagStore.evaluate` in `flags/store.py` returns `False` before it reaches `cache.put`. So the baseline stated a true, code-derived fact that the session did not settle, and the probe session used it. This is the same pattern as `dev-004` p12 and `dev-011` p13. The first run's answer to this probe was "UNKNOWN" from the identical `CLAUDE.md`, so the false answer is probe-session variation, not a change in the skill's output. One reading problem for the next review: the question presumes unknown flags are cached, and the code answers it, yet the spec tags `code_answers: false`. The tag looks wrong and the probe is a weaker near-miss than intended; nothing was changed here.
+- **`dev-005` p8 (not analysed before).** Question: "How long does the cache keep the result for an unknown flag?" Gold: UNKNOWN (the probe has `near: m1`, the 30-second TTL, and `code_answers: false`). Answer: "It doesn't; unknown results are not cached." Traces to line 32 of the `CLAUDE.md`, a Decisions row: "`evaluate()` returns `False` for an unknown flag and never raises | Requested behavior; unknown results are not cached." The clause "unknown results are not cached" is the run's own addition: the fixture's item `m3` says only that `evaluate()` returns `False` for an unknown flag and never raises, and no item mentions caching of unknown flags. The clause is true of the repo, since `FlagStore.evaluate` in `flags/store.py` returns `False` before it reaches `cache.put`. So the baseline stated a true, code-derived fact that the session did not settle, and the probe session used it. This is the same pattern as `dev-004` p12 and `dev-011` p13. The first run's answer to this probe was "UNKNOWN" from the identical `CLAUDE.md`, so the false answer is probe-session variation, not a change in the skill's output. One reading problem for the next review: the question presumes unknown flags are cached, and the code answers it, yet the spec tags `code_answers: false`. The tag was wrong; it has been corrected to `code_answers: true`. The probe is a weaker near-miss than intended, and nothing else was changed.
 - **`dev-011` p13.** Question: "Does the Retry-After header also appear on 4xx responses?" Answer: "No; `response_headers` gives `Retry-After: 30` only to 5xx responses." Traces to line 14 ("`response_headers(status)`, which gives 5xx responses `Retry-After: 30`") and line 42 ("`Retry-After: 30` (plain seconds) on every 5xx"). The repo's `router/dispatch.py` supports the answer; the session never said whether 4xx responses carry it.
 
 All three answers are supported by the repo and traced to lines the run added or inferred from, so they count against the baseline only because probe sessions see `CLAUDE.md` alone and are meant to abstain on what the session did not settle.
@@ -82,7 +82,7 @@ The headline is a primary score of 0.813 [0.767, 0.853] for the baseline, 1.000 
 
 The baseline fails 32 probes. Nine of them are defects in the probe or fixture, not in the skill's output. Eight of the nine are "not started" questions whose gold leaves out items that are equally unstarted.
 
-Without those eight, the primary would be about 0.05 higher (0.861 to 0.867), and the baseline-to-oracle gap about 0.05 smaller than the +0.187 the headline shows.
+Without those eight, the primary would be 0.861 with them excluded, or 0.867 with them counted correct, against 0.813 as scored, and the baseline-to-oracle gap about 0.05 smaller than the +0.187 the headline shows.
 
 ## Scope and method
 
@@ -169,7 +169,7 @@ The baseline-to-oracle gap is +0.187 as scored. With the eight defects removed i
 
 ## Why precision is low
 
-Baseline precision is 0.578. Of the lines the baseline added over the floor on the 18 fixtures, 170 are labelled `needed`, 119 `unplanted` and 11 `not_needed`. The 130 lines that are not `needed` split as follows (the sub-kinds are this analysis's own reading, one per line):
+Baseline precision is 0.578. Of the lines the baseline added over the floor on the 18 fixtures (first run), 170 are labelled `needed`, 119 `unplanted` and 11 `not_needed`. The 130 lines that are not `needed` split as follows (first run, 18 fixtures) (the sub-kinds are this analysis's own reading, one per line):
 
 | Sub-kind | Lines |
 |---|---|
@@ -223,7 +223,7 @@ Of the 32 failures, one fits: `dev-006` p9, "Why can the budget limits not be bu
 ## What contradicts the headline
 
 - The sensitivity figures above: 0.867 and 0.861 against 0.813, and a gap to the oracle about 0.05 smaller.
-- Two of the three baseline false answers (`dev-004` p12, `dev-011` p13) are answers the repo's code supports. They count against the baseline because probe sessions see only `CLAUDE.md`, not because the answers are wrong about the repo.
+- Two of the three baseline false answers (`dev-004` p12, `dev-011` p13; first run, in the repaired run all three are, see above) are answers the repo's code supports. They count against the baseline because probe sessions see only `CLAUDE.md`, not because the answers are wrong about the repo.
 - The baseline false-answer rate (0.079) sits close to the oracle's (0.053), and the oracle's two cases are probe defects. The comparison rests on a handful of probes.
 - "Repo states it" scores 0.838 against 0.771 for facts only the session holds. Part of the gap is the skill leaving out what code already says (all seven dropped probes are `code_answers: true`).
 - Precision of 0.578 mixes inventory coverage, table scaffolding and repeats, as described above.
