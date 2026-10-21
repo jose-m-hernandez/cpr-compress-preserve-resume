@@ -69,7 +69,7 @@ The order flipped, and the reason is mechanical. The 8 excluded probes are all `
 
 ## Follow-ups from r1
 
-- The `dev-005` p8 tag (`code_answers`) and the strength of its near-miss need a decision before another run.
+- The `dev-005` p8 near-miss is weaker than intended (its `code_answers` tag is now `true`); whether to keep it needs a decision before another run.
 - A plain-prompt comparison arm has been built but has not run, and it is not part of this package; see `evals/ITERATIONS.md`.
 
 # First run (0.813), 2026-10-18
@@ -223,7 +223,7 @@ Of the 32 failures, one fits: `dev-006` p9, "Why can the budget limits not be bu
 ## What contradicts the headline
 
 - The sensitivity figures above: 0.867 and 0.861 against 0.813, and a gap to the oracle about 0.05 smaller.
-- Two of the three baseline false answers (`dev-004` p12, `dev-011` p13; first run, in the repaired run all three are, see above) are answers the repo's code supports. They count against the baseline because probe sessions see only `CLAUDE.md`, not because the answers are wrong about the repo.
+- Two of the three baseline false answers (`dev-004` p12, `dev-011` p13; in the repaired run all three are, see above) are answers the repo's code supports. They count against the baseline because probe sessions see only `CLAUDE.md`, not because the answers are wrong about the repo.
 - The baseline false-answer rate (0.079) sits close to the oracle's (0.053), and the oracle's two cases are probe defects. The comparison rests on a handful of probes.
 - "Repo states it" scores 0.838 against 0.771 for facts only the session holds. Part of the gap is the skill leaving out what code already says (all seven dropped probes are `code_answers: true`).
 - Precision of 0.578 mixes inventory coverage, table scaffolding and repeats, as described above.

@@ -431,21 +431,21 @@ def _mean_of(calls, kind, key):
     return _mean(_vals(calls[kind], key))
 
 
-# The rows of the budget GATE table, as written in the plan: (block, Claude calls, Codex calls, {type: count}, judge calls).
-# The Codex column counts the judge's calls; the judge runs on Claude (config judge backend), so they are priced at
+# The rows of the budget projection table: (block, preserve and probe calls, judge calls as text, {type: count}, judge calls).
+# The judge-calls column counts the judge's calls; the judge runs on Claude (config judge backend), so they are priced at
 # the measured judge mean. A count of None is a slot: the formula is shown and the count is left to the reader.
-GATE_ROWS = (
+BUDGET_ROWS = (
     ("Fixture gen, 15 more dev + 25 held-out (about 8 turns each; 3 dev and 5 held-out of about 30)",
      "about 500", "0", {"gen": 500}, 0),
-    ("P2 error-analysis baseline, 20 dev x 1 seed", "20 preserve + 20 probe", "about 40",
+    ("Error-analysis baseline, 20 dev x 1 seed", "20 preserve + 20 probe", "about 40",
      {"preserve": 20, "probe": 20}, 40),
-    ("P3 dev run, 20 x 5 seeds x {floor, baseline, oracle}", "100 preserve + 300 probe", "about 400",
+    ("Dev run, 20 x 5 seeds x {floor, baseline, oracle}", "100 preserve + 300 probe", "about 400",
      {"preserve": 100, "probe": 300}, 400),
-    ("P3 held-out check, 25 x 5 x {floor, oracle}, plus repairs", "about 250 probe", "about 250",
+    ("Held-out check, 25 x 5 x {floor, oracle}, plus repairs", "about 250 probe", "about 250",
      {"probe": 250}, 250),
-    ("P4 dev iteration, up to 3 rounds x 3 ablations x 20 x 5", "up to 900 preserve + 900 probe", "up to 1,800",
+    ("Dev iteration, up to 3 rounds x 3 ablations x 20 x 5", "up to 900 preserve + 900 probe", "up to 1,800",
      {"preserve": 900, "probe": 900}, 1800),
-    ("P4 held-out, 25 x 5 x 6 arms (4 run preserve)", "500 preserve + 750 probe", "about 1,250",
+    ("Held-out run, 25 x 5 x 6 arms (4 run preserve)", "500 preserve + 750 probe", "about 1,250",
      {"preserve": 500, "probe": 750}, 1250),
 )
 TYPE_LABEL = {"gen": "gen turn", "preserve": "preserve", "probe": "probe", "judge": "judge"}
@@ -575,19 +575,19 @@ def build_pilot_md(run: dict, state: dict, scores, calls: dict, arm_calls: dict)
         out.append("Scorable probes per fixture: not computed (scoring did not complete).")
         out.append("")
 
-    out += ["## Budget projection (GATE)", "",
-            "Each cell multiplies a call count from the plan by the mean measured above (gen turn, preserve, probe, "
-            "judge), and wall-clock assumes the calls run one after another. The Codex column counts judge calls; the "
-            "judge runs on Claude, so they are priced at the measured judge mean. Costs are API-price equivalents under "
+    out += ["## Budget projection", "",
+            "Each cell multiplies a planned call count by the mean measured above (gen turn, preserve, probe, "
+            "judge), and wall-clock assumes the calls run one after another. The Judge calls column counts judge calls; "
+            "the judge runs on Claude, so they are priced at the measured judge mean. Costs are API-price equivalents under "
             "a subscription. Held-out n is planned at 25 here and set later.", ""]
     table_rows = []
-    for block, claude_calls, codex_calls, counts, judge_calls in GATE_ROWS:
+    for block, claude_calls, judge_call_text, counts, judge_calls in BUDGET_ROWS:
         priced = dict(counts)
         if judge_calls:
             priced["judge"] = judge_calls
         dollars, wall = _projection(priced, calls)
-        table_rows.append([block, claude_calls, codex_calls, dollars, wall])
-    out += report.table(["Block", "Claude calls", "Codex calls", "$ (measured mean x count)", "Wall-clock"], table_rows)
+        table_rows.append([block, claude_calls, judge_call_text, dollars, wall])
+    out += report.table(["Block", "Claude calls", "Judge calls", "$ (measured mean x count)", "Wall-clock"], table_rows)
 
     out += ["## Completion", "",
             "Pilot ledger growth in this results directory: $%s (budget per invocation $%s, phase cap $%s). "

@@ -120,11 +120,13 @@ class FullRunTests(PilotEnv):
         self.assertEqual(jud[2], "0.0100")
         self.assertEqual(lines["fixture-gen turn"][1], str(sum(len(json.loads(
             (base.FIXTURES / fid / "gen.json").read_text(encoding="utf-8"))["turns"]) for fid in base.IDS)))
-        gate = text.split("## Budget projection (GATE)")[1].split("## Completion")[0]
+        gate = text.split("## Budget projection")[1].split("## Completion")[0]
         self.assertNotIn("n/a", gate)
-        # P3 dev run: 100 preserve at 0.2 + 300 probe at 0.01 + 400 judge calls at 0.01
+        # dev run: 100 preserve at 0.2 + 300 probe at 0.01 + 400 judge calls at 0.01
         self.assertIn("100 x preserve 0.2000 + 300 x probe 0.0100 + 400 x judge 0.0100 = $27.00", gate)
-        self.assertEqual(gate.count("| P"), 5)
+        rows = [ln for ln in gate.splitlines() if ln.startswith("| ") and "---" not in ln]
+        self.assertEqual(len(rows) - 1, 6)  # six blocks under the header
+        self.assertIn("| Dev run,", gate)
         self.assertIn("Fixture gen", gate)
 
     def test_plan_usage_reported_by_the_stream_is_shown_not_inferred(self):

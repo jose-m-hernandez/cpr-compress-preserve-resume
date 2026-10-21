@@ -122,7 +122,6 @@ class ClaudeJudgeTests(unittest.TestCase):
         cfg = claude_run.load_config(self.config)
         self.assertNotEqual(cfg["judge"]["model"], cfg["model"])
         self.assertEqual(cfg["judge"]["model"], JUDGE_MODEL)
-        self.assertEqual(cfg["judge"]["labeller_model"], "claude-fable-5-1")
         self.assertEqual(cfg["judge"]["cross_family_attempt"][:7], "failed:")
         # A run that reports the system-under-test model fails the judge's proof.
         self.model = cfg["model"]
@@ -215,12 +214,12 @@ class ClaudeJudgeTests(unittest.TestCase):
         self.assertIsNone(labels)
         self.assertFalse(rec["proof"]["ok"])
 
-    def test_labeller_model_can_override_the_pin(self):
+    def test_a_model_argument_overrides_the_pin(self):
         cfg = claude_run.load_config(self.config)
-        self.model = cfg["judge"]["labeller_model"]
+        self.model = "other-model-x"
         labels, rec = judge.label_probe(cfg, ONE, self.environ, model=self.model)
         self.assertEqual(labels, {"P1": "correct"})
-        self.assertEqual(self.calls[0]["model"], "claude-fable-5-1")
+        self.assertEqual(self.calls[0]["model"], "other-model-x")
 
     # -- one call per session ------------------------------------------------
 
@@ -491,7 +490,7 @@ class UnitTests(unittest.TestCase):
         for name in ("run_codex", "codex_markers", "find_rollout", "classify", "build_argv"):
             self.assertFalse(hasattr(judge, name), name)
         cfg = claude_run.load_config()
-        self.assertEqual(sorted(cfg["judge"]), ["backend", "cross_family_attempt", "labeller_model", "max_calls", "model"])
+        self.assertEqual(sorted(cfg["judge"]), ["backend", "cross_family_attempt", "max_calls", "model"])
         self.assertNotIn("codex", judge.__doc__.split("A cross-family")[0].lower())
 
 

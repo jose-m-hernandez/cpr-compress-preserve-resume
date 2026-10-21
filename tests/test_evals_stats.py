@@ -14,7 +14,7 @@ import stats  # noqa: E402
 
 
 class VectorTests(unittest.TestCase):
-    """The hand-computed vectors from the plan."""
+    """Hand-computed test vectors."""
 
     def test_kappa_table_20_5_10_15_is_0_4(self):
         a = ["y"] * 20 + ["y"] * 5 + ["n"] * 10 + ["n"] * 15

@@ -32,7 +32,7 @@ Only these keys are allowed at each level; anything else (for example an extra l
 - `suits` values come only from the six categories. Across the set every category is suited by at least 2 items.
 - The floor `CLAUDE.md` has 20 to 80 lines; the rendered oracle (floor plus each needed item's `oracle_line` under its `oracle_section`, created at the end if absent) stays under 200 lines. No needed item's `statement` or `oracle_line` appears in the floor as an exact substring.
 - `history_check.token` is 6 to 16 capital letters, appears in `turns`, and appears nowhere in `repo`, items or probes.
-- Long sessions: a long fixture has 30 or more turns. A complete dev split (19) needs at least 3 long fixtures; the held-out split needs at least 5 (`validate --heldout-complete`).
+- Long sessions: a long fixture has 30 or more turns. A complete dev split (19 run fixtures) needs at least 3 long fixtures; the held-out split needs at least 5 (`validate --heldout-complete`).
 - `allowed_bash` entries start with one of a short list of commands and contain no shell operators. Turns never start with `/` (a slash would invoke a command instead of talking). Python files in `repo` must parse.
 - Turns carry no signposting: the validator rejects the phrases "for the record", "note that", "remember that", "please remember", "important:", "decision:", "keep in mind", "don't forget", "make a note", "worth noting" and "fyi" (case-insensitive). At least 2 needed items per pilot fixture sit mid-turn.
 - An item with `source: tool` must not be stated in any turn, and its probe answers must not appear in the turns.
@@ -77,3 +77,5 @@ Write one or two probes per needed item, phrased as a fresh question with a shor
 ## Content rules
 
 Everything is invented and generic: neutral project names, `@example.com` addresses if any, no real people, no paths from any real machine, and nothing that reads like the tooling of any particular workstation. The release-branch codename in `history_check` is an arbitrary token used to test that a resumed session carries the conversation.
+
+`dev-014-log-digest` is kept as a spec with an `excluded` block but was not run: its generation failed six times (compound shell commands outside the allowlist, then the resume control), so it has no installed transcript. It counts toward none of the results, which cover the other 19 dev fixtures.

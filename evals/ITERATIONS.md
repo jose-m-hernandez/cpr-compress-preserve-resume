@@ -12,7 +12,7 @@ These were proposals when written; the entries below record what was done with e
 - **Current definition.** The eight "not started" probes are `dev-002` p6, `dev-005` p6, `dev-010` p6, `dev-011` p10, `dev-013` p6, `dev-015` p10, `dev-016` p6 and `dev-019` p6. Each asks which piece of work has not been started, and its gold in `spec.json` names one item. The same fixture's inventory holds a "Remaining work, in order" item, so other items are equally unstarted. They count in the primary through `scorable_probes` in `evals/score.py`. `dev-009` p8 and `dev-012` p9 are abstention probes whose answer the fixture's own oracle line states.
 - **Proposed change.** Reword the eight questions so each asks for the status the user reported at that point in the session, with a gold that matches the inventory. Replace `dev-009` p8 and `dev-012` p9 with near-miss abstention questions that the oracle line does not answer. Fixtures must still pass `fixtures.validate_spec`.
 - **Motivation.** 9 of the 32 baseline failures are probe or fixture defects (8 "not started" plus `dev-009` p8). The two oracle false answers are the `dev-009` p8 and `dev-012` p9 defects.
-- **Cost.** Changed questions need new probe runs and changed golds need new judge calls, so this is live spend and waits for approval.
+- **Cost.** Changed questions need new probe runs and changed golds need new judge calls, so this is live spend and is not run in this package.
 
 ### 2. Scorable guard
 
@@ -41,8 +41,9 @@ These were proposals when written; the entries below record what was done with e
 - **Why.** The fixture's own oracle line answered each old question, so the oracle arm had false answers (0.053) that were probe defects. After the replacement, the oracle false-answer rate is 0.000 in r1.
 - **Cost.** The probe sessions of the affected fixtures were re-run live in r1 on the pinned Claude Code 2.1.302 (30 probe sessions, pilot ledger +0.51), with no preserve runs, so the baseline `CLAUDE.md` files are the first run's. The new `dev-005` p8 false answer comes from that re-run (`evals/ERROR-ANALYSIS.md`).
 
-## 2026-10-18: scoring hardening after the adversarial review (da87144)
+## 2026-10-18: scoring hardening
 
+- A review of the scoring, report, fixture and lint code turned up the gaps below. Each is closed in the code and has a test under `tests/test_evals*`.
 - A missing label drops a probe from the scorable set (`label_missing`); for any other arm and seed it leaves the cell's numerator and denominator rather than counting as incorrect, and the pilot gate marks the run INCOMPLETE on invalid labels.
 - An abstention probe the judge labels `correct` is not counted as a false answer.
 - Floor and oracle must hold exactly seeds 1 to N, or scoring refuses.
@@ -51,11 +52,15 @@ These were proposals when written; the entries below record what was done with e
 - One exclusion list (`fixtures.active_probes`) is used by scoring, the report and the fixture validator.
 - The report prints the floor and oracle Primary rows as "by construction" and leaves them out of the Holm family.
 - The leak lint stops on symlinked directories and on non-text files instead of skipping them.
-- The judge check gained an abstention-gold case, where both `abstained` and `correct` pass. Its test, on a scripted judge, reports 7 of 7 probe cases and 5 of 5 item cases, and fails at 6 of 7 when an abstention answer is labelled `incorrect`. The live judge check ran once, on 2026-10-18, against the batched judge, before the review hardening: `backend=claude model=claude-opus-5-5 isolation=PASS`, 2 calls, `probe 6/6 items 5/5`, rc 0. That was before the seventh probe case existed. The output itself is not committed, and the 7-case version has not run live.
-- The r1 results were re-scored offline with this code (0 judge calls, every number unchanged). The committed `labels.json` of the two earlier results dirs were rekeyed in the same commit by a one-off tool; a later commit restored their original labels byte for byte and removed the tool, and the tests that replay them now convert a temporary copy.
+- The judge check gained an abstention-gold case, where both `abstained` and `correct` pass. Its test, on a scripted judge, reports 7 of 7 probe cases and 5 of 5 item cases, and fails at 6 of 7 when an abstention answer is labelled `incorrect`. The live judge check ran once, on 2026-10-18, against the batched judge, before this hardening: `backend=claude model=claude-opus-5-5 isolation=PASS`, 2 calls, `probe 6/6 items 5/5`, rc 0. That was before the seventh probe case existed. The output itself is not committed, and the 7-case version has not run live.
+- The r1 results were re-scored offline with this code (0 judge calls, every number unchanged). The `labels.json` of the two earlier results directories keep their original labels, byte for byte; the tests that replay them convert a temporary copy (`tests/legacy_labels.py`) and leave the committed files alone.
 
-## 2026-10-18: plain-prompt arm built and rehearsed offline; not run (spend paused)
+## 2026-10-18: plain-prompt arm built and rehearsed offline; not run in this package
 
 - **What was built.** A comparison arm whose preserve skill keeps the baseline skill's frontmatter and replaces its body with one fixed sentence ("Update the project's CLAUDE.md with anything from this session that a future session working in this repo should know. Edit the file in place. Keep it concise."), run on the same 19 fixtures and probes as r1. It was rehearsed offline on a scripted claude and a fake judge.
-- **What the rehearsal showed.** Only the new arm's units would run (19 preserve runs and 19 probe sessions, none of the existing three arms), the repaired results stay byte-identical, and the projected cost is $4.50 to $8.10 against a $4 budget, so the verdict was STOP.
-- **Status.** The arm has not run live, because spend was paused on 2026-10-18, so it has produced no result. It is kept outside this package until it has run: its skill file, its results scaffold and its rehearsal test are not part of this tree. The runner still supports a skill-variant arm (a `SKILL.md` under `evals/arms/<name>/`), which is how the arm would be added back. The comparison it would give (the skill against a one-sentence prompt, same fixtures and probes) is open.
+- **What the rehearsal showed.** Only the new arm's units would run (19 preserve runs and 19 probe sessions, none of the existing three arms), the repaired results stay byte-identical, and the projected cost is $4.50 to $8.10 against a $4 budget, so the run was not started.
+- **Status.** The arm has not run live, so it has produced no result. It is kept outside this package until it has run: its skill file, its results scaffold and its rehearsal test are not part of this tree. The runner still supports a skill-variant arm (a `SKILL.md` under `evals/arms/<name>/`), which is how the arm would be added back. The comparison it would give (the skill against a one-sentence prompt, same fixtures and probes) is open.
+
+## 2026-10-18: dev-014 kept as a spec, not run
+
+- `dev-014-log-digest` is in the package as a spec only: generation failed six times (compound shell commands outside the allowlist, then the resume control), so it has no installed transcript or repo and was never run or scored. The package therefore holds 20 dev fixture specs and the results cover 19 sessions; `dev-014` counts toward none of the figures in this log or in the committed results.

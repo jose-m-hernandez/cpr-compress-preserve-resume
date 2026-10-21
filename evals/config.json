@@ -41,7 +41,6 @@
   "judge": {
     "backend": "claude",
     "model": "claude-opus-5-5",
-    "labeller_model": "claude-fable-5-1",
     "cross_family_attempt": "failed: global AGENTS.md injected despite documented flags (0.156.1)",
     "max_calls": 30
   },

@@ -62,7 +62,7 @@ def captured_args(argv=None):
 
 
 def prepare(out):
-    """Step D of the plan, in Python: tracked content of the committed baseline, the ten fixtures' probe files removed."""
+    """Copy the committed baseline's tracked content, with the ten fixtures' probe files removed."""
     out = Path(out)
     shutil.copy(COMMITTED / "run.json", out / "run.json")
     # The committed labels keep the legacy key format; the rehearsal reads a converted copy (a label for a question the
